@@ -1,0 +1,24 @@
+{
+    "name": "webaccess/ifmquiz",
+    "type": "library",
+    "description": "IFM Quiz",
+    "authors": [
+        {
+            "name": "Louis Gandelin",
+            "email": "lgandelin@web-access.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "~5.2",
+        "intervention/image": "~2.3.5",
+        "ramsey/uuid": "^3.5",
+        "fzaninotto/faker": "^1.7",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webaccess\\IFMQuiz\\": "src/Webaccess/IFMQuiz"
+        }
+    }
+}
