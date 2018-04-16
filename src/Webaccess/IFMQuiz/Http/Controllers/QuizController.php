@@ -49,6 +49,8 @@ class QuizController extends Controller
     }
 
     public function questions(Request $request) {
-        return Question::orderBy('number', 'asc')->get();
+        $questions = Question::orderBy('number', 'asc')->get();
+
+        return $questions;
     }
 }
