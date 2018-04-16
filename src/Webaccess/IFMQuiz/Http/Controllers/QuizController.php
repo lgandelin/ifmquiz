@@ -4,6 +4,7 @@ namespace Webaccess\IFMQuiz\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Webaccess\IFMQuiz\Models\Question;
 
 class QuizController extends Controller
 {
@@ -21,7 +22,9 @@ class QuizController extends Controller
             ['uuid' => '2a791a2e-2ebe-49f3-9686-044a60222685', 'name' => 'Questionnaire 3'],
         ];
 
-        return view('ifmquiz::index', ['quizs' => $quizs]);
+        return view('ifmquiz::index', [
+            'quizs' => $quizs
+        ]);
     }
 
     public function create(Request $request) {
@@ -29,6 +32,11 @@ class QuizController extends Controller
     }
 
     public function update(Request $request, $quizID) {
+        $quiz = ['name' => 'Questionnaire 1'];
+
+        return view('ifmquiz::update', [
+            'quiz' => $quiz,
+        ]);
     }
 
     public function results(Request $request, $quizID) {
@@ -38,5 +46,9 @@ class QuizController extends Controller
     }
 
     public function delete(Request $request, $quizID) {
+    }
+
+    public function questions(Request $request) {
+        return Question::orderBy('number', 'asc')->get();
     }
 }

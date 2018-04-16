@@ -15,13 +15,13 @@ class CreateQuestionTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
-            $table->string('title')->nullable();
+            $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->integer('type')->nullable();
             $table->integer('number')->nullable();
             $table->text('items')->nullable();
             $table->text('correct_items')->nullable();
-            $table->integer('quiz_id')->nullable();
+            $table->uuid('quiz_id')->nullable();
             $table->timestamps();
         });
     }
