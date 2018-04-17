@@ -19,6 +19,8 @@
                         v-bind:question_number="index"
                         v-bind:description="question.description"
                         v-bind:answers="question.answers"
+                        v-bind:item_left_answers="question.item_left_answers"
+                        v-bind:item_right_answers="question.item_right_answers"
                         v-bind:type="question.type"
                         v-bind:key="question.id"
                 ></question>
@@ -73,43 +75,35 @@
 
                 <div class="items" v-if="type == 3">
                     <div class="div-50">
-                        <div class="field">
-                            <label class="label">Nom d'item 1</label>
-                            <input type="text" class="input" placeholder="Nom d'item 1" />
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Nom d'item 2</label>
-                            <input type="text" class="input" placeholder="Nom d'item 2" />
-                        </div>
+                        <item-left-answer
+                                v-for="(answer, index) in item_left_answers"
+                                v-bind:title="answer.title"
+                                v-bind:answer_number="index"
+                                v-bind:question_number="question_number"
+                                v-bind:key="answer.id"
+                        ></item-left-answer>
 
                         <div class="field">
                             <label class="label">Ajouter un item</label>
-                            <input type="text" class="input" placeholder="Ajouter un item" />
+                            <input type="text" class="input" placeholder="Ajouter un item" v-model="new_item_left_answer_title" />
+                            <button class="button" v-on:click="add_item_left_answer(question_number)">OK</button>
                         </div>
                     </div>
                     <div class="div-50">
-                        <div class="field">
-                            <label class="label">Nom d'item</label>
-                            <input type="text" class="input" placeholder="Nom d'item 1" />
-                            <input class="input" type="number" value="1" />
-                        </div>
+                        <item-right-answer
+                                v-for="(answer, index) in item_right_answers"
+                                v-bind:title="answer.title"
+                                v-bind:item="answer.item"
+                                v-bind:answer_number="index"
+                                v-bind:question_number="question_number"
+                                v-bind:key="answer.id"
+                                ></item-right-answer>
 
                         <div class="field">
-                            <label class="label">Nom d'item</label>
-                            <input type="text" class="input" placeholder="Nom d'item 1" />
-                            <input class="input" type="number" value="2" />
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Nom d'item</label>
-                            <input type="text" class="input" placeholder="Nom d'item 1" />
-                            <input class="input" type="number" value="2" />
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Ajouter une réponse</label>
-                            <input type="text" class="input" placeholder="Ajouter un item" />
+                            <label class="label">Ajouter un item</label>
+                            <input type="text" class="input" placeholder="Ajouter un item" v-model="new_item_right_answer_title"  />
+                            <input class="input" type="number" v-model="new_item_right_answer_item" />
+                            <button class="button" v-on:click="add_item_right_answer(question_number)">OK</button>
                         </div>
                     </div>
                 </div>
@@ -126,6 +120,23 @@
             <label class="label">Réponse @{{ answer_number+1 }}<span :class="{correct: true, checked: correct}" v-on:click="check_answer(answer_number, question_number)">V</span></label>
             <input type="text" class="input" placeholder="" :value="title" />
             <span class="delete" v-on:click="delete_answer(answer_number, question_number)">x</span>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="item-left-answer-template">
+        <div class="field">
+            <label class="label">Nom d'item @{{ answer_number+1 }}</label>
+            <input type="text" class="input" placeholder="" :value="title" />
+            <span class="delete" v-on:click="delete_item_left_answer(answer_number, question_number)">x</span>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="item-right-answer-template">
+        <div class="field">
+            <label class="label">Nom d'item @{{ answer_number+1 }}</label>
+            <input type="text" class="input" placeholder="" :value="title" />
+            <input class="input" type="number" :value="item" />
+            <span class="delete" v-on:click="delete_item_right_answer(answer_number, question_number)">x</span>
         </div>
     </script>
 

@@ -7,6 +7,8 @@ const store = new Vuex.Store({
     mutations: {
         add_question(state, question) {
             question.answers = [];
+            question.item_left_answers = [];
+            question.item_right_answers = [];
             question.type = 1;
             state.questions.push(question);
         },
@@ -33,6 +35,27 @@ const store = new Vuex.Store({
                 title: params.title,
                 correct: params.correct
             })
+
+            //For the radio buttons, if the first option is added, it must be selected
+            if (state.questions[question_number].type == 1) {
+                if (state.questions[question_number].answers.length == 1) {
+                    state.questions[question_number].answers[0].correct = true
+                }
+            }
+        },
+        check_answer(state, params) {
+            var answer_number = params.answer_number;
+            var question_number = params.question_number;
+
+            //For the radio buttons, only one option can be selected at once
+            if (state.questions[question_number].type == 1) {
+                for (var i in state.questions[question_number].answers) {
+                    var answer = state.questions[question_number].answers[i];
+                    answer.correct = false;
+                }
+            }
+
+            state.questions[question_number].answers[answer_number].correct = !state.questions[question_number].answers[answer_number].correct
         },
         delete_answer(state, params) {
             var answer_number = params.answer_number;
@@ -54,19 +77,34 @@ const store = new Vuex.Store({
                 }
             }
         },
-        check_answer(state, params) {
-            var answer_number = params.answer_number;
+
+        add_item_left_answer(state, params) {
             var question_number = params.question_number;
 
-            //For the radio buttons, only one option can be selected at once
-            if (state.questions[question_number].type == 1) {
-                for (var i in state.questions[question_number].answers) {
-                    var answer = state.questions[question_number].answers[i];
-                    answer.correct = false;
-                }
-            }
+            state.questions[question_number].item_left_answers.push({
+                title: params.title,
+                correct: params.correct
+            });
+        },
+        add_item_right_answer(state, params) {
+            var question_number = params.question_number;
 
-            state.questions[question_number].answers[answer_number].correct = !state.questions[question_number].answers[answer_number].correct
+            state.questions[question_number].item_right_answers.push({
+                title: params.title,
+                item: parseInt(params.item)
+            });
+        },
+        delete_item_left_answer(state, params) {
+            var question_number = params.question_number;
+            var answer_number = params.answer_number;
+
+            state.questions[question_number].item_left_answers.splice(answer_number, 1);
+        },
+        delete_item_right_answer(state, params) {
+            var question_number = params.question_number;
+            var answer_number = params.answer_number;
+
+            state.questions[question_number].item_right_answers.splice(answer_number, 1);
         }
     }
 });
@@ -121,11 +159,16 @@ Vue.component('question', {
             type: Number
         },
         answers: Array,
+        item_left_answers: Array,
+        item_right_answers: Array,
     },
     data: function() {
         return {
             is_opened: true,
             new_answer_title: '',
+            new_item_left_answer_title : '',
+            new_item_right_answer_title : '',
+            new_item_right_answer_item : 0,
         }
     },
     methods: {
@@ -143,7 +186,25 @@ Vue.component('question', {
                 type: parseInt(e.target.value),
                 question_number: question_number,
             });
-        }
+        },
+        add_item_left_answer: function(question_number) {
+            this.$store.commit('add_item_left_answer', {
+                title: this.new_item_left_answer_title,
+                question_number: question_number
+            });
+
+            this.new_item_left_answer_title = '';
+        },
+        add_item_right_answer: function(question_number) {
+            this.$store.commit('add_item_right_answer', {
+                title: this.new_item_right_answer_title,
+                item: this.new_item_right_answer_item,
+                question_number: question_number,
+            });
+
+            this.new_item_right_answer_title = '';
+            this.new_item_right_answer_item = 0;
+        },
     }
 });
 
@@ -175,6 +236,50 @@ Vue.component('text-answer', {
             });
         },
     },
+});
+
+Vue.component('item-left-answer', {
+    template: '#item-left-answer-template',
+    props: {
+        answer_number: 0,
+        question_number: 0,
+        title: {
+            default: '',
+            type: String
+        },
+    },
+    methods: {
+        delete_item_left_answer: function (answer_number, question_number) {
+            this.$store.commit('delete_item_left_answer', {
+                answer_number: answer_number,
+                question_number: question_number
+            });
+        },
+    }
+});
+
+Vue.component('item-right-answer', {
+    template: '#item-right-answer-template',
+    props: {
+        answer_number: 0,
+        question_number: 0,
+        title: {
+            default: '',
+            type: String
+        },
+        item: {
+            default: 0,
+            type: Number
+        }
+    },
+    methods: {
+        delete_item_right_answer: function(answer_number, question_number) {
+            this.$store.commit('delete_item_right_answer', {
+                answer_number: answer_number,
+                question_number: question_number
+            });
+        }
+    }
 });
 
 new Vue({
