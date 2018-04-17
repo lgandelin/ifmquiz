@@ -10,8 +10,33 @@
         <quiz></quiz>
     </div>
 
+    <script type="text/x-template" id="quiz-template">
+        <div class="quiz">
+            <question
+                    v-for="(question, index) in questions"
+                    v-bind:title="question.title"
+                    v-bind:number="index"
+                    v-bind:description="question.description"
+                    v-bind:answers="[{id: '1', title: 'Lorem ipsum', correct: true}, {id: '2', title: 'Dolor sit amet', correct: false}, {id: '3', title: 'Last answser', correct: true }]"
+                    v-bind:type="question.type"
+                    v-bind:key="question.id"
+                    v-on:delete_question="delete_question"
+                    v-on:duplicate_question="duplicate_question"
+                    ></question>
+
+            <div class="question add-question">
+                <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
+                <textarea class="question-description textarea" placeholder="Ajouter une description" v-model="new_question_description"></textarea>
+                <button class="add-button button" @click="valid_add_question">OK</button>
+            </div>
+        </div>
+    </script>
+
     <script type="text/x-template" id="question-template">
         <div class="question">
+            <button class="button duplicate-button" v-on:click="delete_question(number)">S</button>
+            <button class="button duplicate-button" v-on:click="duplicate_question(number)">D</button>
+
             <textarea class="question-title textarea">@{{ title }}</textarea>
             <textarea class="question-description textarea">@{{ description }}</textarea>
 
@@ -32,6 +57,7 @@
                             v-bind:title="answer.title"
                             v-bind:number="index"
                             v-bind:correct="answer.correct"
+                            v-bind:is_checked="answer.is_checked"
                             v-bind:key="answer.id"
                             v-on:delete_answer="delete_answer"
                             v-on:check_answer="check_answer"
@@ -94,28 +120,9 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="quiz-template">
-        <div class="quiz">
-            <question
-                    v-for="(question, index) in questions"
-                    v-bind:title="question.title"
-                    v-bind:description="question.description"
-                    v-bind:answers="[{id: '1', title: 'Lorem ipsum', correct: true}, {id: '2', title: 'Dolor sit amet', correct: false}, {id: '3', title: 'Last answser', correct: true }]"
-                    v-bind:type="question.type"
-                    v-bind:key="question.id"
-            ></question>
-
-            <div class="question add-question">
-                <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
-                <textarea class="question-description textarea" placeholder="Ajouter une description" v-model="new_question_description"></textarea>
-                <button class="add-button button" @click="valid_add_question">OK</button>
-            </div>
-        </div>
-    </script>
-
     <script type="text/x-template" id="text-answer-template">
         <div class="field">
-            <label class="label">Réponse @{{ number+1 }}<span :class="{correct: true, checked: mutable_correct}" v-on:click="check(number)">V</span></label>
+            <label class="label">Réponse @{{ number+1 }}<span :class="{correct: true, checked: is_checked}" v-on:click="check(number)">V</span></label>
             <input type="text" class="input" placeholder="" :value="title" />
             <span class="delete" v-on:click="delete_answer(number)">x</span>
         </div>
@@ -123,6 +130,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
     <script src="/js/quiz.js"></script>
 
     <style type="text/css">
@@ -196,6 +204,11 @@
 
         .div-50 input[type="number"] {
             width: 50px;
+        }
+
+        .duplicate-button, .delete-button {
+            float: right;
+            margin-left: 0.5rem;
         }
     </style>
 </body>

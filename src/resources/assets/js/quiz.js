@@ -25,6 +25,15 @@ Vue.component('quiz', {
             this.new_question_title = '';
             this.new_question_description = '';
         },
+        delete_question: function(number) {
+            this.questions.splice(number, 1);
+        },
+        duplicate_question: function(number) {
+            var question = Object.assign({}, this.questions[number]);
+            question.id = uuidv4();
+            question.title += " - copie";
+            this.questions.splice(number+1, 0, question);
+        }
     }
 });
 
@@ -44,6 +53,7 @@ Vue.component('question', {
             type: Number
         },
         answers: Array,
+        number: 0,
     },
     data: function() {
         return {
@@ -69,14 +79,19 @@ Vue.component('question', {
             this.mutable_answers.splice(number, 1);
         },
         check_answer: function(number) {
-            /*if (this.type == 1) {    NOT WORKING FOR SOME REASON...
-                for (var i = 0; i < this.mutable_answers.length; i++) {
-                    if (i != number) {
-                        this.mutable_answers[i].correct = false;
-                        this.mutable_answers[i].mutable_correct = false;
-                    }
+            /*if (this.type == 1) {
+                for (var key in this.mutable_answers) {
+                    this.mutable_answers[key].correct = false;
+                    this.mutable_answers[key].is_checked = false;
+                    this.mutable_answers[key].title = "";
                 }
             }*/
+        },
+        delete_question: function(number) {
+            this.$emit('delete_question', number);
+        },
+        duplicate_question: function(number) {
+            this.$emit('duplicate_question', number);
         }
     }
 });
@@ -96,20 +111,20 @@ Vue.component('text-answer', {
     },
     data: function() {
         return {
-            mutable_correct: false,
+            is_checked: false,
         }
     },
     methods: {
         check: function(number) {
-            this.mutable_correct = !this.mutable_correct;
             this.$emit('check_answer', number);
+            this.is_checked = !this.is_checked;
         },
         delete_answer: function(number) {
             this.$emit('delete_answer', number);
-        }
+        },
     },
     mounted: function() {
-        this.mutable_correct = this.correct;
+        this.is_checked = this.correct;
     },
 });
 
