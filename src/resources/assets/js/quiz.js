@@ -1,23 +1,92 @@
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+    state: {
+        questions: []
+    },
+    mutations: {
+        add_question(state, question) {
+            state.questions.push(question);
+        },
+        update_question_type(state, params) {
+            var number = params.question_number;
+            var type = params.type;
+
+            state.questions[number].type = type;
+        },
+        delete_question(state, number) {
+            state.questions.splice(number, 1);
+        },
+        duplicate_question(state, number) {
+            var question = Object.assign({}, state.questions[number]);
+            question.id = uuidv4();
+            question.title += " - copie";
+            state.questions.splice(number+1, 0, question);
+        },
+
+        add_answer(state, params) {
+            var question_number = params.question_number;
+
+            state.questions[question_number].answers.push({
+                title: params.title,
+                correct: params.correct
+            })
+        },
+        delete_answer(state, params) {
+            var answer_number = params.answer_number;
+            var question_number = params.question_number;
+
+            state.questions[question_number].answers.splice(answer_number, 1);
+
+            //For the radio buttons, at least one option must be selected
+            if (state.questions[question_number].type == 1) {
+                var one_answer_selected = false;
+                for (var i in state.questions[question_number].answers) {
+                    if (state.questions[question_number].answers[i].correct) {
+                        one_answer_selected = true
+                    }
+                }
+
+                if (!one_answer_selected) {
+                    state.questions[question_number].answers[0].correct = true
+                }
+            }
+        },
+        check_answer(state, params) {
+            var answer_number = params.answer_number;
+            var question_number = params.question_number;
+
+            //For the radio buttons, only one option can be selected at once
+            if (state.questions[question_number].type == 1) {
+                for (var i in state.questions[question_number].answers) {
+                    var answer = state.questions[question_number].answers[i];
+                    answer.correct = false;
+                }
+            }
+
+            state.questions[question_number].answers[answer_number].correct = !state.questions[question_number].answers[answer_number].correct
+        }
+    }
+});
+
 Vue.component('quiz', {
     template: '#quiz-template',
     data: function() {
         return {
             new_question_title: '',
             new_question_description: '',
-            questions: [],
         }
     },
     mounted: function() {
-        var c = this;
-
+        var store = this.$store;
         axios.get("/questions")
             .then(function (response) {
-                c.questions = response.data
+                store.state.questions = response.data
             })
     },
     methods: {
-        valid_add_question: function() {
-            this.questions.push({
+        add_question: function() {
+            this.$store.commit('add_question', {
                 title: this.new_question_title,
                 description: this.new_question_description,
             });
@@ -25,21 +94,13 @@ Vue.component('quiz', {
             this.new_question_title = '';
             this.new_question_description = '';
         },
-        delete_question: function(number) {
-            this.questions.splice(number, 1);
-        },
-        duplicate_question: function(number) {
-            var question = Object.assign({}, this.questions[number]);
-            question.id = uuidv4();
-            question.title += " - copie";
-            this.questions.splice(number+1, 0, question);
-        }
     }
 });
 
 Vue.component('question', {
     template: '#question-template',
     props: {
+        question_number: 0,
         title: {
             default: '',
             type: String
@@ -53,45 +114,27 @@ Vue.component('question', {
             type: Number
         },
         answers: Array,
-        number: 0,
     },
     data: function() {
         return {
-            mutable_type: '',
-            mutable_answers: [],
             new_answer_title: '',
         }
     },
-    mounted: function() {
-        this.mutable_type = this.type;
-        this.mutable_answers = this.answers;
-    },
     methods: {
-        valid_add_answer: function() {
-            this.mutable_answers.push({
-                correct: false,
+        add_answer: function(question_number) {
+            this.$store.commit('add_answer', {
                 title: this.new_answer_title,
+                correct: false,
+                question_number: question_number
             });
 
             this.new_answer_title = '';
         },
-        delete_answer: function(number) {
-            this.mutable_answers.splice(number, 1);
-        },
-        check_answer: function(number) {
-            /*if (this.type == 1) {
-                for (var key in this.mutable_answers) {
-                    this.mutable_answers[key].correct = false;
-                    this.mutable_answers[key].is_checked = false;
-                    this.mutable_answers[key].title = "";
-                }
-            }*/
-        },
-        delete_question: function(number) {
-            this.$emit('delete_question', number);
-        },
-        duplicate_question: function(number) {
-            this.$emit('duplicate_question', number);
+        update_question_type: function(e, question_number) {
+            this.$store.commit('update_question_type', {
+                type: parseInt(e.target.value),
+                question_number: question_number,
+            });
         }
     }
 });
@@ -99,7 +142,8 @@ Vue.component('question', {
 Vue.component('text-answer', {
     template: '#text-answer-template',
     props: {
-        number: 0,
+        answer_number: 0,
+        question_number: 0,
         title: {
             default: '',
             type: String
@@ -109,25 +153,23 @@ Vue.component('text-answer', {
             type: Boolean,
         },
     },
-    data: function() {
-        return {
-            is_checked: false,
-        }
-    },
     methods: {
-        check: function(number) {
-            this.$emit('check_answer', number);
-            this.is_checked = !this.is_checked;
+        check_answer: function(answer_number, question_number) {
+            this.$store.commit('check_answer', {
+                answer_number: answer_number,
+                question_number: question_number
+            });
         },
-        delete_answer: function(number) {
-            this.$emit('delete_answer', number);
+        delete_answer: function(answer_number, question_number) {
+            this.$store.commit('delete_answer', {
+                answer_number: answer_number,
+                question_number: question_number
+            });
         },
-    },
-    mounted: function() {
-        this.is_checked = this.correct;
     },
 });
 
 new Vue({
-    el: '#quiz'
+    el: '#quiz',
+    store,
 });

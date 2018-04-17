@@ -51,6 +51,14 @@ class QuizController extends Controller
     public function questions(Request $request) {
         $questions = Question::orderBy('number', 'asc')->get();
 
+        foreach ($questions as $question) {
+            $question->answers = [
+                ['id' => '1', 'title' => 'ek lzezlhgl zei zzeffh zrgle ', 'correct' => true],
+                ['id' => '2', 'title' => 'ùer igh ao ziezze rgae', 'correct' => false],
+                ['id' => '3', 'title' => 'aef oze jjoz ej ezoj', 'correct' => true],
+            ];
+        }
+
         return $questions;
     }
 }

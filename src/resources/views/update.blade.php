@@ -13,29 +13,27 @@
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
             <question
-                    v-for="(question, index) in questions"
+                    v-for="(question, index) in $store.state.questions"
                     v-bind:title="question.title"
-                    v-bind:number="index"
+                    v-bind:question_number="index"
                     v-bind:description="question.description"
-                    v-bind:answers="[{id: '1', title: 'Lorem ipsum', correct: true}, {id: '2', title: 'Dolor sit amet', correct: false}, {id: '3', title: 'Last answser', correct: true }]"
+                    v-bind:answers="question.answers"
                     v-bind:type="question.type"
                     v-bind:key="question.id"
-                    v-on:delete_question="delete_question"
-                    v-on:duplicate_question="duplicate_question"
-                    ></question>
+            ></question>
 
             <div class="question add-question">
                 <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
                 <textarea class="question-description textarea" placeholder="Ajouter une description" v-model="new_question_description"></textarea>
-                <button class="add-button button" @click="valid_add_question">OK</button>
+                <button class="add-button button" v-on:click="add_question">OK</button>
             </div>
         </div>
     </script>
 
     <script type="text/x-template" id="question-template">
         <div class="question">
-            <button class="button duplicate-button" v-on:click="delete_question(number)">S</button>
-            <button class="button duplicate-button" v-on:click="duplicate_question(number)">D</button>
+            <button class="button duplicate-button" v-on:click="$store.commit('delete_question', question_number)">S</button>
+            <button class="button duplicate-button" v-on:click="$store.commit('duplicate_question', question_number)">D</button>
 
             <textarea class="question-title textarea">@{{ title }}</textarea>
             <textarea class="question-description textarea">@{{ description }}</textarea>
@@ -43,7 +41,7 @@
             <div class="content">
                 <div class="type">
                     <label class="label">Type:</label>
-                    <select class="select" v-model="mutable_type">
+                    <select class="select" v-on:change="update_question_type($event, question_number)">
                         <option value="1">Boutons radios</option>
                         <option value="2">Choix multiples</option>
                         <option value="3">Association d'items</option>
@@ -51,26 +49,24 @@
                     </select>
                 </div>
 
-                <div class="items" v-if="mutable_type == 1 || mutable_type == 2">
+                <div class="items" v-if="type == 1 || type == 2">
                     <text-answer
-                            v-for="(answer, index) in mutable_answers"
+                            v-for="(answer, index) in answers"
                             v-bind:title="answer.title"
-                            v-bind:number="index"
+                            v-bind:answer_number="index"
+                            v-bind:question_number="question_number"
                             v-bind:correct="answer.correct"
-                            v-bind:is_checked="answer.is_checked"
                             v-bind:key="answer.id"
-                            v-on:delete_answer="delete_answer"
-                            v-on:check_answer="check_answer"
                     ></text-answer>
 
                     <div class="field">
                         <label class="label">Ajouter une réponse</label>
                         <input type="text" class="input" placeholder="Ajouter une réponse" v-model="new_answer_title" />
-                        <button class="button" v-on:click="valid_add_answer">OK</button>
+                        <button class="button" v-on:click="add_answer(question_number)">OK</button>
                     </div>
                 </div>
 
-                <div class="items" v-if="mutable_type == 3">
+                <div class="items" v-if="type == 3">
                     <div class="div-50">
                         <div class="field">
                             <label class="label">Nom d'item 1</label>
@@ -113,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="items" v-if="mutable_type == 4">
+                <div class="items" v-if="type == 4">
 
                 </div>
             </div>
@@ -122,15 +118,16 @@
 
     <script type="text/x-template" id="text-answer-template">
         <div class="field">
-            <label class="label">Réponse @{{ number+1 }}<span :class="{correct: true, checked: is_checked}" v-on:click="check(number)">V</span></label>
+            <label class="label">Réponse @{{ answer_number+1 }}<span :class="{correct: true, checked: correct}" v-on:click="check_answer(answer_number, question_number)">V</span></label>
             <input type="text" class="input" placeholder="" :value="title" />
-            <span class="delete" v-on:click="delete_answer(number)">x</span>
+            <span class="delete" v-on:click="delete_answer(answer_number, question_number)">x</span>
         </div>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+    <script src="/js/vendor/uuid.js"></script>
     <script src="/js/quiz.js"></script>
 
     <style type="text/css">
