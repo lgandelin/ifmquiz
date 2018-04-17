@@ -6,6 +6,8 @@ const store = new Vuex.Store({
     },
     mutations: {
         add_question(state, question) {
+            question.answers = [];
+            question.type = 1;
             state.questions.push(question);
         },
         update_question_type(state, params) {
@@ -83,6 +85,11 @@ Vue.component('quiz', {
             .then(function (response) {
                 store.state.questions = response.data
             })
+
+        var el = document.getElementById('questions');
+        var sortable = new Sortable(el, {
+            handle: '.move-button',
+        });
     },
     methods: {
         add_question: function() {
@@ -117,6 +124,7 @@ Vue.component('question', {
     },
     data: function() {
         return {
+            is_opened: true,
             new_answer_title: '',
         }
     },

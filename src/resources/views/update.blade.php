@@ -12,15 +12,17 @@
 
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
-            <question
-                    v-for="(question, index) in $store.state.questions"
-                    v-bind:title="question.title"
-                    v-bind:question_number="index"
-                    v-bind:description="question.description"
-                    v-bind:answers="question.answers"
-                    v-bind:type="question.type"
-                    v-bind:key="question.id"
-            ></question>
+            <div id="questions">
+                <question
+                        v-for="(question, index) in $store.state.questions"
+                        v-bind:title="question.title"
+                        v-bind:question_number="index"
+                        v-bind:description="question.description"
+                        v-bind:answers="question.answers"
+                        v-bind:type="question.type"
+                        v-bind:key="question.id"
+                ></question>
+            </div>
 
             <div class="question add-question">
                 <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
@@ -32,16 +34,19 @@
 
     <script type="text/x-template" id="question-template">
         <div class="question">
+            <button class="button move-button">M</button>
+
             <button class="button duplicate-button" v-on:click="$store.commit('delete_question', question_number)">S</button>
             <button class="button duplicate-button" v-on:click="$store.commit('duplicate_question', question_number)">D</button>
 
             <textarea class="question-title textarea">@{{ title }}</textarea>
             <textarea class="question-description textarea">@{{ description }}</textarea>
 
-            <div class="content">
+            <button class="button toggle-button" v-on:click="is_opened = !is_opened">O</button>
+            <div class="content" v-show="is_opened">
                 <div class="type">
                     <label class="label">Type:</label>
-                    <select class="select" v-on:change="update_question_type($event, question_number)">
+                    <select class="select" v-bind:value="type" v-on:change="update_question_type($event, question_number)">
                         <option value="1">Boutons radios</option>
                         <option value="2">Choix multiples</option>
                         <option value="3">Association d'items</option>
@@ -126,6 +131,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="https://unpkg.com/sortablejs@1.4.2"></script>
+    <script src="https://unpkg.com/vue-sortable@0.1.3"></script>
     <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
     <script src="/js/vendor/uuid.js"></script>
     <script src="/js/quiz.js"></script>
@@ -173,7 +180,9 @@
         }
         
         .content {
-            margin-top: 3rem;
+            border-top: 1px solid #444;
+            margin-top: 2rem;
+            padding-top: 2rem;
         }
 
         .correct {
@@ -206,6 +215,26 @@
         .duplicate-button, .delete-button {
             float: right;
             margin-left: 0.5rem;
+        }
+
+        .move-button {
+            display: block;
+            margin: auto;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-button {
+            display: block;
+            margin: auto;
+            margin-top: 2rem;
+        }
+
+        .move-button:hover {
+             cursor: move;
+        }
+
+        .sortable-ghost {
+            background: orange;
         }
     </style>
 </body>
