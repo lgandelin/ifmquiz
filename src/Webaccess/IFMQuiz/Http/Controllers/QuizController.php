@@ -48,24 +48,24 @@ class QuizController extends Controller
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         foreach ($questions as $question) {
-            $question->answers = [
+            $question->items = [
                 ['id' => '1', 'title' => 'ek lzezlhgl zei zzeffh zrgle ', 'correct' => true],
                 ['id' => '2', 'title' => 'ùer igh ao ziezze rgae', 'correct' => false],
                 ['id' => '3', 'title' => 'aef oze jjoz ej ezoj', 'correct' => true],
             ];
 
-            $question->item_left_answers = [
+            $question->items_left = [
                 ['id' => '1', 'title' => 'ek lzezlhgl zei zzeffh zrgle'],
                 ['id' => '2', 'title' => 'ùer igh ao ziezze rgae'],
                 ['id' => '3', 'title' => 'aef oze jjoz ej ezoj'],
                 ['id' => '4', 'title' => 'aef oze jjoz ej ezoj'],
             ];
 
-            $question->item_right_answers = [
-                ['id' => '5', 'title' => 'paoeir pfdmj erpùogjmoq jere', 'item' => 2],
-                ['id' => '6', 'title' => 'bjpfjpfjg hiohae ogiha eorghoahe ', 'item' => 1],
-                ['id' => '7', 'title' => 'oireg jfg aera merg', 'item' => 1],
-                ['id' => '8', 'title' => 'pzg pojrgo joaerhig oaehr g', 'item' => 2],
+            $question->items_right = [
+                ['id' => '5', 'title' => 'paoeir pfdmj erpùogjmoq jere', 'associated_item' => 2],
+                ['id' => '6', 'title' => 'bjpfjpfjg hiohae ogiha eorghoahe ', 'associated_item' => 1],
+                ['id' => '7', 'title' => 'oireg jfg aera merg', 'associated_item' => 1],
+                ['id' => '8', 'title' => 'pzg pojrgo joaerhig oaehr g', 'associated_item' => 2],
             ];
         }
 

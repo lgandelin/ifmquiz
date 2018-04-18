@@ -20,7 +20,6 @@ class CreateQuestionTable extends Migration
             $table->integer('type')->nullable();
             $table->integer('number')->nullable();
             $table->text('items')->nullable();
-            $table->text('correct_items')->nullable();
             $table->uuid('quiz_id')->nullable();
             $table->timestamps();
         });
