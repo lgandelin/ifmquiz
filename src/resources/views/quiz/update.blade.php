@@ -9,10 +9,9 @@
 
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
-            {{--<div id="questions">--}}
-            <draggable v-model="questions" :options="{handle:'.move-button'}" @start="drag=true" @end="drag=false">
+            <div id="questions" v-sortable="{onEnd: reorder_questions}">
                 <question
-                        v-for="(question, index) in questions"
+                        v-for="(question, index) in $store.state.questions"
                         v-bind:title="question.title"
                         v-bind:question_number="index"
                         v-bind:description="question.description"
@@ -22,8 +21,7 @@
                         v-bind:type="question.type"
                         v-bind:key="question.id"
                 ></question>
-            </draggable>
-            {{--</div>--}}
+            </div>
 
             <div class="question add-question">
                 <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
