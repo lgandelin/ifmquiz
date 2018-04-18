@@ -1,5 +1,6 @@
 /vendor
 .DS_Store
+*.css
 *.scssc
 .idea
 *.map

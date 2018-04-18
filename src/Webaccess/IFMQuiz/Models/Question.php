@@ -15,4 +15,9 @@ class Question extends Model
     protected $fillable = [
         'title',
     ];
+
+    public function quiz()
+    {
+        return $this->belongsTo('Webaccess\IFMQuiz\Models\Quiz');
+    }
 }

@@ -1,0 +1,98 @@
+.question {
+    margin-bottom: 2rem;
+    padding: 2rem;
+
+    background: #ccc;
+}
+
+.question-title {
+    width: 250px;
+    min-width: auto;
+    display: inline-block;
+    height: 50px;
+}
+
+.question-description {
+    display: inline-block;
+    min-width: auto;
+    width: 850px;
+    height: 50px;
+}
+
+.add-question {
+    background: #eee;
+}
+
+.add-button {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.type {
+    vertical-align: top;
+    display: inline-block;
+    width: 250px;
+}
+
+.items {
+    display: inline-block;
+    width: 850px;
+}
+
+.content {
+    border-top: 1px solid #444;
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+.correct {
+    float: right;
+
+    cursor: pointer;
+}
+
+.correct.checked {
+    color: orange;
+}
+
+.input {
+    width: 97%;
+}
+
+.div-50 {
+    width: 50%;
+    float: left;
+}
+
+.div-50 .input {
+    width: 80%;
+}
+
+.div-50 input[type="number"] {
+    width: 50px;
+}
+
+.duplicate-button, .delete-button {
+    float: right;
+    margin-left: 0.5rem;
+}
+
+.move-button {
+    display: block;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.toggle-button {
+    display: block;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.move-button:hover {
+    cursor: move;
+}
+
+.sortable-ghost {
+    background: orange;
+}

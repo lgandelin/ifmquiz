@@ -11,7 +11,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
     Route::post('/questionnaires/dupliquer/{uuid}', array('as' => 'quiz_duplicate', 'uses' => 'QuizController@duplicate'));
     Route::get('/questionnaires/supprimer/{uuid}', array('as' => 'quiz_delete', 'uses' => 'QuizController@delete'));
 
-    Route::get('/questions/', array('as' => 'questions_list', 'uses' => 'QuizController@questions'));
+    Route::get('/questions/{uuid}', array('as' => 'questions_list', 'uses' => 'QuizController@questions'));
 
     Route::group(['middleware' => 'admin'], function () {
 

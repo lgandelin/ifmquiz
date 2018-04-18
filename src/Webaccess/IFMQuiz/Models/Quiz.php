@@ -21,9 +21,4 @@ class Quiz extends Model
         'correct_items',
         'quiz_id',
     ];
-
-    public function quiz()
-    {
-        return $this->belongsTo('Webaccess\IFMQuiz\Models\Quiz');
-    }
 }

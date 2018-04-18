@@ -5,6 +5,7 @@ namespace Webaccess\IFMQuiz\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Webaccess\IFMQuiz\Models\Question;
+use Webaccess\IFMQuiz\Models\Quiz;
 
 class QuizController extends Controller
 {
@@ -16,13 +17,9 @@ class QuizController extends Controller
     }
 
     public function index(Request $request) {
-        $quizs = [
-            ['uuid' => '48a6dc74-8868-4aef-8efa-88491cc71361', 'name' => 'Questionnaire 1'],
-            ['uuid' => '4f4b9738-86c9-4dd0-bd3f-694dcf6948cd', 'name' => 'Questionnaire 2'],
-            ['uuid' => '2a791a2e-2ebe-49f3-9686-044a60222685', 'name' => 'Questionnaire 3'],
-        ];
+        $quizs = Quiz::all();
 
-        return view('ifmquiz::index', [
+        return view('ifmquiz::dashboard.index', [
             'quizs' => $quizs
         ]);
     }
@@ -31,9 +28,9 @@ class QuizController extends Controller
     }
 
     public function update(Request $request, $quizID) {
-        $quiz = ['name' => 'Questionnaire 1'];
+        $quiz = Quiz::find($quizID);
 
-        return view('ifmquiz::update', [
+        return view('ifmquiz::quiz.update', [
             'quiz' => $quiz,
         ]);
     }
@@ -47,8 +44,8 @@ class QuizController extends Controller
     public function delete(Request $request, $quizID) {
     }
 
-    public function questions(Request $request) {
-        $questions = Question::orderBy('number', 'asc')->get();
+    public function questions(Request $request, $quizID) {
+        $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         foreach ($questions as $question) {
             $question->answers = [
