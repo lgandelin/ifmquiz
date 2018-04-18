@@ -9,9 +9,10 @@
 
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
-            <div id="questions">
+            {{--<div id="questions">--}}
+            <draggable v-model="questions" :options="{handle:'.move-button'}" @start="drag=true" @end="drag=false">
                 <question
-                        v-for="(question, index) in $store.state.questions"
+                        v-for="(question, index) in questions"
                         v-bind:title="question.title"
                         v-bind:question_number="index"
                         v-bind:description="question.description"
@@ -21,14 +22,18 @@
                         v-bind:type="question.type"
                         v-bind:key="question.id"
                 ></question>
-            </div>
+            </draggable>
+            {{--</div>--}}
 
             <div class="question add-question">
                 <textarea class="question-title textarea" placeholder="Ajouter une question" v-model="new_question_title"></textarea>
                 <textarea class="question-description textarea" placeholder="Ajouter une description" v-model="new_question_description"></textarea>
                 <button class="add-button button" v-on:click="add_question">OK</button>
             </div>
-            </div>
+
+            <button class="button" v-on:click="save_questions" v-show="!saving">Save</button>
+            <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
+        </div>
     </script>
 
     <script type="text/x-template" id="question-template">
@@ -38,14 +43,14 @@
             <button class="button duplicate-button" v-on:click="$store.commit('delete_question', question_number)">S</button>
             <button class="button duplicate-button" v-on:click="$store.commit('duplicate_question', question_number)">D</button>
 
-            <textarea class="question-title textarea">@{{ title }}</textarea>
-            <textarea class="question-description textarea">@{{ description }}</textarea>
+            <textarea class="question-title textarea" @input="update_question_title($event, question_number)">@{{ title }}</textarea>
+            <textarea class="question-description textarea" @input="update_question_description($event, question_number)">@{{ description }}</textarea>
 
             <button class="button toggle-button" v-on:click="is_opened = !is_opened">O</button>
             <div class="content" v-show="is_opened">
                 <div class="type">
                     <label class="label">Type:</label>
-                    <select class="select" v-bind:value="type" v-on:change="update_question_type($event, question_number)">
+                    <select class="select" v-bind:value="type" @input="update_question_type($event, question_number)">
                         <option value="1">Boutons radios</option>
                         <option value="2">Choix multiples</option>
                         <option value="3">Association d'items</option>
@@ -114,8 +119,10 @@
 
     <script type="text/x-template" id="item-text-template">
         <div class="field">
-            <label class="label">Réponse @{{ item_number+1 }}<span :class="{correct: true, checked: correct}" v-on:click="check_item(item_number, question_number)">V</span></label>
-            <input type="text" class="input" placeholder="" :value="title" />
+            <label class="label">Réponse @{{ item_number+1 }}
+                <span :class="{correct: true, checked: correct}" v-on:click="check_item(item_number, question_number)">V</span>
+            </label>
+            <input type="text" class="input" placeholder="" :value="title" @input="update_item_title($event, item_number, question_number)" />
             <span class="delete" v-on:click="delete_item(item_number, question_number)">x</span>
         </div>
     </script>
@@ -123,7 +130,7 @@
     <script type="text/x-template" id="item-left-template">
         <div class="field">
             <label class="label">Nom d'item @{{ item_number+1 }}</label>
-            <input type="text" class="input" placeholder="" :value="title" />
+            <input type="text" class="input" placeholder="" :value="title" @input="update_item_left_title($event, item_number, question_number)" />
             <span class="delete" v-on:click="delete_item_left(item_number, question_number)">x</span>
         </div>
     </script>
@@ -131,7 +138,7 @@
     <script type="text/x-template" id="item-right-template">
         <div class="field">
             <label class="label">Nom d'item @{{ item_number+1 }}</label>
-            <input type="text" class="input" placeholder="" :value="title" />
+            <input type="text" class="input" placeholder="" :value="title" @input="update_item_right_title($event, item_number, question_number)" />
             <input class="input" type="number" :value="associated_item" />
             <span class="delete" v-on:click="delete_item_right(item_number, question_number)">x</span>
         </div>

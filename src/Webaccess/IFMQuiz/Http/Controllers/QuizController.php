@@ -48,27 +48,29 @@ class QuizController extends Controller
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         foreach ($questions as $question) {
-            $question->items = [
-                ['id' => '1', 'title' => 'ek lzezlhgl zei zzeffh zrgle ', 'correct' => true],
-                ['id' => '2', 'title' => 'ùer igh ao ziezze rgae', 'correct' => false],
-                ['id' => '3', 'title' => 'aef oze jjoz ej ezoj', 'correct' => true],
-            ];
-
-            $question->items_left = [
-                ['id' => '1', 'title' => 'ek lzezlhgl zei zzeffh zrgle'],
-                ['id' => '2', 'title' => 'ùer igh ao ziezze rgae'],
-                ['id' => '3', 'title' => 'aef oze jjoz ej ezoj'],
-                ['id' => '4', 'title' => 'aef oze jjoz ej ezoj'],
-            ];
-
-            $question->items_right = [
-                ['id' => '5', 'title' => 'paoeir pfdmj erpùogjmoq jere', 'associated_item' => 2],
-                ['id' => '6', 'title' => 'bjpfjpfjg hiohae ogiha eorghoahe ', 'associated_item' => 1],
-                ['id' => '7', 'title' => 'oireg jfg aera merg', 'associated_item' => 1],
-                ['id' => '8', 'title' => 'pzg pojrgo joaerhig oaehr g', 'associated_item' => 2],
-            ];
+            $question->items = json_decode($question->items);
+            $question->items_left = json_decode($question->items_left);
+            $question->items_right = json_decode($question->items_right);
         }
 
         return $questions;
+    }
+
+    public function questions_handler(Request $request, $quizID) {
+
+        Question::where('quiz_id', '=', $quizID)->delete();
+        foreach ($request->questions as $question_number => $question) {
+            $q = new Question();
+            $q->id = $question['id'];
+            $q->description = $question['description'];
+            $q->type = $question['type'];
+            $q->title = $question['title'];
+            $q->number = $question_number+1;
+            $q->items = json_encode($question['items']);
+            $q->items_left = json_encode($question['items_left']);
+            $q->items_right = json_encode($question['items_right']);
+            $q->quiz_id = $quizID;
+            $q->save();
+        }
     }
 }

@@ -6,11 +6,24 @@ const store = new Vuex.Store({
     },
     mutations: {
         add_question(state, question) {
+            question.id = uuidv4();
             question.items = [];
             question.items_left = [];
             question.items_right = [];
             question.type = 1;
             state.questions.push(question);
+        },
+        update_question_title(state, params) {
+            var number = params.question_number;
+            var title = params.title;
+
+            state.questions[number].title = title;
+        },
+        update_question_description(state, params) {
+            var number = params.question_number;
+            var description = params.description;
+
+            state.questions[number].description = description;
         },
         update_question_type(state, params) {
             var number = params.question_number;
@@ -27,10 +40,10 @@ const store = new Vuex.Store({
             question.title += " - copie";
             state.questions.splice(number+1, 0, question);
         },
-
         add_item(state, params) {
             var question_number = params.question_number;
             state.questions[question_number].items.push({
+                id: uuidv4(),
                 title: params.title,
                 correct: params.correct
             })
@@ -56,6 +69,13 @@ const store = new Vuex.Store({
 
             state.questions[question_number].items[item_number].correct = !state.questions[question_number].items[item_number].correct
         },
+        update_item_title(state, params) {
+            var item_number = params.item_number;
+            var question_number = params.question_number;
+            var title = params.title;
+
+            state.questions[question_number].items[item_number].title = title;
+        },
         delete_item(state, params) {
             var item_number = params.item_number;
             var question_number = params.question_number;
@@ -76,22 +96,45 @@ const store = new Vuex.Store({
                 }
             }
         },
-
         add_item_left(state, params) {
             var question_number = params.question_number;
 
+            if (state.questions[question_number].items_left == null) {
+                state.questions[question_number].items_left = [];
+            }
+
             state.questions[question_number].items_left.push({
+                id: uuidv4(),
                 title: params.title,
                 correct: params.correct
             });
         },
+        update_item_left_title(state, params) {
+            var item_number = params.item_number;
+            var question_number = params.question_number;
+            var title = params.title;
+
+            state.questions[question_number].items_left[item_number].title = title;
+        },
         add_item_right(state, params) {
             var question_number = params.question_number;
 
+            if (state.questions[question_number].items_right == null) {
+                state.questions[question_number].items_right = [];
+            }
+
             state.questions[question_number].items_right.push({
+                id: uuidv4(),
                 title: params.title,
                 associated_item: parseInt(params.associated_item)
             });
+        },
+        update_item_right_title(state, params) {
+            var item_number = params.item_number;
+            var question_number = params.question_number;
+            var title = params.title;
+
+            state.questions[question_number].items_right[item_number].title = title;
         },
         delete_item_left(state, params) {
             var question_number = params.question_number;
@@ -104,7 +147,7 @@ const store = new Vuex.Store({
             var item_number = params.item_number;
 
             state.questions[question_number].items_right.splice(item_number, 1);
-        }
+        },
     }
 });
 
@@ -112,6 +155,7 @@ Vue.component('quiz', {
     template: '#quiz-template',
     data: function() {
         return {
+            saving: false,
             new_question_title: '',
             new_question_description: '',
         }
@@ -120,16 +164,16 @@ Vue.component('quiz', {
         var store = this.$store;
         var quiz_id = document.getElementById('quiz_id').value;
 
-        axios.get("/questions/" + quiz_id)
+        axios.get("/questionnaires/" + quiz_id + "/questions")
             .then(function (response) {
                 store.state.questions = response.data
-            })
+            });
 
         //Initialize drag and drop
-        var el = document.getElementById('questions');
+        /*var el = document.getElementById('questions');
         var sortable = new Sortable(el, {
             handle: '.move-button',
-        });
+        });*/
     },
     methods: {
         add_question: function() {
@@ -141,6 +185,30 @@ Vue.component('quiz', {
             this.new_question_title = '';
             this.new_question_description = '';
         },
+        save_questions: function() {
+            var quiz_id = document.getElementById('quiz_id').value;
+            var quiz = this;
+            quiz.saving = true;
+
+            axios.post(
+                "/questionnaires/" + quiz_id + "/questions", {
+                    questions: this.$store.state.questions
+                })
+                .then(function (response) {
+                    quiz.saving = false;
+                });
+        }
+    },
+    computed: {
+        questions: {
+            get: function() {
+                return this.$store.state.questions
+            },
+            set: function(value) {
+                console.log(value);
+                //this.$store.commit('setPages', value)
+            }
+        }
     }
 });
 
@@ -182,6 +250,18 @@ Vue.component('question', {
             });
 
             this.new_item_title = '';
+        },
+        update_question_title: function(e, question_number) {
+            this.$store.commit('update_question_title', {
+                title: e.target.value,
+                question_number: question_number,
+            })
+        },
+        update_question_description: function(e, question_number) {
+            this.$store.commit('update_question_description', {
+                description: e.target.value,
+                question_number: question_number,
+            })
         },
         update_question_type: function(e, question_number) {
             this.$store.commit('update_question_type', {
@@ -237,6 +317,13 @@ Vue.component('item-text', {
                 question_number: question_number
             });
         },
+        update_item_title: function(e, item_number, question_number) {
+            this.$store.commit('update_item_title', {
+                title: e.target.value,
+                item_number: item_number,
+                question_number: question_number
+            });
+        }
     },
 });
 
@@ -257,6 +344,13 @@ Vue.component('item-left', {
                 question_number: question_number
             });
         },
+        update_item_left_title: function(e, item_number, question_number) {
+            this.$store.commit('update_item_left_title', {
+                title: e.target.value,
+                item_number: item_number,
+                question_number: question_number
+            });
+        }
     }
 });
 
@@ -277,6 +371,13 @@ Vue.component('item-right', {
     methods: {
         delete_item_right: function(item_number, question_number) {
             this.$store.commit('delete_item_right', {
+                item_number: item_number,
+                question_number: question_number
+            });
+        },
+        update_item_right_title: function(e, item_number, question_number) {
+            this.$store.commit('update_item_right_title', {
+                title: e.target.value,
                 item_number: item_number,
                 question_number: question_number
             });

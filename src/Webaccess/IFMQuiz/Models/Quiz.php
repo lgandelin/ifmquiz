@@ -18,6 +18,8 @@ class Quiz extends Model
         'type',
         'number',
         'items',
+        'items_left',
+        'items_right',
         'quiz_id',
     ];
 }
