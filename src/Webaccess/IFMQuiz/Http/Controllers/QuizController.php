@@ -18,7 +18,7 @@ class QuizController extends Controller
     }
 
     public function index(Request $request) {
-        $quizs = Quiz::all();
+        $quizs = Quiz::orderBy('created_at', 'desc')->get();
 
         return view('ifmquiz::back.quiz.index', [
             'quizs' => $quizs
@@ -48,9 +48,33 @@ class QuizController extends Controller
     }
 
     public function duplicate(Request $request, $quizID) {
+        if ($quiz = Quiz::find($quizID)) {
+            $questions = Question::where('quiz_id', '=', $quizID)->get();
+
+            $quiz_copy = $quiz->replicate();
+            $quiz_copy->id = Uuid::uuid4()->toString();
+            $quiz_copy->title = $quiz_copy->title . ' - copie';
+            $quiz_copy->save();
+
+            foreach ($questions as $question) {
+                $question_copy = $question->replicate();
+                $question_copy->id = Uuid::uuid4()->toString();
+                $question_copy->quiz_id = $quiz_copy->id;
+                $question_copy->save();
+            }
+        }
+
+        return redirect()->route('quiz_list');
     }
 
     public function delete(Request $request, $quizID) {
+        if ($quiz = Quiz::find($quizID)) {
+            $questions = Question::where('quiz_id', '=', $quizID)->delete();
+
+            $quiz->delete();
+        }
+
+        return redirect()->route('quiz_list');
     }
 
 

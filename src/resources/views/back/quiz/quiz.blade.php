@@ -20,10 +20,10 @@
                 <input type="text" class="input subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
 
                 <div style="clear:both"></div>
-                <button class="button is-link" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
+                <button class="button is-primary" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
                 <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
 
-                <a class="button is-text" style="float:right" href="{{ route('dashboard') }}">Retour</a>
+                <a class="button is-text" style="float:right" href="{{ route('quiz_list') }}">Retour</a>
             </div>
 
             <div id="questions" v-sortable="{onEnd: reorder_questions, handle: '.move-button'}">
@@ -46,10 +46,10 @@
                 <button class="add-button button" v-on:click="add_question">OK</button>
             </div>
 
-            <button class="button is-link" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
+            <button class="button is-primary" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
             <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
 
-            <a class="button is-text" style="float:right" href="{{ route('dashboard') }}">Retour</a>
+            <a class="button is-text" style="float:right" href="{{ route('quiz_list') }}">Retour</a>
         </div>
     </script>
 

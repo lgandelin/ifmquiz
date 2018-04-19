@@ -145,3 +145,22 @@
         box-shadow: none;
     }
 }
+
+.tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+
+    .tile {
+        padding: 1rem;
+
+        .title {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.page-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}

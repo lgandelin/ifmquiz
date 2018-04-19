@@ -6,3 +6,4 @@
     <link rel="stylesheet" href="/css/quiz.css" />
 </head>
 <body>
+    <div class="page-wrapper">
