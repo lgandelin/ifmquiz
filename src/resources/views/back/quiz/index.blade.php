@@ -9,7 +9,7 @@
 
         <ul>
         @foreach ($quizs as $quiz)
-            <li>
+            <li class="box">
                 <h3>{{ $quiz->title }}</h3>
 
                 <a href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Editer</a>

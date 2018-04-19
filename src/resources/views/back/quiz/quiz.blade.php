@@ -162,4 +162,6 @@
             <span class="delete" v-on:click="delete_item_right(item_number, question_number)">x</span>
         </div>
     </script>
+
+    <script src="/js/dist/build.js"></script>
 @endsection

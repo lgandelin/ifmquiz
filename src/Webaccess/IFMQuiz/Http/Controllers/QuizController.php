@@ -4,6 +4,7 @@ namespace Webaccess\IFMQuiz\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Ramsey\Uuid\Uuid;
 use Webaccess\IFMQuiz\Models\Question;
 use Webaccess\IFMQuiz\Models\Quiz;
 
@@ -19,18 +20,26 @@ class QuizController extends Controller
     public function index(Request $request) {
         $quizs = Quiz::all();
 
-        return view('ifmquiz::back.dashboard.index', [
+        return view('ifmquiz::back.quiz.index', [
             'quizs' => $quizs
         ]);
     }
 
     public function create(Request $request) {
+        $quiz = new Quiz();
+        $quiz->id = Uuid::uuid4()->toString();
+        $quiz->title = "Nouveau questionnaire";
+        $quiz->subtitle = "Sous-titre";
+        $quiz->time = 0;
+        $quiz->save();
+
+        return redirect()->route('quiz_update', ['uuid' => $quiz->id]);
     }
 
     public function update(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
 
-        return view('ifmquiz::back.quiz.update', [
+        return view('ifmquiz::back.quiz.quiz', [
             'quiz' => $quiz,
         ]);
     }
@@ -43,6 +52,11 @@ class QuizController extends Controller
 
     public function delete(Request $request, $quizID) {
     }
+
+
+
+
+
 
     public function quiz(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
