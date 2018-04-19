@@ -1,10 +1,9 @@
-@extends('ifmquiz::master')
+@extends('ifmquiz::back.master')
 
 @section('main-content')
 
     <div class="container">
         <h1 class="title">Dashboard</h1>
-        <h2>Questionnaires</h2>
 
         <a href="{{ route('quiz_create') }}">Créer un questionnaire</a>
 

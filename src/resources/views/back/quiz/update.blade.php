@@ -1,4 +1,4 @@
-@extends('ifmquiz::master')
+@extends('ifmquiz::back.master')
 
 @section('main-content')
     <div class="container" id="quiz">
@@ -18,6 +18,12 @@
                 <input type="text" class="input title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                 <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
                 <input type="text" class="input subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
+
+                <div style="clear:both"></div>
+                <button class="button is-link" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
+                <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
+
+                <a class="button is-text" style="float:right" href="{{ route('dashboard') }}">Retour</a>
             </div>
 
             <div id="questions" v-sortable="{onEnd: reorder_questions, handle: '.move-button'}">
@@ -40,8 +46,10 @@
                 <button class="add-button button" v-on:click="add_question">OK</button>
             </div>
 
-            <button class="button" v-on:click="save_questions" v-show="!saving">Save</button>
+            <button class="button is-link" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
             <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
+
+            <a class="button is-text" style="float:right" href="{{ route('dashboard') }}">Retour</a>
         </div>
     </script>
 
@@ -59,12 +67,14 @@
             <div class="content" v-show="is_opened">
                 <div class="type">
                     <label class="label">Type:</label>
-                    <select class="select" v-bind:value="type" @input="update_question_type($event, question_number)">
-                        <option value="1">Boutons radios</option>
-                        <option value="2">Choix multiples</option>
-                        <option value="3">Association d'items</option>
-                        <option value="4">Réponse simple</option>
-                    </select>
+                    <div class="select">
+                        <select v-bind:value="type" @input="update_question_type($event, question_number)">
+                            <option value="1">Boutons radios</option>
+                            <option value="2">Choix multiples</option>
+                            <option value="3">Association d'items</option>
+                            <option value="4">Réponse simple</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="items" v-if="type == 1 || type == 2">

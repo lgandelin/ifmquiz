@@ -19,7 +19,7 @@ class QuizController extends Controller
     public function index(Request $request) {
         $quizs = Quiz::all();
 
-        return view('ifmquiz::dashboard.index', [
+        return view('ifmquiz::back.dashboard.index', [
             'quizs' => $quizs
         ]);
     }
@@ -30,7 +30,7 @@ class QuizController extends Controller
     public function update(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
 
-        return view('ifmquiz::quiz.update', [
+        return view('ifmquiz::back.quiz.update', [
             'quiz' => $quiz,
         ]);
     }
