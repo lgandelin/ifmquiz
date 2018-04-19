@@ -8,15 +8,18 @@ Vue.component('quiz', {
             saving: false,
             new_question_title: '',
             new_question_description: '',
+            updating_quiz_title: false,
+            updating_quiz_subtitle: false,
+            updating_quiz_time: false,
         }
     },
     mounted: function() {
         var store = this.$store;
         var quiz_id = document.getElementById('quiz_id').value;
 
-        axios.get("/questionnaires/" + quiz_id + "/questions")
+        axios.get("/quiz/" + quiz_id)
             .then(function (response) {
-                store.state.questions = response.data
+                store.state.quiz = response.data
             });
     },
     methods: {
@@ -35,16 +38,16 @@ Vue.component('quiz', {
             quiz.saving = true;
 
             axios.post(
-                "/questionnaires/" + quiz_id + "/questions", {
-                    questions: this.$store.state.questions
+                "/quiz/" + quiz_id, {
+                    quiz: this.$store.state.quiz
                 })
                 .then(function (response) {
                     quiz.saving = false;
                 });
         },
         reorder_questions: function(event) {
-            const moved_question = this.$store.state.questions.splice(event.oldIndex, 1)[0];
-            this.$store.state.questions.splice(event.newIndex, 0, moved_question);
+            const moved_question = this.$store.state.quiz.questions.splice(event.oldIndex, 1)[0];
+            this.$store.state.quiz.questions.splice(event.newIndex, 0, moved_question);
         },
     },
 });

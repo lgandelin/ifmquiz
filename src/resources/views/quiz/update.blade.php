@@ -2,16 +2,27 @@
 
 @section('main-content')
     <div class="container" id="quiz">
-        <h1 class="title">{{ $quiz->title }}</h1>
         <quiz></quiz>
         <input type="hidden" id="quiz_id" value="{{ $quiz->id }}" />
     </div>
 
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
-            <div id="questions" v-sortable="{onEnd: reorder_questions}">
+            <div class="header">
+                <span class="time" style="float:right">
+                    <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
+                    <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
+                min</span>
+                <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
+                <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
+                <input type="text" class="input title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
+                <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
+                <input type="text" class="input subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
+            </div>
+
+            <div id="questions" v-sortable="{onEnd: reorder_questions, handle: '.move-button'}">
                 <question
-                        v-for="(question, index) in $store.state.questions"
+                        v-for="(question, index) in $store.state.quiz.questions"
                         v-bind:title="question.title"
                         v-bind:question_number="index"
                         v-bind:description="question.description"

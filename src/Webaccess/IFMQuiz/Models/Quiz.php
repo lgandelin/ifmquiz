@@ -14,12 +14,7 @@ class Quiz extends Model
 
     protected $fillable = [
         'title',
-        'description',
-        'type',
-        'number',
-        'items',
-        'items_left',
-        'items_right',
-        'quiz_id',
+        'subtitle',
+        'time',
     ];
 }

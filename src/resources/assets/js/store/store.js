@@ -7,7 +7,12 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        questions: []
+        quiz: {
+            time: 0,
+            title: '',
+            subtitle: '',
+            questions: [],
+        }
     },
     mutations: {
         add_question(state, question) {
@@ -16,47 +21,47 @@ const store = new Vuex.Store({
             question.items_left = [];
             question.items_right = [];
             question.type = 1;
-            state.questions.push(question);
+            state.quiz.questions.push(question);
         },
         update_question_title(state, params) {
             var number = params.question_number;
             var title = params.title;
 
-            state.questions[number].title = title;
+            state.quiz.questions[number].title = title;
         },
         update_question_description(state, params) {
             var number = params.question_number;
             var description = params.description;
 
-            state.questions[number].description = description;
+            state.quiz.questions[number].description = description;
         },
         update_question_type(state, params) {
             var number = params.question_number;
             var type = params.type;
 
-            state.questions[number].type = type;
+            state.quiz.questions[number].type = type;
         },
         delete_question(state, number) {
-            state.questions.splice(number, 1);
+            state.quiz.questions.splice(number, 1);
         },
         duplicate_question(state, number) {
-            var question = Object.assign({}, state.questions[number]);
+            var question = Object.assign({}, state.quiz.questions[number]);
             question.id = uuidv4();
             question.title += " - copie";
-            state.questions.splice(number+1, 0, question);
+            state.quiz.questions.splice(number+1, 0, question);
         },
         add_item(state, params) {
             var question_number = params.question_number;
-            state.questions[question_number].items.push({
+            state.quiz.questions[question_number].items.push({
                 id: uuidv4(),
                 title: params.title,
                 correct: params.correct
             })
 
             //For the radio buttons, if the first option is added, it must be selected
-            if (state.questions[question_number].type == 1) {
-                if (state.questions[question_number].items.length == 1) {
-                    state.questions[question_number].items[0].correct = true
+            if (state.quiz.questions[question_number].type == 1) {
+                if (state.quiz.questions[question_number].items.length == 1) {
+                    state.quiz.questions[question_number].items[0].correct = true
                 }
             }
         },
@@ -65,50 +70,50 @@ const store = new Vuex.Store({
             var question_number = params.question_number;
 
             //For the radio buttons, only one option can be selected at once
-            if (state.questions[question_number].type == 1) {
-                for (var i in state.questions[question_number].items) {
-                    var item = state.questions[question_number].items[i];
+            if (state.quiz.questions[question_number].type == 1) {
+                for (var i in state.quiz.questions[question_number].items) {
+                    var item = state.quiz.questions[question_number].items[i];
                     item.correct = false;
                 }
             }
 
-            state.questions[question_number].items[item_number].correct = !state.questions[question_number].items[item_number].correct
+            state.quiz.questions[question_number].items[item_number].correct = !state.quiz.questions[question_number].items[item_number].correct
         },
         update_item_title(state, params) {
             var item_number = params.item_number;
             var question_number = params.question_number;
             var title = params.title;
 
-            state.questions[question_number].items[item_number].title = title;
+            state.quiz.questions[question_number].items[item_number].title = title;
         },
         delete_item(state, params) {
             var item_number = params.item_number;
             var question_number = params.question_number;
 
-            state.questions[question_number].items.splice(item_number, 1);
+            state.quiz.questions[question_number].items.splice(item_number, 1);
 
             //For the radio buttons, at least one option must be selected
-            if (state.questions[question_number].type == 1) {
+            if (state.quiz.questions[question_number].type == 1) {
                 var one_item_selected = false;
-                for (var i in state.questions[question_number].items) {
-                    if (state.questions[question_number].items[i].correct) {
+                for (var i in state.quiz.questions[question_number].items) {
+                    if (state.quiz.questions[question_number].items[i].correct) {
                         one_item_selected = true
                     }
                 }
 
                 if (!one_item_selected) {
-                    state.questions[question_number].items[0].correct = true
+                    state.quiz.questions[question_number].items[0].correct = true
                 }
             }
         },
         add_item_left(state, params) {
             var question_number = params.question_number;
 
-            if (state.questions[question_number].items_left == null) {
-                state.questions[question_number].items_left = [];
+            if (state.quiz.questions[question_number].items_left == null) {
+                state.quiz.questions[question_number].items_left = [];
             }
 
-            state.questions[question_number].items_left.push({
+            state.quiz.questions[question_number].items_left.push({
                 id: uuidv4(),
                 title: params.title,
                 correct: params.correct
@@ -119,16 +124,16 @@ const store = new Vuex.Store({
             var question_number = params.question_number;
             var title = params.title;
 
-            state.questions[question_number].items_left[item_number].title = title;
+            state.quiz.questions[question_number].items_left[item_number].title = title;
         },
         add_item_right(state, params) {
             var question_number = params.question_number;
 
-            if (state.questions[question_number].items_right == null) {
-                state.questions[question_number].items_right = [];
+            if (state.quiz.questions[question_number].items_right == null) {
+                state.quiz.questions[question_number].items_right = [];
             }
 
-            state.questions[question_number].items_right.push({
+            state.quiz.questions[question_number].items_right.push({
                 id: uuidv4(),
                 title: params.title,
                 associated_item: parseInt(params.associated_item)
@@ -139,19 +144,19 @@ const store = new Vuex.Store({
             var question_number = params.question_number;
             var title = params.title;
 
-            state.questions[question_number].items_right[item_number].title = title;
+            state.quiz.questions[question_number].items_right[item_number].title = title;
         },
         delete_item_left(state, params) {
             var question_number = params.question_number;
             var item_number = params.item_number;
 
-            state.questions[question_number].items_left.splice(item_number, 1);
+            state.quiz.questions[question_number].items_left.splice(item_number, 1);
         },
         delete_item_right(state, params) {
             var question_number = params.question_number;
             var item_number = params.item_number;
 
-            state.questions[question_number].items_right.splice(item_number, 1);
+            state.quiz.questions[question_number].items_right.splice(item_number, 1);
         },
     }
 });

@@ -44,7 +44,9 @@ class QuizController extends Controller
     public function delete(Request $request, $quizID) {
     }
 
-    public function questions(Request $request, $quizID) {
+    public function quiz(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         foreach ($questions as $question) {
@@ -53,13 +55,20 @@ class QuizController extends Controller
             $question->items_right = json_decode($question->items_right);
         }
 
-        return $questions;
+        $quiz->questions = $questions;
+
+        return $quiz;
     }
 
-    public function questions_handler(Request $request, $quizID) {
+    public function quiz_handler(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+        $quiz->title = $request->quiz['title'];
+        $quiz->subtitle = $request->quiz['subtitle'];
+        $quiz->time = $request->quiz['time'];
+        $quiz->save();
 
         Question::where('quiz_id', '=', $quizID)->delete();
-        foreach ($request->questions as $question_number => $question) {
+        foreach ($request->quiz['questions'] as $question_number => $question) {
             $q = new Question();
             $q->id = $question['id'];
             $q->description = $question['description'];

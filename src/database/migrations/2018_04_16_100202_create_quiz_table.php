@@ -16,6 +16,8 @@ class CreateQuizTable extends Migration
         Schema::create('quizs', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
             $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->integer('time')->nullable();
             $table->timestamps();
         });
     }

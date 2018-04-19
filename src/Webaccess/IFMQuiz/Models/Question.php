@@ -14,6 +14,13 @@ class Question extends Model
 
     protected $fillable = [
         'title',
+        'description',
+        'type',
+        'number',
+        'items',
+        'items_left',
+        'items_right',
+        'quiz_id',
     ];
 
     public function quiz()
