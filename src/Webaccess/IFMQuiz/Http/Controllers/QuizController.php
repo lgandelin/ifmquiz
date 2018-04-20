@@ -5,6 +5,7 @@ namespace Webaccess\IFMQuiz\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
+use Webaccess\IFMQuiz\Models\Answer;
 use Webaccess\IFMQuiz\Models\Question;
 use Webaccess\IFMQuiz\Models\Quiz;
 
@@ -45,6 +46,29 @@ class QuizController extends Controller
     }
 
     public function results(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+        $users = [['id' => 'ddb5d645-af5a-48d3-8ff2-87bf7823772d']];
+        $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
+
+        foreach ($users as $i => $user) {
+            $result = 0;
+            $users[$i]['answers'] = [];
+
+            foreach ($questions as $question) {
+                $answer = Answer::where('question_id', '=', $question->id)->where('user_id', '=', $user['id'])->first();
+                $users[$i]['answers'][] = $answer->correct;
+                if ($answer->correct) {
+                    $result++;
+                }
+            }
+            $users[$i]['result'] = $result . '/' . sizeof($questions);
+        }
+
+        return view('ifmquiz::back.quiz.results', [
+            'quiz' => $quiz,
+            'questions' => $questions,
+            'users' => $users,
+        ]);
     }
 
     public function duplicate(Request $request, $quizID) {
