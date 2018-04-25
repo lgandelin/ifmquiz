@@ -8,6 +8,7 @@ use Ramsey\Uuid\Uuid;
 use Webaccess\IFMQuiz\Models\Answer;
 use Webaccess\IFMQuiz\Models\Question;
 use Webaccess\IFMQuiz\Models\Quiz;
+use Webaccess\IFMQuiz\Models\User;
 
 class QuizController extends Controller
 {
@@ -47,21 +48,27 @@ class QuizController extends Controller
 
     public function results(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
-        $users = [['id' => 'ddb5d645-af5a-48d3-8ff2-87bf7823772d']];
+        $users = User::all();
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         foreach ($users as $i => $user) {
             $result = 0;
-            $users[$i]['answers'] = [];
+            $answers = [];
 
             foreach ($questions as $question) {
-                $answer = Answer::where('question_id', '=', $question->id)->where('user_id', '=', $user['id'])->first();
-                $users[$i]['answers'][] = $answer->correct;
-                if ($answer->correct) {
-                    $result++;
+                $answer = Answer::where('question_id', '=', $question->id)->where('user_id', '=', $user->id)->first();
+                if (isset($answer->correct)) {
+                    $answers[]= $answer->correct;
+
+                    if ($answer->correct) {
+                        $result++;
+                    }
+                } else {
+                    $answers[] = 'N/A';
                 }
             }
-            $users[$i]['result'] = $result . '/' . sizeof($questions);
+            $user->answers = $answers;
+            $user->result = $result . '/' . sizeof($questions);
         }
 
         return view('ifmquiz::back.quiz.results', [

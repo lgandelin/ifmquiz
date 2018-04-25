@@ -11,7 +11,7 @@
         </div>
 
         <div class="questions">
-            <form action="#" method="post">
+            <form action="{{ route('quiz_front_handler', ['uuid' => $quiz->id]) }}" method="post">
                 @foreach($questions as $i => $question)
                     <div class="box">
                         <h3>{{ $question->title }}</h3>
@@ -21,13 +21,13 @@
                             @if ($question->type == 1)
                                 @foreach ($question->items as $j => $item)
                                     <label class="radio">
-                                        <input type="radio" name="answer_{{ $i }}_{{ $j }}" /> {{ $item->title }}
+                                        <input type="radio" name="answer_{{ $question->id }}_{{ $item->id }}" /> {{ $item->title }}
                                     </label>
                                 @endforeach
                             @elseif ($question->type == 2)
                                 @foreach ($question->items as $j => $item)
                                     <label class="checkbox">
-                                        <input type="checkbox" name="answer_{{ $i }}_{{ $j }}" /> {{ $item->title }}
+                                        <input type="checkbox" name="answer_{{ $question->id }}_{{ $item->id }}" /> {{ $item->title }}
                                     </label>
                                 @endforeach
                             @elseif ($question->type == 3)
@@ -46,19 +46,20 @@
                                         @foreach ($question->items_right as $j => $item)
                                             <div class="control">
                                                 <label>
-                                                    <input style="font-weight:bold; width: 2rem;" type="text" name="answer_{{ $i }}_{{ $j }}" /> {{ $item->title }}
+                                                    <input style="font-weight:bold; width: 2rem;" type="text" name="answer_{{ $question->id }}_{{ $item->id }}" /> {{ $item->title }}
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                             @elseif ($question->type == 4)
-                                <textarea class="textarea" placeholder="Répondre içi"></textarea>
+                                <textarea class="textarea" placeholder="Répondre içi" name="textanswer_{{ $question->id }}"></textarea>
                             @endif
                         </div>
                     </div>
                 @endforeach
 
+                {{ csrf_field() }}
                 <input type="submit" class="button is-link" value="Valider" />
 
             </form>

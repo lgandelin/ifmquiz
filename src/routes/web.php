@@ -6,6 +6,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
 
     //FRONT
     Route::get('/{uuid}', array('as' => 'quiz_front', 'uses' => 'FrontController@quiz'));
+    Route::post('/{uuid}/submit', array('as' => 'quiz_front_handler', 'uses' => 'FrontController@quiz_handler'));
 
     //ADMIN
     Route::get('/admin', array('as' => 'quiz_list', 'uses' => 'QuizController@index'));

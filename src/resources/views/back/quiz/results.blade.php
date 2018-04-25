@@ -10,7 +10,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>UUID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
                     @foreach ($questions as $i => $question)
                         <th>Q{{ $i+1 }}</th>
                     @endforeach
@@ -20,11 +21,12 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td>{{ $user['id'] }}</td>
-                        @foreach ($user['answers'] as $answer)
+                        <td>{{ $user->last_name }}</td>
+                        <td>{{ $user->first_name }}</td>
+                        @foreach ($user->answers as $answer)
                             <td>{{ $answer }}</td>
                         @endforeach
-                        <td>{{ $user['result'] }}</td>
+                        <td>{{ $user->result }}</td>
                     </tr>
                 @endforeach
             </tbody>
