@@ -19,6 +19,7 @@ class CreateAttemptTable extends Migration
             $table->uuid('user_id')->nullable();
             $table->datetime('started_at')->nullable();
             $table->datetime('ends_at')->nullable();
+            $table->datetime('validated_at')->nullable();
             $table->timestamps();
         });
     }

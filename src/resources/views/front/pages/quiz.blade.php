@@ -60,6 +60,7 @@
                 @endforeach
 
                 {{ csrf_field() }}
+                <input type="hidden" name="attempt_id" value="{{ $attempt_id }}" />
                 <input type="submit" class="button is-link" value="Valider" />
 
             </form>

@@ -24,6 +24,15 @@ class QuizController extends Controller
     public function index(Request $request) {
         $quizs = Quiz::orderBy('created_at', 'desc')->get();
 
+        foreach ($quizs as $quiz) {
+            $validated_attempts = Attempt::where('quiz_id', '=', $quiz->id)->where('completed_at', '=', null)->get()->count();
+            $attempts = Attempt::where('quiz_id', '=', $quiz->id)->get()->count();
+
+            $quiz->completion = ($attempts > 0) ? ($validated_attempts / $attempts) : 0;
+
+            $quiz->average = 'N/A';
+        }
+
         return view('ifmquiz::back.quiz.index', [
             'quizs' => $quizs
         ]);
@@ -161,15 +170,33 @@ class QuizController extends Controller
 
     public function mailing_handler(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
-        $url = route('quiz_front_intro', ['uuid' => $quizID]) . '?email=';
+        $url = route('quiz_front_intro', ['uuid' => $quizID]);
 
-        $mails = explode(PHP_EOL, $request->mailing_list);
-        foreach($mails as $i => $mail) {
-            $mail = trim(preg_replace('/\r/', '', $mail));
+        $emails = explode(PHP_EOL, $request->mailing_list);
+        foreach($emails as $i => $email) {
+            $email = trim(preg_replace('/\r/', '', $email));
 
-            Mail::send('ifmquiz::emails.quiz', ['url' => $url . $mail], function ($m) use ($url, $mail, $quiz) {
-                $m->to($mail)->subject(sprintf('[%s] Le lien pour accéder à votre examen', $quiz->title));
-            });
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                //Create user if not existing
+                if (!$user = User::where('email', $email)->first()) {
+                    $user = new User();
+                    $user->id = Uuid::uuid4()->toString();
+                    $user->email = $email;
+                    $user->save();
+                }
+
+                //Create attempt
+                $attempt = new Attempt();
+                $attempt->id = Uuid::uuid4()->toString();
+                $attempt->user_id = $user->id;
+                $attempt->quiz_id = $quizID;
+                $attempt->save();
+
+                Mail::send('ifmquiz::emails.quiz', ['url' => $url . '?attempt_id=' . $attempt->id], function ($m) use ($url, $user, $quiz) {
+                    $m->to($user->email)->subject(sprintf('[%s] Le lien pour accéder à votre examen', $quiz->title));
+                });
+            }
         }
 
         return redirect()->route('quiz_mailing', ['uuid' => $quizID]);

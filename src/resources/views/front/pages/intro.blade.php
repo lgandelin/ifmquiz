@@ -16,26 +16,26 @@
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input type="text" class="input" value="{{ $email }}" disabled="disabled" />
+                        <input type="text" class="input" value="{{ $user->email }}" disabled="disabled" />
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Nom</label>
                     <div class="control">
-                        <input type="text" class="input" value="" name="last_name" placeholder="Nom" />
+                        <input type="text" class="input" value="{{ $user->last_name }}" name="last_name" placeholder="Nom" />
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Prénom</label>
                     <div class="control">
-                        <input type="text" class="input" value="" name="first_name" placeholder="Prénom" />
+                        <input type="text" class="input" value="{{ $user->first_name }}" name="first_name" placeholder="Prénom" />
                     </div>
                 </div>
 
-                <input type="hidden" value="{{ $email }}" name="email" />
                 {{ csrf_field() }}
+                <input type="hidden" value="{{ $attempt_id }}" name="attempt_id" />
                 <input type="submit" class="button is-primary" value="Démarrer l'examen" />
             </form>
         </div>

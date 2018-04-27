@@ -35,13 +35,18 @@ class FrontController extends Controller
         return view('ifmquiz::front.pages.quiz', [
             'quiz' => $quiz,
             'questions' => $questions,
+            'attempt_id' => $request->attempt_id,
         ]);
     }
 
     public function quiz_handler(Request $request, $quizID)
     {
-        $userID = session('user_id');
-        $attemptID = session('attempt_id');
+        $attemptID = $request->attempt_id;
+
+        //Update date to record when the user submitted the form
+        $attempt = Attempt::find($attemptID);
+        $attempt->completed_at = new DateTime();
+        $attempt->save();
 
         $quiz = Quiz::find($quizID);
         $answers = [];
@@ -68,7 +73,6 @@ class FrontController extends Controller
             $answer->id = Uuid::uuid4()->toString();
             $answer->question_id = $questionID;
             $answer->attempt_id = $attemptID;
-            $answer->user_id = $userID;
             $answer->created_at = new DateTime();
             $answer->updated_at = new DateTime();
 
@@ -89,45 +93,45 @@ class FrontController extends Controller
             $answer->save();
         }
 
-        //Update date to record when the user submitted the form
-        $attempt = Attempt::find($attemptID);
-        $attempt->updated_at = new DateTime();
-        $attempt->save();
-
         return redirect()->route('quiz_front_outro', ['uuid' => $quizID]);
     }
 
     public function quiz_intro(Request $request, $quizID)
     {
         $quiz = Quiz::find($quizID);
-        $email = $request->email;
+        $attemptID = $request->attempt_id;
+
+        //@TODO : Check that attempt_id is valid
+        if (!$attempt = Attempt::find($attemptID)) {
+
+        }
+
+        $user = User::find($attempt->user_id);
 
         return view('ifmquiz::front.pages.intro', [
             'quiz' => $quiz,
-            'email' => $email,
+            'user' => $user,
+            'attempt_id' => $attemptID,
         ]);
     }
 
     public function quiz_front_intro_handler(Request $request, $quizID)
     {
+        $attemptID = $request->attempt_id;
         $quiz = Quiz::find($quizID);
 
-        //@TODO : Verify that the user does not already exists (get user by email) and if so, print error message
+        $attempt = Attempt::find($attemptID);
 
-        //Create user with lastname/firstname
-        $user = new User();
-        $user->id = Uuid::uuid4()->toString();
-        $user->email = $request->email;
+        //Update user with lastname / firstname
+        $user = User::find($attempt->user_id);
         $user->last_name = $request->last_name;
         $user->first_name = $request->first_name;
         $user->save();
 
-        //Create attempt
-        $attempt = new Attempt();
-        $attempt->id = Uuid::uuid4()->toString();
-        $attempt->user_id = $user->id;
-        $attempt->quiz_id = $quizID;
+        //Update attempt start date
+        $attempt = Attempt::find($attemptID);
         $attempt->started_at = new DateTime();
+
         if ($quiz->time > 0 && is_int($quiz->time)) {
             $endTime = clone $attempt->started_at;
             $endTime->add(new \DateInterval('PT' . $quiz->time . 'M'));
@@ -135,11 +139,7 @@ class FrontController extends Controller
         }
         $attempt->save();
 
-        //Put user and attempt in session
-        session(['user_id' => $user->id]);
-        session(['attempt_id' => $attempt->id]);
-
-        return redirect()->route('quiz_front', ['uuid' => $quizID]);
+        return redirect()->route('quiz_front', ['uuid' => $quizID, 'attempt_id' => $attemptID]);
     }
 
     public function quiz_outro(Request $request, $quizID)
