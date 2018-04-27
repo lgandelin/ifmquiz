@@ -16,5 +16,7 @@ class Quiz extends Model
         'title',
         'subtitle',
         'time',
+        'intro_text',
+        'outro_text',
     ];
 }

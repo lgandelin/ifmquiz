@@ -2,6 +2,10 @@
 
 @section('main-content')
     <div class="container" id="quiz">
+        <div class="header is-clearfix">
+            <a class="is-pulled-right" href="{{ route('quiz_parameters', ['uuid' => $quiz->id]) }}">Paramètres</a>
+            <a class="is-pulled-right" style="margin-right: 1rem;" href="{{ route('quiz_mailing', ['uuid' => $quiz->id]) }}">Mailing</a>
+        </div>
         <quiz></quiz>
         <input type="hidden" id="quiz_id" value="{{ $quiz->id }}" />
     </div>

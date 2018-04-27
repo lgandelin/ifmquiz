@@ -2,6 +2,7 @@
 
 namespace Webaccess\IFMQuiz\Http\Controllers;
 
+use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
@@ -51,6 +52,12 @@ class QuizController extends Controller
         $users = User::all();
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
+        $totalByQuestions = [];
+        $totalResults = 0;
+        foreach ($questions as $question) {
+            $totalByQuestions[$question->id] = 0;
+        }
+
         foreach ($users as $i => $user) {
             $result = 0;
             $answers = [];
@@ -62,19 +69,30 @@ class QuizController extends Controller
 
                     if ($answer->correct) {
                         $result++;
+                        $totalByQuestions[$question->id]++;
                     }
                 } else {
                     $answers[] = 'N/A';
                 }
             }
             $user->answers = $answers;
-            $user->result = $result . '/' . sizeof($questions);
+            $user->result = $result;
+            $totalResults += $result;
+        }
+
+        $averageResult = (sizeof($users) > 0) ? ($totalResults / sizeof($users)) : 0;
+        $averageByQuestions = [];
+
+        foreach ($questions as $question) {
+            $averageByQuestions[$question->id] = (sizeof($users) > 0) ? ($totalByQuestions[$question->id] / sizeof($users)) : 0;
         }
 
         return view('ifmquiz::back.quiz.results', [
             'quiz' => $quiz,
             'questions' => $questions,
             'users' => $users,
+            'average_result' => $averageResult,
+            'average_by_questions' => $averageByQuestions,
         ]);
     }
 
@@ -108,7 +126,47 @@ class QuizController extends Controller
         return redirect()->route('quiz_list');
     }
 
+    public function parameters(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
 
+        return view('ifmquiz::back.quiz.parameters', [
+            'quiz' => $quiz,
+        ]);
+    }
+
+    public function parameters_handler(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+
+        $quiz->intro_text = $request->intro_text;
+        $quiz->outro_text = $request->outro_text;
+        $quiz->save();
+
+        return redirect()->route('quiz_parameters', ['uuid' => $quizID]);
+    }
+
+    public function mailing(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+
+        return view('ifmquiz::back.quiz.mailing', [
+            'quiz' => $quiz,
+        ]);
+    }
+
+    public function mailing_handler(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+        $url = route('quiz_front', ['uuid' => $quizID]) . '?mail=';
+
+        $mails = explode(PHP_EOL, $request->mailing_list);
+        foreach($mails as $i => $mail) {
+            $mail = trim(preg_replace('/\r/', '', $mail));
+
+            Mail::send('ifmquiz::emails.quiz', ['url' => $url . $mail], function ($m) use ($url, $mail, $quiz) {
+                $m->to($mail)->subject(sprintf('[%s] Le lien pour accéder à votre examen', $quiz->title));
+            });
+        }
+
+        return redirect()->route('quiz_mailing', ['uuid' => $quizID]);
+    }
 
 
 

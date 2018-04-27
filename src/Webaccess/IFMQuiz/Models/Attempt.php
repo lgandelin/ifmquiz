@@ -4,9 +4,9 @@ namespace Webaccess\IFMQuiz\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Attempt extends Model
 {
-    protected $table = 'answers';
+    protected $table = 'attempts';
     public $incrementing = false;
     public $casts = [
         'id' => 'string'
@@ -14,12 +14,8 @@ class Answer extends Model
 
     protected $fillable = [
         'quiz_id',
-        'attempt_id',
-        'question_id',
         'user_id',
-        'items',
-        'items_left',
-        'items_right',
-        'correct',
+        'started_at',
+        'ends_at',
     ];
 }

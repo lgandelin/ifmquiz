@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswerTable extends Migration
+class CreateAttemptTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateAnswerTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('attempts', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
             $table->uuid('quiz_id')->nullable();
-            $table->uuid('attempt_id')->nullable();
-            $table->uuid('question_id')->nullable();
             $table->uuid('user_id')->nullable();
-            $table->text('items')->nullable();
-            $table->text('items_left')->nullable();
-            $table->text('items_right')->nullable();
-            $table->boolean('correct')->nullable();
+            $table->datetime('started_at')->nullable();
+            $table->datetime('ends_at')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateAnswerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('answers');
+        Schema::drop('attempts');
     }
 }

@@ -12,6 +12,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
+                    <th>Mail</th>
                     @foreach ($questions as $i => $question)
                         <th>Q{{ $i+1 }}</th>
                     @endforeach
@@ -23,14 +24,23 @@
                     <tr>
                         <td>{{ $user->last_name }}</td>
                         <td>{{ $user->first_name }}</td>
+                        <td>{{ $user->email }}</td>
                         @foreach ($user->answers as $answer)
                             <td>{{ $answer }}</td>
                         @endforeach
-                        <td>{{ $user->result }}</td>
+                        <td>{{ round($user->result, 1) }}/{{ sizeof($questions) }}</td>
                     </tr>
                 @endforeach
             </tbody>
-
+            <tfoot>
+                <tr>
+                    <td colspan="3">Moyenne</td>
+                    @foreach ($average_by_questions as $i => $question)
+                        <td>{{ $question }}</td>
+                    @endforeach
+                    <td>{{ round($average_result, 1) }}/{{ sizeof($questions) }}</td>
+                </tr>
+            </tfoot>
         </table>
 
     </div>
