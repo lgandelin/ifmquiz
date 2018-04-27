@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
 use Webaccess\IFMQuiz\Models\Answer;
+use Webaccess\IFMQuiz\Models\Attempt;
 use Webaccess\IFMQuiz\Models\Question;
 use Webaccess\IFMQuiz\Models\Quiz;
 use Webaccess\IFMQuiz\Models\User;
@@ -49,7 +50,6 @@ class QuizController extends Controller
 
     public function results(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
-        $users = User::all();
         $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
 
         $totalByQuestions = [];
@@ -58,14 +58,18 @@ class QuizController extends Controller
             $totalByQuestions[$question->id] = 0;
         }
 
-        foreach ($users as $i => $user) {
+        $attempts = Attempt::where('quiz_id', '=', $quizID)->get();
+
+        $users = [];
+        foreach ($attempts as $attempt) {
             $result = 0;
             $answers = [];
 
             foreach ($questions as $question) {
-                $answer = Answer::where('question_id', '=', $question->id)->where('user_id', '=', $user->id)->first();
+                $answer = Answer::where('question_id', '=', $question->id)->where('attempt_id', '=', $attempt->id)->first();
+
                 if (isset($answer->correct)) {
-                    $answers[]= $answer->correct;
+                    $answers[] = $answer->correct;
 
                     if ($answer->correct) {
                         $result++;
@@ -75,9 +79,12 @@ class QuizController extends Controller
                     $answers[] = 'N/A';
                 }
             }
+
+            $user = User::find($attempt->user_id);
             $user->answers = $answers;
             $user->result = $result;
             $totalResults += $result;
+            $users[]= $user;
         }
 
         $averageResult = (sizeof($users) > 0) ? ($totalResults / sizeof($users)) : 0;
@@ -154,7 +161,7 @@ class QuizController extends Controller
 
     public function mailing_handler(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
-        $url = route('quiz_front', ['uuid' => $quizID]) . '?mail=';
+        $url = route('quiz_front_intro', ['uuid' => $quizID]) . '?email=';
 
         $mails = explode(PHP_EOL, $request->mailing_list);
         foreach($mails as $i => $mail) {

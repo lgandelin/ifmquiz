@@ -13,10 +13,8 @@ class Answer extends Model
     ];
 
     protected $fillable = [
-        'quiz_id',
         'attempt_id',
         'question_id',
-        'user_id',
         'items',
         'items_left',
         'items_right',

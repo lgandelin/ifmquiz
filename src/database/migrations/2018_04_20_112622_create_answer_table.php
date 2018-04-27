@@ -15,10 +15,8 @@ class CreateAnswerTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
-            $table->uuid('quiz_id')->nullable();
             $table->uuid('attempt_id')->nullable();
             $table->uuid('question_id')->nullable();
-            $table->uuid('user_id')->nullable();
             $table->text('items')->nullable();
             $table->text('items_left')->nullable();
             $table->text('items_right')->nullable();

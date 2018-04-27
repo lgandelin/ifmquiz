@@ -112,7 +112,7 @@ class FrontController extends Controller
     {
         $quiz = Quiz::find($quizID);
 
-        //Verify that the user does not already exists (get user by email) and if so, print error message
+        //@TODO : Verify that the user does not already exists (get user by email) and if so, print error message
 
         //Create user with lastname/firstname
         $user = new User();
@@ -138,7 +138,6 @@ class FrontController extends Controller
         //Put user and attempt in session
         session(['user_id' => $user->id]);
         session(['attempt_id' => $attempt->id]);
-        //session(['quiz_id' => $quizID]);
 
         return redirect()->route('quiz_front', ['uuid' => $quizID]);
     }

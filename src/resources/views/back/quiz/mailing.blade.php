@@ -18,7 +18,7 @@ exemple3@mail.com" name="mailing_list"></textarea>
             </div>
 
             {{ csrf_field() }}
-            <input type="submit" class="button is-primary" value="Sauvegarder" />
+            <input type="submit" class="button is-primary" value="Envoyer" />
         </form>
     </div>
 
