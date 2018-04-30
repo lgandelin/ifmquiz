@@ -52,13 +52,8 @@ class IFMQuizServiceProvider extends ServiceProvider
 
         App::register('Intervention\Image\ImageServiceProvider');
 
-       /* App::singleton(
-            ExceptionHandler::class,
-            IFMQuizExceptionHandler::class
-        );*/
-
         $this->commands([
-            //'Webaccess\IFMQuiz\Commands\CreateUserCommand',
+            'Webaccess\IFMQuiz\Commands\MarkQuizcommand',
         ]);
     }
 }

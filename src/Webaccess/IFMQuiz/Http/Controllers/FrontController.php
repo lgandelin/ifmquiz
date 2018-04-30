@@ -60,7 +60,7 @@ class FrontController extends Controller
 
                 $answer = ['id' => $itemID];
                 if ($value != 'on') {
-                    $answer['associated_item'] = $value;
+                    $answer['associated_item'] = (int) $value;
                 }
                 $answers[$questionID][]= $answer;
             }
@@ -92,6 +92,9 @@ class FrontController extends Controller
             }
             $answer->save();
         }
+
+        //Create marking task
+
 
         return redirect()->route('quiz_front_outro', ['uuid' => $quizID]);
     }
