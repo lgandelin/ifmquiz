@@ -202,9 +202,6 @@ class QuizController extends Controller
         return redirect()->route('quiz_mailing', ['uuid' => $quizID]);
     }
 
-
-
-
     public function quiz(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
 
