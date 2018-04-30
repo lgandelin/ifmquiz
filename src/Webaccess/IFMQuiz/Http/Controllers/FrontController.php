@@ -43,12 +43,12 @@ class FrontController extends Controller
     {
         $attemptID = $request->attempt_id;
 
-        //Update date to record when the user submitted the form
+        //Update status / date of the attempt
         $attempt = Attempt::find($attemptID);
         $attempt->completed_at = new DateTime();
+        $attempt->status = Attempt::STATUS_COMPLETED;
         $attempt->save();
 
-        $quiz = Quiz::find($quizID);
         $answers = [];
         foreach($request->all() as $key => $value) {
             if (preg_match('/textanswer_/', $key)) {

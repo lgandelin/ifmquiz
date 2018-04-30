@@ -11,7 +11,7 @@
             <input id="user-filter" type="text" class="input" placeholder="Recherche..." />
         </div>
 
-        <table id="user-results" class="table">
+        <table id="user-results" class="table is-bordered">
             <thead>
                 <tr>
                     <th>Nom</th>
@@ -24,20 +24,20 @@
                 </tr>
             <thead>
             <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->last_name }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->email }}</td>
-                        @foreach ($user->answers as $answer)
+                @foreach ($attempts as $attempt)
+                    <tr class="status-{{ $attempt->status }}">
+                        <td>{{ $attempt->user->last_name }}</td>
+                        <td>{{ $attempt->user->first_name }}</td>
+                        <td>{{ $attempt->user->email }}</td>
+                        @foreach ($attempt->answers as $answer)
                             <td>{{ $answer }}</td>
                         @endforeach
-                        <td>{{ $user->result }}</td>
+                        <td>{{ $attempt->result }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
-                <tr>
+                <tr class="is-selected">
                     <td colspan="3">Moyenne</td>
                     @foreach ($average_by_questions as $i => $question)
                         <td>{{ $question }}</td>

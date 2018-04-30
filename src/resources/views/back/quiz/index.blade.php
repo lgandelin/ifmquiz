@@ -12,8 +12,15 @@
                 <div class="tile box">
                     <div>
                         <h3 class="title">{{ $quiz->title }}</h3>
-                        <p>Taux de complétion : {{ 100*$quiz->completion }}%</p>
-                        <p>Note moyenne : {{ $quiz->average }}/{{ $quiz->questions_number }}</p>
+                        <p>Taux de complétion : <span class="is-pulled-right">{{ 100*$quiz->completion }}%</span><br/>
+                            <progress class="progress is-warning" value="{{ 100*$quiz->completion }}" max="100"></progress>
+                        </p>
+                        <br/>
+
+                        <p>Note moyenne : <span class="is-pulled-right">{{ $quiz->average }}/{{ $quiz->questions_number }}</span><br/>
+                            <progress class="progress is-warning" value="{{ $quiz->average/$quiz->questions_number }}" max="1"></progress>
+                        </p>
+                        <br/>
 
                         <a class="button is-primary" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Editer</a>
                         <a class="button is-warning" href="{{ route('quiz_results', ['uuid' => $quiz->id]) }}">Résultats</a>
