@@ -32,7 +32,7 @@
                         @foreach ($user->answers as $answer)
                             <td>{{ $answer }}</td>
                         @endforeach
-                        <td>{{ round($user->result, 1) }}/{{ sizeof($questions) }}</td>
+                        <td>{{ $user->result }}</td>
                     </tr>
                 @endforeach
             </tbody>

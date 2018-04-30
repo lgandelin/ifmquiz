@@ -25,12 +25,30 @@ class QuizController extends Controller
         $quizs = Quiz::orderBy('created_at', 'desc')->get();
 
         foreach ($quizs as $quiz) {
-            $validated_attempts = Attempt::where('quiz_id', '=', $quiz->id)->where('completed_at', '=', null)->get()->count();
-            $attempts = Attempt::where('quiz_id', '=', $quiz->id)->get()->count();
+            //Calculate completion
+            $submitted_attempts = Attempt::where('quiz_id', '=', $quiz->id)->where('completed_at', '=', null)->get();
+            $attempts = Attempt::where('quiz_id', '=', $quiz->id)->get();
+            $quiz->completion = ($attempts->count() > 0) ? ($submitted_attempts->count() / $attempts->count()) : 0;
 
-            $quiz->completion = ($attempts > 0) ? ($validated_attempts / $attempts) : 0;
+            //Calculate average
+            $totalResults = 0;
+            $completed_attempts = 0;
+            $questions = Question::where('quiz_id', '=', $quiz->id)->orderBy('number', 'asc')->get();
+            foreach ($attempts as $attempt) {
+                $result = 0;
+                if ($attempt->completed_at) $completed_attempts++;
 
-            $quiz->average = 'N/A';
+                foreach ($questions as $question) {
+                    $answer = Answer::where('question_id', '=', $question->id)->where('attempt_id', '=', $attempt->id)->first();
+                    if (isset($answer->correct) && $answer->correct) {
+                        $result++;
+                    }
+                }
+                $totalResults += $result;
+            }
+
+            $quiz->average = ($completed_attempts > 0) ? ($totalResults / $completed_attempts) : 0;
+            $quiz->questions_number = sizeof($questions);
         }
 
         return view('ifmquiz::back.quiz.index', [
@@ -63,6 +81,8 @@ class QuizController extends Controller
 
         $totalByQuestions = [];
         $totalResults = 0;
+        $submittedQuizs = 0;
+
         foreach ($questions as $question) {
             $totalByQuestions[$question->id] = 0;
         }
@@ -76,6 +96,9 @@ class QuizController extends Controller
 
             foreach ($questions as $question) {
                 $answer = Answer::where('question_id', '=', $question->id)->where('attempt_id', '=', $attempt->id)->first();
+                if (!$answer) {
+                    $result = 'N/A';
+                }
 
                 if (isset($answer->correct)) {
                     $answers[] = $answer->correct;
@@ -91,16 +114,21 @@ class QuizController extends Controller
 
             $user = User::find($attempt->user_id);
             $user->answers = $answers;
-            $user->result = $result;
-            $totalResults += $result;
+            if (is_numeric($result)) {
+                $totalResults += $result;
+                $user->result = round($result, 1) . '/' . sizeof($questions);
+                $submittedQuizs++;
+            } else {
+                $user->result = 'N/A';
+            }
             $users[]= $user;
         }
 
-        $averageResult = (sizeof($users) > 0) ? ($totalResults / sizeof($users)) : 0;
+        $averageResult = ($submittedQuizs > 0) ? ($totalResults / $submittedQuizs) : 0;
         $averageByQuestions = [];
 
         foreach ($questions as $question) {
-            $averageByQuestions[$question->id] = (sizeof($users) > 0) ? ($totalByQuestions[$question->id] / sizeof($users)) : 0;
+            $averageByQuestions[$question->id] = ($submittedQuizs > 0) ? ($totalByQuestions[$question->id] / $submittedQuizs) : 0;
         }
 
         return view('ifmquiz::back.quiz.results', [
@@ -226,6 +254,7 @@ class QuizController extends Controller
         $quiz->save();
 
         Question::where('quiz_id', '=', $quizID)->delete();
+
         foreach ($request->quiz['questions'] as $question_number => $question) {
             $q = new Question();
             $q->id = $question['id'];

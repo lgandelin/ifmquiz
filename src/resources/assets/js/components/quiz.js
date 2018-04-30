@@ -17,7 +17,7 @@ Vue.component('quiz', {
         var store = this.$store;
         var quiz_id = document.getElementById('quiz_id').value;
 
-        axios.get("/quiz/" + quiz_id)
+        axios.get("/admin/quiz/" + quiz_id)
             .then(function (response) {
                 store.state.quiz = response.data
             });
@@ -38,7 +38,7 @@ Vue.component('quiz', {
             quiz.saving = true;
 
             axios.post(
-                "/quiz/" + quiz_id, {
+                "/admin/quiz/" + quiz_id, {
                     quiz: this.$store.state.quiz
                 })
                 .then(function (response) {

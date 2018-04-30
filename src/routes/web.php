@@ -25,7 +25,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
 
         //API
         Route::get('/admin/quiz/{uuid}', array('as' => 'quiz', 'uses' => 'QuizController@quiz'));
-        Route::post('/adlin/quiz/{uuid}', array('as' => 'quiz_handler', 'uses' => 'QuizController@quiz_handler'));
+        Route::post('/admin/quiz/{uuid}', array('as' => 'quiz_handler', 'uses' => 'QuizController@quiz_handler'));
 
     Route::group(['middleware' => 'admin'], function () {
 

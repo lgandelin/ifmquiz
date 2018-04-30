@@ -13,7 +13,7 @@
                     <div>
                         <h3 class="title">{{ $quiz->title }}</h3>
                         <p>Taux de complétion : {{ 100*$quiz->completion }}%</p>
-                        <p>Note moyenne : {{ $quiz->average }}</p>
+                        <p>Note moyenne : {{ $quiz->average }}/{{ $quiz->questions_number }}</p>
 
                         <a class="button is-primary" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Editer</a>
                         <a class="button is-warning" href="{{ route('quiz_results', ['uuid' => $quiz->id]) }}">Résultats</a>
