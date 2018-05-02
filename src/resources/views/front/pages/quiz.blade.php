@@ -6,7 +6,17 @@
             <h1 class="title">{{ $quiz->title }}</h1>
             <h2>{{ $quiz->subtitle }}</h2>
 
-            <p>Temps : {{  $quiz->time }} min</p>
+
+            @if ($quiz->time > 0)
+                <div id="countdown" class="is-pulled-right">
+                    <strong>Temps restant :</strong>
+                    <countdown :time="{{ $seconds_remaining * 1000 }}" @countdownend="countdownend">
+                    <template slot-scope="props">@{{ props.hours }}h @{{ props.minutes }}m @{{ props.seconds }}s</template>
+                    </countdown>
+                </div>
+            @endif
+
+            @if ($quiz->time)<p><strong>Temps :</strong> {{  $quiz->time }} min</p>@endif
             <p>{{ sizeof($questions) }} questions</p>
         </div>
 
@@ -67,5 +77,7 @@
 
         </div>
     </div>
+
+    <script src="{{ asset('js/dist/front.js') }}"></script>
 
 @endsection

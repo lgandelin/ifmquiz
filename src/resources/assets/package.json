@@ -14,6 +14,7 @@
     "webpack-dev-server": "^3.1.3"
   },
   "dependencies": {
+    "@xkeshi/vue-countdown": "^0.6.0",
     "axios": "^0.18.0",
     "sortablejs": "^1.7.0",
     "uuid": "^3.2.1",
