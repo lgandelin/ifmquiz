@@ -17,7 +17,7 @@
                         </p>
                         <br/>
 
-                        <p>Note moyenne : <span class="is-pulled-right">{{ $quiz->average }}/{{ $quiz->questions_number }}</span><br/>
+                        <p>Note moyenne : <span class="is-pulled-right">{{ round($quiz->average, 1) }}/{{ $quiz->questions_number }}</span><br/>
                             <progress class="progress is-warning" value="{{ $quiz->average/$quiz->questions_number }}" max="1"></progress>
                         </p>
                         <br/>

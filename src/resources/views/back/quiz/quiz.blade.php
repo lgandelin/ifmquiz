@@ -167,5 +167,5 @@
         </div>
     </script>
 
-    <script src="/js/dist/build.js"></script>
+    <script src="{{ asset('js/dist/build.js') }}"></script>
 @endsection

@@ -16,6 +16,8 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
     Route::get('/admin/questionnaires/creer', array('as' => 'quiz_create', 'uses' => 'QuizController@create'));
     Route::get('/admin/questionnaires/modifier/{uuid}', array('as' => 'quiz_update', 'uses' => 'QuizController@update'));
     Route::get('/admin/questionnaires/resultats/{uuid}', array('as' => 'quiz_results', 'uses' => 'QuizController@results'));
+    Route::get('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers', 'uses' => 'QuizController@user_answers'));
+    Route::post('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers_valid_answer', 'uses' => 'QuizController@user_answers_valid_answer'));
     Route::get('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters', 'uses' => 'QuizController@parameters'));
     Route::post('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters_handler', 'uses' => 'QuizController@parameters_handler'));
     Route::get('/admin/questionnaires/envoyer/{uuid}', array('as' => 'quiz_mailing', 'uses' => 'QuizController@mailing'));

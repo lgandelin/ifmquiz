@@ -32,19 +32,38 @@ class FrontController extends Controller
             $question->items_right = json_decode($question->items_right);
         }
 
+        $seconds_remaining = null;
+        if ($quiz->time > 0) {
+            $attemptID = $request->attempt_id;
+            $attempt = Attempt::find($attemptID);
+
+            if ($attempt->ends_at) {
+                $endDate = new DateTime($attempt->ends_at);
+                $seconds_remaining = $endDate->getTimestamp() - time();
+            }
+        }
+
         return view('ifmquiz::front.pages.quiz', [
             'quiz' => $quiz,
             'questions' => $questions,
             'attempt_id' => $request->attempt_id,
+            'seconds_remaining' => $seconds_remaining,
         ]);
     }
 
     public function quiz_handler(Request $request, $quizID)
     {
         $attemptID = $request->attempt_id;
+        $attempt = Attempt::find($attemptID);
+
+        //Check that the time is not elapsed
+        if ($attempt->ends_at) {
+            if (new DateTime() > new DateTime($attempt->ends_at)) {
+                return;
+            }
+        }
 
         //Update status / date of the attempt
-        $attempt = Attempt::find($attemptID);
         $attempt->completed_at = new DateTime();
         $attempt->status = Attempt::STATUS_COMPLETED;
         $attempt->save();
@@ -93,9 +112,6 @@ class FrontController extends Controller
             $answer->save();
         }
 
-        //Create marking task
-
-
         return redirect()->route('quiz_front_outro', ['uuid' => $quizID]);
     }
 
@@ -103,18 +119,25 @@ class FrontController extends Controller
     {
         $quiz = Quiz::find($quizID);
         $attemptID = $request->attempt_id;
+        $error = null;
 
-        //@TODO : Check that attempt_id is valid
+        //Check that the attempt is valid
         if (!$attempt = Attempt::find($attemptID)) {
-
+            $error = 'Le lien pour accéder à votre questionnaire a expiré.';
         }
 
-        $user = User::find($attempt->user_id);
+        //Check that the user has not already answered the quiz
+        elseif ($attempt->status != Attempt::STATUS_SENT) {
+            $error = 'Vous avez déjà rempli le questionnaire.';
+        }
+
+        $user = ($attempt) ? User::find($attempt->user_id) : null;
 
         return view('ifmquiz::front.pages.intro', [
             'quiz' => $quiz,
             'user' => $user,
             'attempt_id' => $attemptID,
+            'error' => $error,
         ]);
     }
 
@@ -123,7 +146,15 @@ class FrontController extends Controller
         $attemptID = $request->attempt_id;
         $quiz = Quiz::find($quizID);
 
-        $attempt = Attempt::find($attemptID);
+        //Check that the attempt is valid
+        if (!$attempt = Attempt::find($attemptID)) {
+            return;
+        }
+
+        //Check that the user has not already answered the quiz
+        elseif ($attempt->status != Attempt::STATUS_SENT) {
+            return;
+        }
 
         //Update user with lastname / firstname
         $user = User::find($attempt->user_id);

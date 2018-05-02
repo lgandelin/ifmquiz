@@ -138,6 +138,46 @@ class QuizController extends Controller
         ]);
     }
 
+    public function user_answers(Request $request, $quizID, $attemptID) {
+        $quiz = Quiz::find($quizID);
+
+        $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
+        foreach ($questions as $question) {
+            $question->items = json_decode($question->items);
+            $question->items_left = json_decode($question->items_left);
+            $question->items_right = json_decode($question->items_right);
+
+            $question->answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $question->id)->first();
+            $question->answer->items = json_decode($question->answer->items);
+            $question->answer->items_right = json_decode($question->answer->items_right);
+
+            switch($question->type) {
+                case 2:
+                    $answerItemIDs = array_column($question->answer->items, 'id');
+                    $question->answer->item_ids = $answerItemIDs;
+                    break;
+                case 4:
+                    $question->answer->text = ($question->answer->items) ? $question->answer->items[0]->text : '';
+                    break;
+            }
+        }
+
+        return view('ifmquiz::back.quiz.user_answers', [
+            'quiz' => $quiz,
+            'attempt_id' => $attemptID,
+            'questions' => $questions,
+        ]);
+    }
+
+    public function user_answers_valid_answer(Request $request, $quizID, $attemptID) {
+        if ($answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $request->question_id)->first()) {
+            $answer->correct = (int) $request->is_correct;
+            $answer->save();
+        }
+
+        return redirect()->route('quiz_user_answers', ['uuid' => $quizID, 'attempt_uuid' => $attemptID]);
+    }
+
     public function duplicate(Request $request, $quizID) {
         if ($quiz = Quiz::find($quizID)) {
             $questions = Question::where('quiz_id', '=', $quizID)->get();

@@ -20,6 +20,7 @@
                     @foreach ($questions as $i => $question)
                         <th>Q{{ $i+1 }}</th>
                     @endforeach
+                    <th>Réponses</th>
                     <th>Résultats</th>
                 </tr>
             <thead>
@@ -32,6 +33,7 @@
                         @foreach ($attempt->answers as $answer)
                             <td>{{ $answer }}</td>
                         @endforeach
+                        <td><a href="{{ route('quiz_user_answers', ['quiz_id' => $quiz->id, 'attempt_id' => $attempt->id]) }}">Voir les réponses</a></td>
                         <td>{{ $attempt->result }}</td>
                     </tr>
                 @endforeach
@@ -40,8 +42,9 @@
                 <tr class="is-selected">
                     <td colspan="3">Moyenne</td>
                     @foreach ($average_by_questions as $i => $question)
-                        <td>{{ $question }}</td>
+                        <td>{{ round($question, 1) }}</td>
                     @endforeach
+                    <td></td>
                     <td>{{ round($average_result, 1) }}/{{ sizeof($questions) }}</td>
                 </tr>
             </tfoot>
