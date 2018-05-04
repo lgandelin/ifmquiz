@@ -1,0 +1,178 @@
+.question {
+    margin-bottom: 2rem;
+    padding: 2rem;
+
+    background: #ccc;
+}
+
+.question-title {
+    width: 250px;
+    min-width: auto;
+    display: inline-block;
+    height: 50px;
+}
+
+.question-description {
+    display: inline-block;
+    min-width: auto;
+    width: 850px;
+    height: 50px;
+}
+
+.add-question {
+    background: #eee;
+}
+
+.add-button {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.type {
+    vertical-align: top;
+    display: inline-block;
+    width: 250px;
+}
+
+.items {
+    display: inline-block;
+    width: 850px;
+}
+
+.content {
+    border-top: 1px solid #444;
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+.correct {
+    float: right;
+
+    cursor: pointer;
+}
+
+.correct.checked {
+    color: orange;
+}
+
+.input {
+    width: 97%;
+}
+
+.div-50 {
+    width: 50%;
+    float: left;
+}
+
+.div-50 .input {
+    width: 80%;
+}
+
+.div-50 input[type="number"] {
+    width: 50px;
+}
+
+.duplicate-button, .delete-button {
+    float: right;
+    margin-left: 0.5rem;
+}
+
+.move-button {
+    display: block;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.toggle-button {
+    display: block;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.move-button:hover {
+    cursor: move;
+}
+
+.sortable-ghost {
+    background: orange;
+}
+
+.header {
+    overflow: hidden;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.updating_title, .updating_subtitle {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1.5rem;
+    width: 50%;
+    display: inline-block;
+    border: none;
+    box-shadow: none;
+    height: auto;
+    outline: none;
+    border-radius: 0;
+
+    &:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.questions-number {
+    margin-right: 2rem;
+    float:right;
+
+    .number {
+        display: inline-block;
+        visibility: middle;
+    }
+}
+
+.updating_time {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    min-width: 0;
+    width: 4rem;
+
+    &:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+
+    .tile {
+        padding: 1rem;
+
+        .title {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.page-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.status-1 {
+    background: hsl(0, 0%, 96%);
+}
+
+.status-2 {
+    background: hsla(47, 100%, 67%, 0.3);
+}
+
+.status-3 {
+    background: hsla(140, 70%, 47%, 0.3);
+}
