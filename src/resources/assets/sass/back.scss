@@ -1,9 +1,16 @@
+@import "back/includes/_variables";
+@import "back/includes/_typography";
+@import "back/includes/_structure";
+@import "back/includes/_buttons";
+
+@import "back/pages/_dashboard";
+
 .question {
     margin-bottom: 2rem;
     padding: 2rem;
 
     background: #ccc;
-}
+} 
 
 .question-title {
     width: 250px;
@@ -97,12 +104,6 @@
     background: orange;
 }
 
-.header {
-    overflow: hidden;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
 .updating_title, .updating_subtitle {
     padding: 0;
     margin: 0;
@@ -144,25 +145,6 @@
         -webkit-box-shadow: none;
         box-shadow: none;
     }
-}
-
-.tiles {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-
-    .tile {
-        padding: 1rem;
-
-        .title {
-            font-size: 1.5rem;
-        }
-    }
-}
-
-.page-wrapper {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .status-1 {
