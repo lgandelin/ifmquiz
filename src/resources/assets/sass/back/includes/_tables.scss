@@ -1,0 +1,53 @@
+.table {
+	width: 100%;
+	
+	font-family: $secondary-font;
+	font-size: 1.4rem;
+	letter-spacing: 0;
+
+	border: 2px solid $light-gray;
+
+	thead {
+		th {
+			color: #c5c5c5;
+			font-weight: normal;
+
+			background: #fbfbfb;
+			border-width: 2px;
+		}
+	}
+
+	td, th {			
+		padding: 2.4rem;
+
+		border: 2px solid $light-gray;
+
+		&.center {
+			text-align: center;
+		}
+
+		&.right {
+			text-align: right;
+		}
+
+		&.no-border {
+			padding: 0;
+
+			span {
+				padding: 2.4rem;
+				display: block;
+			}
+		}
+	}
+
+	tfoot {
+		border: none;
+
+		td {
+			color: white;
+
+			background: #3b3b3b;
+			border-width: 2px;
+		}
+	}
+}
