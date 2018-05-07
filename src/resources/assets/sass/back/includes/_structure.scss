@@ -6,6 +6,16 @@ html, body {
     padding-top: 6.5rem;
     padding-bottom: 5.5rem;
 	background: white;
+
+	.back-button {
+		float: right;
+	}
+
+	.subtitle {
+		color: $gray;
+		font-size: 2.6rem;
+		text-transform: uppercase;
+	}
 }
 
 .container {

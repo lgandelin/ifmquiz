@@ -1,0 +1,29 @@
+input[type="text"], textarea {
+	padding: 1.5rem;
+	width: 100%;
+
+	color: #3b3b3b;
+	font-size: 1.4rem;
+	font-family: $secondary-font;
+	letter-spacing: 0;
+
+	box-shadow: none;
+	border: 1px solid #cccccc;
+}
+
+textarea {
+	min-height: 8.5rem;
+}
+
+.submit {
+	float: right;
+	margin-top: 3rem;
+}
+
+form {
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
