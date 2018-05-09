@@ -1,4 +1,4 @@
-input[type="text"], textarea {
+input[type="text"], input[type="number"], textarea {
 	padding: 1.5rem;
 	width: 100%;
 
@@ -25,5 +25,39 @@ form {
 		content: "";
 		display: block;
 		clear: both;
+	}
+}
+
+.ck-editor__editable {
+	font-size: 1.4rem;
+	font-family: $secondary-font;
+	letter-spacing: 0;
+}
+
+.label {
+	color: #c5c5c5;
+	font-size: 1.4rem;
+	font-weight: normal;
+	font-family: $secondary-font;
+	letter-spacing: 0;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+	border-color: $black;
+}
+
+.select {
+	width: 100%;
+
+	select {
+		padding-left: 1.5rem;
+		width: 100%;
+		height: 4rem;
+
+		font-family: $secondary-font;
+		font-size: 1.4rem;
+		letter-spacing: 0;
+
+		border-radius: 0;
 	}
 }

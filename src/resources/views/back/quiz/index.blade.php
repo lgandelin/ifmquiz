@@ -31,12 +31,12 @@
                     <span class="menu-icon"></span>
                     <h3 class="title">{{ $quiz->title }}</h3>
                     <span class="type">Type : Examen</span>
-                    <div class="progress-bar">Taux de complétion <span class="is-pulled-right">{{ 100*$quiz->completion }}%</span><br/>
-                        <progress class="progress" value="{{ 100*$quiz->completion }}" max="100"></progress>
+                    <div class="progress-bar">Taux de complétion <span class="is-pulled-right">{{ round(100*$quiz->completion) }}%</span><br/>
+                        <progress class="progress" value="{{ $quiz->completion }}" max="1"></progress>
                     </div>
 
-                    <div class="progress-bar">Note moyenne <span class="is-pulled-right">{{ round($quiz->average, 1) }}/{{ $quiz->questions_number }}</span><br/>
-                        <progress class="progress" value="{{ ($quiz->questions_number > 0) ? ($quiz->average/$quiz->questions_number) : 0 }}" max="1"></progress>
+                    <div class="progress-bar">Note moyenne <span class="is-pulled-right">{{ round(100*$quiz->average) }}%</span><br/>
+                        <progress class="progress" value="{{ $quiz->average }}" max="1"></progress>
                     </div>
                     <br/>
 

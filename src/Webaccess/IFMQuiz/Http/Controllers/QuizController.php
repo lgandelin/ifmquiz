@@ -46,8 +46,8 @@ class QuizController extends Controller
                 $totalResults += $result;
             }
 
-            $quiz->average = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
-            $quiz->questions_number = sizeof($questions);
+            $average_score = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
+            $quiz->average = (sizeof($questions) > 0) ? ($average_score / sizeof($questions)) : 0;
         }
 
         return view('ifmquiz::back.quiz.index', [
@@ -147,18 +147,19 @@ class QuizController extends Controller
             $question->items_left = json_decode($question->items_left);
             $question->items_right = json_decode($question->items_right);
 
-            $question->answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $question->id)->first();
-            $question->answer->items = json_decode($question->answer->items);
-            $question->answer->items_right = json_decode($question->answer->items_right);
+            if ($question->answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $question->id)->first()) {
+                $question->answer->items = json_decode($question->answer->items);
+                $question->answer->items_right = json_decode($question->answer->items_right);
 
-            switch($question->type) {
-                case 2:
-                    $answerItemIDs = array_column($question->answer->items, 'id');
-                    $question->answer->item_ids = $answerItemIDs;
-                    break;
-                case 4:
-                    $question->answer->text = ($question->answer->items) ? $question->answer->items[0]->text : '';
-                    break;
+                switch($question->type) {
+                    case 2:
+                        $answerItemIDs = array_column($question->answer->items, 'id');
+                        $question->answer->item_ids = $answerItemIDs;
+                        break;
+                    case 4:
+                        $question->answer->text = ($question->answer->items) ? $question->answer->items[0]->text : '';
+                        break;
+                }
             }
         }
 
