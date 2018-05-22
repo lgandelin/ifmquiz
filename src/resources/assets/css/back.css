@@ -1,0 +1,729 @@
+@import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+/* line 3, ../sass/back/includes/_typography.scss */
+html {
+  font-size: 62.5%;
+}
+
+/* line 7, ../sass/back/includes/_typography.scss */
+body {
+  font-family: "Pathway Gothic One";
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #3b3b3b;
+}
+
+/* line 15, ../sass/back/includes/_typography.scss */
+.title, h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+/* line 21, ../sass/back/includes/_typography.scss */
+.subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* line 32, ../sass/back/includes/_typography.scss */
+a:not(.button), a:visited:not(.button) {
+  color: #e7873c;
+}
+/* line 35, ../sass/back/includes/_typography.scss */
+a:not(.button):hover, a:visited:not(.button):hover {
+  text-decoration: underline;
+}
+
+/* line 1, ../sass/back/includes/_structure.scss */
+html, body {
+  background: #f7f7f7;
+}
+
+/* line 5, ../sass/back/includes/_structure.scss */
+.header {
+  padding-top: 6.5rem;
+  padding-bottom: 5.5rem;
+  background: white;
+}
+/* line 10, ../sass/back/includes/_structure.scss */
+.header .back-button {
+  float: right;
+}
+/* line 14, ../sass/back/includes/_structure.scss */
+.header .subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+}
+
+/* line 21, ../sass/back/includes/_structure.scss */
+.container {
+  max-width: 1140px;
+}
+
+/* line 1, ../sass/back/includes/_buttons.scss */
+.button {
+  padding-top: 0.7rem;
+  padding-bottom: 1rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  color: white;
+  font-size: 2rem;
+  font-family: "Pathway Gothic One";
+  text-align: center;
+  background: #e7873c;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0;
+}
+
+/* line 1, ../sass/back/includes/_tables.scss */
+.table {
+  width: 100%;
+  font-family: "Helvetica";
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  border: 2px solid #d0d0d0;
+}
+/* line 11, ../sass/back/includes/_tables.scss */
+.table thead th {
+  color: #c5c5c5;
+  font-weight: normal;
+  background: #fbfbfb;
+  border-width: 2px;
+}
+/* line 20, ../sass/back/includes/_tables.scss */
+.table td, .table th {
+  padding: 2.4rem;
+  border: 2px solid #d0d0d0;
+}
+/* line 25, ../sass/back/includes/_tables.scss */
+.table td.center, .table th.center {
+  text-align: center;
+}
+/* line 29, ../sass/back/includes/_tables.scss */
+.table td.right, .table th.right {
+  text-align: right;
+}
+/* line 33, ../sass/back/includes/_tables.scss */
+.table td.no-border, .table th.no-border {
+  padding: 0;
+}
+/* line 36, ../sass/back/includes/_tables.scss */
+.table td.no-border span, .table th.no-border span {
+  padding: 2.4rem;
+  display: block;
+}
+/* line 43, ../sass/back/includes/_tables.scss */
+.table tfoot {
+  border: none;
+}
+/* line 46, ../sass/back/includes/_tables.scss */
+.table tfoot td {
+  color: white;
+  background: #3b3b3b;
+  border-width: 2px;
+}
+
+/* line 1, ../sass/back/includes/_form.scss */
+input[type="text"], input[type="number"], textarea {
+  padding: 1.5rem;
+  width: 100%;
+  color: #3b3b3b;
+  font-size: 1.4rem;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+  box-shadow: none;
+  border: 1px solid #cccccc;
+}
+
+/* line 14, ../sass/back/includes/_form.scss */
+textarea {
+  min-height: 8.5rem;
+}
+
+/* line 18, ../sass/back/includes/_form.scss */
+.submit {
+  float: right;
+  margin-top: 3rem;
+}
+
+/* line 24, ../sass/back/includes/_form.scss */
+form:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* line 31, ../sass/back/includes/_form.scss */
+.ck-editor__editable {
+  font-size: 1.4rem;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+}
+
+/* line 37, ../sass/back/includes/_form.scss */
+.label {
+  color: #c5c5c5;
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+}
+
+/* line 45, ../sass/back/includes/_form.scss */
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #3b3b3b;
+}
+
+/* line 49, ../sass/back/includes/_form.scss */
+.select {
+  width: 100%;
+}
+/* line 52, ../sass/back/includes/_form.scss */
+.select select {
+  padding-left: 1.5rem;
+  width: 100%;
+  height: 4rem;
+  font-family: "Helvetica";
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  border-radius: 0;
+}
+
+/* line 2, ../sass/back/includes/_page.scss */
+.page-template .page-content {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  padding: 4rem;
+  border: 2px solid #d0d0d0;
+  background: white;
+}
+/* line 11, ../sass/back/includes/_page.scss */
+.page-template .block {
+  margin-bottom: 2.5rem;
+  border: 2px solid #dddddd;
+  box-shadow: 0px 0px 15px 1px #eee;
+}
+/* line 17, ../sass/back/includes/_page.scss */
+.page-template .block .block-header {
+  padding: 3.2rem;
+  background: #f8f8fa;
+  border-bottom: 1px solid #d0d0d0;
+}
+/* line 20, ../sass/back/includes/_page.scss */
+.page-template .block .block-header .block-title {
+  color: #c5c5c5;
+  font-size: 1.4rem;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+}
+/* line 31, ../sass/back/includes/_page.scss */
+.page-template .block .block-content {
+  padding: 2.5rem;
+}
+
+/* line 3, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list {
+  padding-top: 8.5rem;
+  padding-bottom: 8.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3rem;
+}
+/* line 10, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item {
+  padding: 3.5rem;
+  position: relative;
+  border: 2px solid #d0d0d0;
+  box-shadow: none;
+  border-radius: 0;
+  background: white;
+}
+/* line 19, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .menu-icon {
+  position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  width: 4px;
+  height: 18px;
+  display: block;
+  z-index: 2;
+  cursor: pointer;
+  background: url(../img/back/menu-icon.png) no-repeat center center;
+}
+/* line 33, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .menu {
+  display: none;
+  padding: 1.5rem 3rem 0.5rem 3rem;
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  text-align: center;
+  background: white;
+  border: 2px solid #d0d0d0;
+}
+/* line 45, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .menu a {
+  display: block;
+  margin-bottom: 1rem;
+  color: #999999;
+  font-size: 1.5rem;
+}
+/* line 52, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .menu a:hover {
+  color: #e7873c;
+}
+/* line 58, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .title, .dashboard-template .list .item h1 {
+  margin-bottom: 0.5rem;
+  font-size: 3rem;
+}
+/* line 63, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .type {
+  display: inline-block;
+  margin-bottom: 7.5rem;
+  color: #999999;
+  font-size: 1.5rem;
+}
+/* line 71, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add {
+  color: #999999;
+  font-size: 2rem;
+  text-align: center;
+  background: #fbfbfb;
+  border: 3px dashed #d0d0d0;
+}
+/* line 79, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .create-quiz {
+  margin-top: 8rem;
+  padding: 0 3rem 3rem;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  background: white;
+  border: 1px solid #d0d0d0;
+}
+/* line 89, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .create-quiz .create {
+  line-height: 0;
+}
+/* line 93, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .create-quiz .plus {
+  margin-bottom: 0;
+  display: block;
+  color: #cccccc;
+  font-family: Helvetica;
+  font-weight: 100;
+  font-size: 8rem;
+}
+/* line 103, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .create-quiz:hover {
+  color: #e7873c;
+  border-color: #e7873c;
+}
+/* line 108, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .create-quiz:hover .plus, .dashboard-template .list .item.add .create-quiz:hover .create {
+  color: #e7873c;
+}
+/* line 114, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add .select-quiz-type {
+  display: none;
+}
+/* line 118, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add.selecting {
+  color: #999999;
+  background: white;
+}
+/* line 123, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add.selecting .create-quiz {
+  display: none;
+}
+/* line 127, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add.selecting .select-quiz-type {
+  padding-top: 8rem;
+  display: block;
+  position: relative;
+}
+/* line 132, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add.selecting .select-quiz-type .select-type {
+  display: inline-block;
+  margin-bottom: 3.5rem;
+  font-size: 2rem;
+}
+/* line 139, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item.add.selecting .select-quiz-type .back {
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+  font-size: 1.4rem;
+}
+/* line 150, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .progress-bar {
+  margin-bottom: 2rem;
+  color: #999999;
+}
+/* line 155, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .progress-bar .progress {
+  margin-top: 0.3rem;
+  height: 4px;
+  border-radius: 0;
+}
+/* line 160, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .progress-bar .progress::-webkit-progress-value {
+  background-color: #e7873c;
+}
+/* line 164, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .progress-bar .progress::-moz-progress-bar {
+  background-color: #e7873c;
+}
+/* line 168, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .progress-bar .progress::-ms-fill {
+  background-color: #e7873c;
+}
+/* line 174, ../sass/back/pages/_dashboard.scss */
+.dashboard-template .list .item .button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* line 2, ../sass/back/pages/_results.scss */
+.results-template .search {
+  padding: 3rem 0;
+}
+/* line 5, ../sass/back/pages/_results.scss */
+.results-template .search .search-label {
+  display: inline-block;
+  font-family: "Helvetica";
+  font-size: 1.6rem;
+}
+/* line 12, ../sass/back/pages/_results.scss */
+.results-template .search .search-input {
+  width: 20%;
+  display: inline-block;
+  margin-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* line 3, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar {
+  overflow: hidden;
+  background: #fafafa;
+}
+/* line 8, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar .icon {
+  display: inline-block;
+  text-indent: -9999px;
+}
+/* line 12, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar .icon.settings {
+  display: block;
+  width: 4.7rem;
+  height: 4.7rem;
+  background: #3b3b3b url(../img/back/cog-icon.png) no-repeat center center;
+}
+/* line 20, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar .icon.mailing {
+  display: block;
+  width: 4.7rem;
+  height: 4.7rem;
+  background: #9a9a9a url(../img/back/mail-icon.png) no-repeat center center;
+}
+/* line 28, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar .icon:hover {
+  opacity: 0.9;
+}
+/* line 33, ../sass/back/pages/_quiz.scss */
+.quiz-template .top-bar .button {
+  height: 100%;
+}
+/* line 39, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .subtitle {
+  margin-bottom: 0;
+}
+/* line 42, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .submit {
+  margin-top: 0;
+}
+/* line 47, ../sass/back/pages/_quiz.scss */
+.quiz-template .question {
+  margin-bottom: 2rem;
+}
+/* line 50, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .block-header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+/* line 55, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .move-button {
+  display: block;
+  margin: auto;
+  width: 18px;
+  height: 11px;
+  background: url(../img/back/move-icon.png) no-repeat center center;
+  border: none;
+}
+/* line 64, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .move-button:focus {
+  outline: 0;
+}
+/* line 69, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .toggle-button {
+  display: block;
+  margin: auto;
+  width: 11px;
+  height: 7px;
+  border: none;
+  outline: 0;
+}
+/* line 78, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .toggle-button.up {
+  background: url(../img/back/up-arrow-icon.png) no-repeat center center;
+}
+/* line 82, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .toggle-button.down {
+  background: url(../img/back/down-arrow-icon.png) no-repeat center center;
+}
+/* line 86, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .toggle-button:focus, .quiz-template .question .toggle-button:active {
+  outline: 0 !important;
+}
+/* line 91, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .inline-field {
+  display: inline-block;
+}
+/* line 95, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .question-title {
+  margin-right: 3.5rem;
+  width: 250px;
+  min-width: auto;
+  display: inline-block;
+  height: 50px;
+}
+/* line 103, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .question-description {
+  display: inline-block;
+  min-width: auto;
+  width: 680px;
+  height: 50px;
+}
+/* line 110, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .block-content {
+  padding: 3.2rem 0rem 3.2rem 3.2rem;
+}
+/* line 114, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .type {
+  vertical-align: top;
+  display: inline-block;
+  width: 250px;
+  margin-right: 3.5rem;
+}
+/* line 121, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items {
+  display: inline-block;
+  width: 715px;
+}
+/* line 125, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field {
+  margin-bottom: 1.5rem;
+}
+/* line 128, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field input {
+  width: 680px;
+}
+/* line 132, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field input[type="text"].highlighted {
+  border: 1px solid #e7873c;
+}
+/* line 136, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field label {
+  margin-right: 3.5rem;
+}
+/* line 140, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field .correct {
+  margin-top: 0.5rem;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: url(../img/back/gray-check-icon.png) no-repeat center center;
+}
+/* line 148, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field .correct.checked {
+  background: url(../img/back/orange-check-icon.png) no-repeat center center;
+}
+/* line 153, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field .delete {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin: 1.3rem 0 0 1rem;
+  background: url(../img/back/delete-icon.png) no-repeat center center;
+}
+/* line 161, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .field .delete:before, .quiz-template .question .items .field .delete:after {
+  display: none;
+}
+/* line 168, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-left input, .quiz-template .question .items .items-right input {
+  width: 100%;
+}
+/* line 173, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-left {
+  width: 325px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 178, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-left input {
+  width: 280px;
+  display: inline-block;
+}
+/* line 184, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-right {
+  width: 350px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 189, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-right input {
+  width: 280px;
+  display: inline-block;
+}
+/* line 194, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .items .items-right .associated-item {
+  width: 30px;
+  display: inline-block;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+/* line 206, ../sass/back/pages/_quiz.scss */
+.quiz-template .question .add-answer input {
+  border: 1px dashed #cccccc;
+}
+/* line 212, ../sass/back/pages/_quiz.scss */
+.quiz-template .add-question {
+  border: 2px dashed #eeeeee;
+  background: #fcfcfc;
+}
+
+/* line 13, ../sass/back.scss */
+.add-button {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* line 18, ../sass/back.scss */
+.correct {
+  float: right;
+  cursor: pointer;
+}
+
+/* line 24, ../sass/back.scss */
+.correct.checked {
+  color: orange;
+}
+
+/* line 28, ../sass/back.scss */
+.input {
+  width: 97%;
+}
+
+/* line 32, ../sass/back.scss */
+.div-50 {
+  width: 50%;
+  float: left;
+}
+
+/* line 37, ../sass/back.scss */
+.div-50 .input {
+  width: 80%;
+}
+
+/* line 41, ../sass/back.scss */
+.div-50 input[type="number"] {
+  width: 50px;
+}
+
+/* line 45, ../sass/back.scss */
+.duplicate-button, .delete-button {
+  float: right;
+  margin-left: 0.5rem;
+}
+
+/* line 50, ../sass/back.scss */
+.move-button:hover {
+  cursor: move;
+}
+
+/* line 54, ../sass/back.scss */
+.sortable-ghost > div {
+  border: 1px solid #e7873c;
+  box-shadow: none;
+  background: none;
+}
+
+/* line 60, ../sass/back.scss */
+.updating_title, .updating_subtitle {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  width: 50%;
+  display: inline-block;
+  border: none;
+  box-shadow: none;
+  height: auto;
+  outline: none;
+  border-radius: 0;
+}
+/* line 72, ../sass/back.scss */
+.updating_title:focus, .updating_subtitle:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 79, ../sass/back.scss */
+.questions-number {
+  margin-right: 2rem;
+  float: right;
+}
+/* line 83, ../sass/back.scss */
+.questions-number .number {
+  display: inline-block;
+  visibility: middle;
+}
+
+/* line 89, ../sass/back.scss */
+.updating_time {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  min-width: 0;
+  width: 4rem;
+}
+/* line 96, ../sass/back.scss */
+.updating_time:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 103, ../sass/back.scss */
+.status-1 {
+  background: whitesmoke;
+}
+
+/* line 107, ../sass/back.scss */
+.status-2 {
+  background: rgba(255, 219, 87, 0.3);
+}
+
+/* line 111, ../sass/back.scss */
+.status-3 {
+  background: rgba(36, 204, 92, 0.3);
+}

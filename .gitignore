@@ -1,6 +1,5 @@
 /vendor
 .DS_Store
-*.css
 .idea
 *.map
 src/resources/assets/node_modules

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Webaccess\IFMQuiz\Commands\MarkQuizCommand;
 
 class IFMQuizServiceProvider extends ServiceProvider
 {
@@ -53,7 +54,7 @@ class IFMQuizServiceProvider extends ServiceProvider
         App::register('Intervention\Image\ImageServiceProvider');
 
         $this->commands([
-            'Webaccess\IFMQuiz\Commands\MarkQuizcommand',
+            MarkQuizCommand::class,
         ]);
     }
 }
