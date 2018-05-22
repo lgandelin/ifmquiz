@@ -78,9 +78,10 @@
             <div class="block-header">
                 <button class="move-button"></button>
 
-                <div style="display:none">
-                    <button class="button duplicate-button" v-on:click="$store.commit('delete_question', question_number)">S</button>
-                    <button class="button duplicate-button" v-on:click="$store.commit('duplicate_question', question_number)">D</button>
+                <span class="menu-icon" v-on:click="menu_opened = !menu_opened"></span>
+                <div class="menu" v-show="menu_opened">
+                    <span v-on:click="$store.commit('duplicate_question', question_number)">Dupliquer</span>
+                    <span v-on:click="$store.commit('delete_question', question_number)">Supprimer</span>
                 </div>
 
                 <div class="inline-field question-title">
@@ -194,4 +195,5 @@
     </script>
 
     <script src="{{ asset('js/dist/back.js') }}"></script>
+
 @endsection

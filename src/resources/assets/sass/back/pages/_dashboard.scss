@@ -16,45 +16,6 @@
 	        border-radius: 0;
 	        background: white;
 
-	        .menu-icon {
-	        	position: absolute;
-	        	top: 1.8rem;
-	        	right: 1.8rem;
-	        	width: 4px;
-	        	height: 18px;
-	        	display: block;
-	        	z-index: 2;
-
-	        	cursor: pointer;
-
-	        	background: url(../img/back/menu-icon.png) no-repeat center center;
-	        }
-
-	        .menu {
-	        	display: none;
-	        	padding: 1.5rem 3rem 0.5rem 3rem;
-	        	position: absolute;
-	        	top: 2rem;
-	        	right: 4rem;
-
-	        	text-align: center;
-
-				background: white;
-	        	border: 2px solid $light-gray;
-
-	        	a {
-	        		display: block;
-	        		margin-bottom: 1rem;
-
-		        	color: $gray;
-	        		font-size: 1.5rem;
-
-	        		&:hover {
-	        			color: $orange;
-	        		}
-	        	}
-	        }
-
 	        .title {
 	        	margin-bottom: 0.5rem;
 	            font-size: 3rem;

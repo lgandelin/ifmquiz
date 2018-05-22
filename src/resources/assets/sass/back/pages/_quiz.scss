@@ -46,11 +46,22 @@
 	}
 
 	.question {
+		position: relative;
 		margin-bottom: 2rem;
 
 		.block-header {
 			padding-top: 1rem;
 			padding-bottom: 1rem;
+
+			.menu-icon {
+				top: 7.8rem;
+				right: 2.5rem;
+			}
+
+			.menu {
+				top: 4.8rem;
+				right: 5rem;
+			}
 		}
 
 		.move-button {

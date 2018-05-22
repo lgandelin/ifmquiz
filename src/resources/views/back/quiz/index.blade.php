@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="container dashboard-template">
+    <div class="container dashboard-template page-template">
         <div class="list">
             <div class="item add">
                 <div class="create-quiz">
@@ -43,7 +43,7 @@
                     <a class="button" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Editer</a>
                     <a class="button" href="{{ route('quiz_results', ['uuid' => $quiz->id]) }}">Résultats</a>
 
-                    <div class="menu">
+                    <div class="menu" style="display: none">
                         <a href="{{ route('quiz_duplicate', ['uuid' => $quiz->id]) }}">Dupliquer</a>
                         <a href="{{ route('quiz_delete', ['uuid' => $quiz->id]) }}">Supprimer</a>    
                     </div>
