@@ -122,12 +122,16 @@
 		.block-content {
 			padding: 3.2rem 0rem 3.2rem 3.2rem;
 		}
+		
+		.metadata {
+			display: inline-block;
+			width: 250px;
+			margin-right: 3.5rem;
+			vertical-align: top;
 
-		.type {
-		    vertical-align: top;
-		    display: inline-block;
-		    width: 250px;
-		    margin-right: 3.5rem;
+			.type, .factor {
+				margin-bottom: 2rem;
+			}
 		}
 
 		.items {

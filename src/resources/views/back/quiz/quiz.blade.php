@@ -46,6 +46,7 @@
                                 v-bind:items_left="question.items_left"
                                 v-bind:items_right="question.items_right"
                                 v-bind:type="question.type"
+                                v-bind:factor="question.factor"
                                 v-bind:key="question.id"
                         ></question>
                     </div>
@@ -99,15 +100,30 @@
             </div>
             <div class="block-content" v-show="is_opened">
                 <div class="content">
-                    <div class="type">
-                        <label class="label">Type</label>
-                        <div class="select">
-                            <select v-bind:value="type" @input="update_question_type($event, question_number)">
-                                <option value="1">Boutons radios</option>
-                                <option value="2">Choix multiples</option>
-                                <option value="3">Association d'items</option>
-                                <option value="4">Réponse simple</option>
-                            </select>
+                    <div class="metadata">
+                        <div class="type">
+                            <label class="label">Type</label>
+                            <div class="select">
+                                <select v-bind:value="type" @input="update_question_type($event, question_number)">
+                                    <option value="1">Boutons radios</option>
+                                    <option value="2">Choix multiples</option>
+                                    <option value="3">Association d'items</option>
+                                    <option value="4">Réponse simple</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="factor">
+                            <label class="label">Coefficient</label>
+                            <div class="select">
+                                <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

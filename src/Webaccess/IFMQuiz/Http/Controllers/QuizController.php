@@ -318,6 +318,7 @@ class QuizController extends Controller
             $q->id = $question['id'];
             $q->description = $question['description'];
             $q->type = $question['type'];
+            $q->factor = $question['factor'];
             $q->title = $question['title'];
             $q->number = $question_number+1;
             $q->items = json_encode($question['items']);
