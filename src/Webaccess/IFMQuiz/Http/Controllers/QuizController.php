@@ -2,6 +2,7 @@
 
 namespace Webaccess\IFMQuiz\Http\Controllers;
 
+use DateTime;
 use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -46,12 +47,16 @@ class QuizController extends Controller
                 $totalResults += $result;
             }
 
-            $quiz->average = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
-            $quiz->questions_number = sizeof($questions);
+            $average_score = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
+            $quiz->average = (sizeof($questions) > 0) ? ($average_score / sizeof($questions)) : 0;
+
+            $quiz->training_date = ($quiz->training_date != null) ? DateTime::createFromFormat('Y-m-d', $quiz->training_date)->format('d/m/Y') : 'N/A';
         }
 
         return view('ifmquiz::back.quiz.index', [
-            'quizs' => $quizs
+            'quizs' => $quizs,
+            'confirmation' => $request->session()->get('confirmation'),
+            'error' => $request->session()->get('error'),
         ]);
     }
 
@@ -147,18 +152,19 @@ class QuizController extends Controller
             $question->items_left = json_decode($question->items_left);
             $question->items_right = json_decode($question->items_right);
 
-            $question->answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $question->id)->first();
-            $question->answer->items = json_decode($question->answer->items);
-            $question->answer->items_right = json_decode($question->answer->items_right);
+            if ($question->answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $question->id)->first()) {
+                $question->answer->items = json_decode($question->answer->items);
+                $question->answer->items_right = json_decode($question->answer->items_right);
 
-            switch($question->type) {
-                case 2:
-                    $answerItemIDs = array_column($question->answer->items, 'id');
-                    $question->answer->item_ids = $answerItemIDs;
-                    break;
-                case 4:
-                    $question->answer->text = ($question->answer->items) ? $question->answer->items[0]->text : '';
-                    break;
+                switch($question->type) {
+                    case 2:
+                        $answerItemIDs = array_column($question->answer->items, 'id');
+                        $question->answer->item_ids = $answerItemIDs;
+                        break;
+                    case 4:
+                        $question->answer->text = ($question->answer->items) ? $question->answer->items[0]->text : '';
+                        break;
+                }
             }
         }
 
@@ -193,6 +199,8 @@ class QuizController extends Controller
                 $question_copy->quiz_id = $quiz_copy->id;
                 $question_copy->save();
             }
+
+            $request->session()->flash('confirmation', true);
         }
 
         return redirect()->route('quiz_list');
@@ -202,7 +210,11 @@ class QuizController extends Controller
         if ($quiz = Quiz::find($quizID)) {
             $questions = Question::where('quiz_id', '=', $quizID)->delete();
 
-            $quiz->delete();
+            if ($quiz->delete()) {
+                $request->session()->flash('confirmation', true);
+            } else {
+                $request->session()->flash('error', true);
+            }
         }
 
         return redirect()->route('quiz_list');
@@ -213,6 +225,8 @@ class QuizController extends Controller
 
         return view('ifmquiz::back.quiz.parameters', [
             'quiz' => $quiz,
+            'confirmation' => $request->session()->get('confirmation'),
+            'error' => $request->session()->get('error'),
         ]);
     }
 
@@ -221,7 +235,12 @@ class QuizController extends Controller
 
         $quiz->intro_text = $request->intro_text;
         $quiz->outro_text = $request->outro_text;
-        $quiz->save();
+
+        if ($quiz->save()) {
+            $request->session()->flash('confirmation', true);
+        } else {
+            $request->session()->flash('error', true);
+        }
 
         return redirect()->route('quiz_parameters', ['uuid' => $quizID]);
     }
@@ -289,6 +308,7 @@ class QuizController extends Controller
         $quiz->title = $request->quiz['title'];
         $quiz->subtitle = $request->quiz['subtitle'];
         $quiz->time = $request->quiz['time'];
+        $quiz->training_date = (new DateTime($request->quiz['training_date']))->format('Y-m-d');
         $quiz->save();
 
         Question::where('quiz_id', '=', $quizID)->delete();

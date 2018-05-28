@@ -18,5 +18,6 @@ class Quiz extends Model
         'time',
         'intro_text',
         'outro_text',
+        'training_date',
     ];
 }

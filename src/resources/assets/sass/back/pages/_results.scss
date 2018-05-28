@@ -1,0 +1,21 @@
+.results-template {
+	.search {
+		padding: 3rem 0;
+
+		.search-label {
+			display: inline-block;
+
+			font-family: $secondary-font;
+			font-size: 1.6rem;
+		}		
+
+		.search-input {
+			width: 20%;
+			display: inline-block;
+			margin-left: 2rem;
+
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+		}
+	}
+}

@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Sortable from 'sortablejs';
+import Notifications from 'vue-notification';
+Vue.use(Notifications);
 
 Vue.directive('sortable', {
     inserted: function (el, binding) {

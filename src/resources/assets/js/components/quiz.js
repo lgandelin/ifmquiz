@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue';
+import Datepicker from 'vuejs-datepicker';
+import {fr} from 'vuejs-datepicker/dist/locale';
 
 Vue.component('quiz', {
     template: '#quiz-template',
@@ -11,7 +13,11 @@ Vue.component('quiz', {
             updating_quiz_title: false,
             updating_quiz_subtitle: false,
             updating_quiz_time: false,
+            lang: fr
         }
+    },
+    components: {
+        datepicker: Datepicker,
     },
     mounted: function() {
         var store = this.$store;
@@ -38,12 +44,19 @@ Vue.component('quiz', {
             quiz.saving = true;
 
             axios.post(
-                "/admin/quiz/" + quiz_id, {
-                    quiz: this.$store.state.quiz
-                })
-                .then(function (response) {
-                    quiz.saving = false;
-                });
+            "/admin/quiz/" + quiz_id, {
+                quiz: this.$store.state.quiz
+            })
+            .then(function (response) {
+                quiz.saving = false;
+            });
+
+            this.$notify({
+                group: 'quiz',
+                title: 'Informations sauvegardées',
+                text: 'Les informations du questionnaire ont été sauvegardées avec succès.',
+                type: 'success',
+            });
         },
         reorder_questions: function(event) {
             const moved_question = this.$store.state.quiz.questions.splice(event.oldIndex, 1)[0];
