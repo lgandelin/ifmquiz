@@ -2,24 +2,31 @@
 
 @section('main-content')
 
-    <div class="container">
-        <h1 class="title">Envoyer le questionnaire</h1>
-        <a class="button is-text" style="float:right" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Retour</a>
-        <h2>{{ $quiz->title }}</h2>
+    <div class="header">
+        <div class="container">
+            <a class="button back-button" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Retour</a>
+            <h1 class="title">Envoyer le questionnaire</h1>
+            <h2 class="subtitle">{{ $quiz->title }}</h2>
+        </div>
+    </div>
 
-        <form action="{{ route('quiz_mailing_handler', ['uuid' => $quiz->id]) }}" method="post">
-            <div class="field">
-                <label class="label">Mailing list</label>
-                <div class="control">
-                    <textarea class="textarea" placeholder="exemple1@mail.com
+    <div class="container page-template mailing-template">
+        <div class="page-content">
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Mailing list</h3>
+                </div>
+                <div class="block-content">
+                    <form action="{{ route('quiz_mailing_handler', ['uuid' => $quiz->id]) }}" method="post">
+                        <textarea placeholder="exemple1@mail.com
 exemple2@mail.com
 exemple3@mail.com" name="mailing_list"></textarea>
+                        {{ csrf_field() }}
+                        <input type="submit" class="button submit" value="Envoyer" />
+                    </form>
                 </div>
             </div>
-
-            {{ csrf_field() }}
-            <input type="submit" class="button is-primary" value="Envoyer" />
-        </form>
+        </div>
     </div>
 
 @endsection

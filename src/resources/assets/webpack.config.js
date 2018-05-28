@@ -2,10 +2,12 @@ var webpack = require('webpack');
 const path = require("path");
 
 module.exports = {
-    entry: "./js/back.js",
+    entry: {
+        back: "./js/back.js",
+        front: "./js/front.js",
+    },
     output: {
         path: path.resolve(__dirname, "./js/dist"),
-        filename: "back.js"
     },
     watchOptions: {
         poll: true
@@ -17,7 +19,7 @@ module.exports = {
     },
 };
 
-module.exports = {
+/*module.exports = {
     entry: "./js/front.js",
     output: {
         path: path.resolve(__dirname, "./js/dist"),
@@ -31,4 +33,4 @@ module.exports = {
             vue: 'vue/dist/vue.js'
         },
     },
-};
+};*/

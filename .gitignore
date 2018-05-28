@@ -1,8 +1,7 @@
 /vendor
 .DS_Store
-*.css
-*.scssc
 .idea
 *.map
 src/resources/assets/node_modules
-src/resources/assets/js/dist
+src/resources/assets/.sass-cache
+*.log

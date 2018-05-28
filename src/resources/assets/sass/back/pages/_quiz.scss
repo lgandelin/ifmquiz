@@ -1,0 +1,228 @@
+.quiz-template {
+
+	.top-bar {
+		overflow: hidden;
+
+		background: #fafafa;
+
+		.icon {
+			display: inline-block;
+			text-indent: -9999px;
+
+			&.settings {
+				display: block;
+				width: 4.7rem;
+				height: 4.7rem;
+
+				background: $black url(../img/back/cog-icon.png) no-repeat center center;
+			}
+
+			&.mailing {
+				display: block;
+				width: 4.7rem;
+				height: 4.7rem;
+
+				background: #9a9a9a url(../img/back/mail-icon.png) no-repeat center center;
+			}
+
+			&:hover {
+				opacity: 0.9;
+			}
+		}
+
+		.button {
+			height: 100%;
+		}
+	}
+
+	.header {
+		.subtitle {
+			margin-bottom: 0;
+		}
+		
+		.submit {
+			margin-top: 0;
+		}
+	}
+
+	.question {
+		position: relative;
+		margin-bottom: 2rem;
+
+		.block-header {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+
+			.menu-icon {
+				top: 7.8rem;
+				right: 2.5rem;
+			}
+
+			.menu {
+				top: 4.8rem;
+				right: 5rem;
+			}
+		}
+
+		.move-button {
+		    display: block;
+		    margin: auto;
+			width: 18px;
+			height: 11px;
+
+		    background: url(../img/back/move-icon.png) no-repeat center center;
+		    border: none;
+
+		    &:focus {
+		    	outline: 0;
+		    }
+		}
+
+		.toggle-button {
+		    display: block;
+		    margin: auto;
+			width: 11px;
+			height: 7px;
+
+		    border: none;
+		    outline: 0;
+
+		    &.up {
+		    	background: url(../img/back/up-arrow-icon.png) no-repeat center center;
+		    }
+
+		    &.down {
+		    	background: url(../img/back/down-arrow-icon.png) no-repeat center center;
+		    }
+
+		    &:focus, &:active {
+		    	outline: 0 !important;
+		    }
+		}
+
+		.inline-field {
+			display: inline-block;
+		}
+
+		.question-title {
+		    margin-right: 3.5rem;
+		    width: 250px;
+		    min-width: auto;
+		    display: inline-block;
+		    height: 50px;
+		}
+
+		.question-description {
+		    display: inline-block;
+		    min-width: auto;
+		    width: 680px;
+		    height: 50px;
+		}
+
+		.block-content {
+			padding: 3.2rem 0rem 3.2rem 3.2rem;
+		}
+
+		.type {
+		    vertical-align: top;
+		    display: inline-block;
+		    width: 250px;
+		    margin-right: 3.5rem;
+		}
+
+		.items {
+		    display: inline-block;
+		    width: 715px;
+
+		    .field {
+		    	margin-bottom: 1.5rem;
+
+		    	input {
+		    		width: 680px;
+		    	}
+
+		    	input[type="text"].highlighted {
+				    border: 1px solid $orange;
+		    	}
+
+		    	label {
+		    		margin-right: 3.5rem;
+		    	}
+
+		    	.correct {
+		    		margin-top: 0.5rem;
+		    		width: 10px;
+		    		height: 10px;
+		    		display: inline-block;
+
+		    		background: url(../img/back/gray-check-icon.png) no-repeat center center;
+
+		    		&.checked {
+		    			background: url(../img/back/orange-check-icon.png) no-repeat center center;
+		    		}
+		    	}
+
+		    	.delete {
+		    		width: 10px;
+		    		height: 10px;
+		    		display: inline-block;
+		    		margin: 1.3rem 0 0 1rem;
+
+		    		background: url(../img/back/delete-icon.png) no-repeat center center;
+
+		    		&:before, &:after {
+		    			display: none;
+		    		}
+		    	}
+		    }
+
+		    .items-left, .items-right {
+		    	input {
+		    		width: 100%;
+		    	}
+		    }
+
+		    .items-left {
+		    	width: 325px;
+		    	display: inline-block;
+		    	vertical-align: top;
+
+		    	input {
+		    		width: 280px;
+		    		display: inline-block;
+		    	}
+		    }
+
+		    .items-right {
+		    	width: 350px;
+		    	display: inline-block;
+		    	vertical-align: top;
+
+		    	input {
+		    		width: 280px;
+		    		display: inline-block;
+		    	}
+
+		    	.associated-item {
+					width: 30px;
+					display: inline-block;
+					padding-left: 0;
+					padding-right: 0;
+
+					text-align: center;
+		    	}
+		    }
+		}
+
+		.add-answer {
+			input {
+				border: 1px dashed #cccccc;
+			}
+		}
+	}
+
+	.add-question {
+		border: 2px dashed #eeeeee;
+		background: #fcfcfc;
+	}
+}

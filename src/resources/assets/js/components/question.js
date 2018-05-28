@@ -23,6 +23,7 @@ Vue.component('question', {
     data: function() {
         return {
             is_opened: true,
+            menu_opened: false,
             new_item_title: '',
             new_item_left_title : '',
             new_item_right_title : '',

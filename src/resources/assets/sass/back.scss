@@ -1,48 +1,20 @@
-.question {
-    margin-bottom: 2rem;
-    padding: 2rem;
+@import "back/vendor/_notifications";
 
-    background: #ccc;
-}
+@import "back/includes/_variables";
+@import "back/includes/_typography";
+@import "back/includes/_structure";
+@import "back/includes/_buttons";
+@import "back/includes/_tables";
+@import "back/includes/_form";
+@import "back/includes/_page";
 
-.question-title {
-    width: 250px;
-    min-width: auto;
-    display: inline-block;
-    height: 50px;
-}
-
-.question-description {
-    display: inline-block;
-    min-width: auto;
-    width: 850px;
-    height: 50px;
-}
-
-.add-question {
-    background: #eee;
-}
+@import "back/pages/_dashboard";
+@import "back/pages/_results";
+@import "back/pages/_quiz";
 
 .add-button {
     display: inline-block;
     vertical-align: top;
-}
-
-.type {
-    vertical-align: top;
-    display: inline-block;
-    width: 250px;
-}
-
-.items {
-    display: inline-block;
-    width: 850px;
-}
-
-.content {
-    border-top: 1px solid #444;
-    margin-top: 2rem;
-    padding-top: 2rem;
 }
 
 .correct {
@@ -77,30 +49,14 @@
     margin-left: 0.5rem;
 }
 
-.move-button {
-    display: block;
-    margin: auto;
-    margin-bottom: 2rem;
-}
-
-.toggle-button {
-    display: block;
-    margin: auto;
-    margin-top: 2rem;
-}
-
 .move-button:hover {
     cursor: move;
 }
 
-.sortable-ghost {
-    background: orange;
-}
-
-.header {
-    overflow: hidden;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+.sortable-ghost > div {
+    border: 1px solid $orange;
+    box-shadow: none;
+    background: none;
 }
 
 .updating_title, .updating_subtitle {
@@ -144,25 +100,6 @@
         -webkit-box-shadow: none;
         box-shadow: none;
     }
-}
-
-.tiles {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-
-    .tile {
-        padding: 1rem;
-
-        .title {
-            font-size: 1.5rem;
-        }
-    }
-}
-
-.page-wrapper {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .status-1 {
