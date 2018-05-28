@@ -11,6 +11,7 @@ const store = new Vuex.Store({
             time: 0,
             title: '',
             subtitle: '',
+            training_date: '',
             questions: [],
         }
     },

@@ -9,7 +9,7 @@
                     <a class="is-pulled-right button" href="{{ route('quiz_list') }}">Retour</a>
                 </div>
             </div>
-            
+
             <quiz></quiz>
             <input type="hidden" id="quiz_id" value="{{ $quiz->id }}" />
         </div>
@@ -22,13 +22,14 @@
                         <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
                         <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
                     min</span>
+
                     <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
                     <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
                     <input type="text" class="title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                     <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
                     <input type="text" class="subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
+                    <span style="margin-top: 1rem; float: left" class="training_date">Date de formation : <datepicker style="margin-left: 1rem; display:inline-block" v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
 
-                    <div style="clear:both"></div>
                     <button class="button submit" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
                     <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
                 </div>

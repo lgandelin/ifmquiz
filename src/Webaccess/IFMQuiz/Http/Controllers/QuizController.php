@@ -2,6 +2,7 @@
 
 namespace Webaccess\IFMQuiz\Http\Controllers;
 
+use DateTime;
 use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -48,6 +49,8 @@ class QuizController extends Controller
 
             $average_score = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
             $quiz->average = (sizeof($questions) > 0) ? ($average_score / sizeof($questions)) : 0;
+
+            $quiz->training_date = ($quiz->training_date != null) ? DateTime::createFromFormat('Y-m-d', $quiz->training_date)->format('d/m/Y') : 'N/A';
         }
 
         return view('ifmquiz::back.quiz.index', [
@@ -290,6 +293,7 @@ class QuizController extends Controller
         $quiz->title = $request->quiz['title'];
         $quiz->subtitle = $request->quiz['subtitle'];
         $quiz->time = $request->quiz['time'];
+        $quiz->training_date = (new DateTime($request->quiz['training_date']))->format('Y-m-d');
         $quiz->save();
 
         Question::where('quiz_id', '=', $quizID)->delete();

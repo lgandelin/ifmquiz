@@ -31,6 +31,7 @@
                     <span class="menu-icon"></span>
                     <h3 class="title">{{ $quiz->title }}</h3>
                     <span class="type">Type : Examen</span>
+                    <span class="training_date">Date de formation : {{ $quiz->training_date }}</span>
                     <div class="progress-bar">Taux de complétion <span class="is-pulled-right">{{ round(100*$quiz->completion) }}%</span><br/>
                         <progress class="progress" value="{{ $quiz->completion }}" max="1"></progress>
                     </div>

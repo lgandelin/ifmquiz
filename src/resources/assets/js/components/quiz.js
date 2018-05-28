@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue';
+import Datepicker from 'vuejs-datepicker';
+import {fr} from 'vuejs-datepicker/dist/locale';
 
 Vue.component('quiz', {
     template: '#quiz-template',
@@ -11,7 +13,11 @@ Vue.component('quiz', {
             updating_quiz_title: false,
             updating_quiz_subtitle: false,
             updating_quiz_time: false,
+            lang: fr
         }
+    },
+    components: {
+        Datepicker
     },
     mounted: function() {
         var store = this.$store;
