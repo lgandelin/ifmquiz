@@ -41,24 +41,41 @@
             </div>
         </div>
     </div>
+
+    <div class="notifications" style="width: 300px; top: 0px; right: 0px; @if ($confirmation || $error)display:block @endif">
+        <span>
+            <div data-id="4" class="notification-wrapper" style="transition: all 300ms;">
+                @if ($confirmation)
+                    <div class="notification vue-notification success">
+                        <div class="notification-title">Informations sauvegardées</div>
+                        <div class="notification-content">Les informations du questionnaire ont été sauvegardées avec succès.</div>
+                    </div>
+                @endif
+
+                @if ($error)
+                    <div class="notification vue-notification error">
+                        <div class="notification-title">Une erreur est survenue</div>
+                        <div class="notification-content">Une erreur est survenue lors de l'enregistrement. Veuillez retenter l'opération</div>
+                    </div>
+                @endif
+            </div>
+        </span>
+    </div>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#intro_text_editor'))
             .then(editor => {
-                console.log(editor);
             })
             .catch(error => {
-                console.error(error);
             });
 
         ClassicEditor
                 .create(document.querySelector('#outro_text_editor'))
                 .then(editor => {
-            console.log(editor);
         })
         .catch(error => {
-            console.error(error);
         });
     </script>
 

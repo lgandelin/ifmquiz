@@ -54,7 +54,9 @@ class QuizController extends Controller
         }
 
         return view('ifmquiz::back.quiz.index', [
-            'quizs' => $quizs
+            'quizs' => $quizs,
+            'confirmation' => $request->session()->get('confirmation'),
+            'error' => $request->session()->get('error'),
         ]);
     }
 
@@ -197,6 +199,8 @@ class QuizController extends Controller
                 $question_copy->quiz_id = $quiz_copy->id;
                 $question_copy->save();
             }
+
+            $request->session()->flash('confirmation', true);
         }
 
         return redirect()->route('quiz_list');
@@ -206,7 +210,11 @@ class QuizController extends Controller
         if ($quiz = Quiz::find($quizID)) {
             $questions = Question::where('quiz_id', '=', $quizID)->delete();
 
-            $quiz->delete();
+            if ($quiz->delete()) {
+                $request->session()->flash('confirmation', true);
+            } else {
+                $request->session()->flash('error', true);
+            }
         }
 
         return redirect()->route('quiz_list');
@@ -217,6 +225,8 @@ class QuizController extends Controller
 
         return view('ifmquiz::back.quiz.parameters', [
             'quiz' => $quiz,
+            'confirmation' => $request->session()->get('confirmation'),
+            'error' => $request->session()->get('error'),
         ]);
     }
 
@@ -225,7 +235,12 @@ class QuizController extends Controller
 
         $quiz->intro_text = $request->intro_text;
         $quiz->outro_text = $request->outro_text;
-        $quiz->save();
+
+        if ($quiz->save()) {
+            $request->session()->flash('confirmation', true);
+        } else {
+            $request->session()->flash('error', true);
+        }
 
         return redirect()->route('quiz_parameters', ['uuid' => $quizID]);
     }

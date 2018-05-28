@@ -53,6 +53,26 @@
         </div>
     </div>
 
+    <div class="notifications" style="width: 300px; top: 0px; right: 0px; @if ($confirmation || $error)display:block @endif">
+        <span>
+            <div data-id="4" class="notification-wrapper" style="transition: all 300ms;">
+                @if ($confirmation)
+                    <div class="notification vue-notification success">
+                        <div class="notification-title">Informations sauvegardées</div>
+                        <div class="notification-content">Les informations ont été sauvegardées avec succès.</div>
+                    </div>
+                @endif
+
+                @if ($error)
+                    <div class="notification vue-notification error">
+                        <div class="notification-title">Une erreur est survenue</div>
+                        <div class="notification-content">Une erreur est survenue lors de l'enregistrement. Veuillez retenter l'opération</div>
+                    </div>
+                @endif
+            </div>
+        </span>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {

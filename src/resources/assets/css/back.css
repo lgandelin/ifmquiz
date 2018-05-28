@@ -1,4 +1,71 @@
 @import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+/* line 1, ../sass/back/vendor/_notifications.scss */
+.notifications {
+  display: block;
+  position: fixed;
+  z-index: 5000;
+}
+
+/* line 7, ../sass/back/vendor/_notifications.scss */
+.notification-wrapper {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 15, ../sass/back/vendor/_notifications.scss */
+.notification {
+  display: block;
+  box-sizing: border-box;
+  background: white;
+  text-align: left;
+}
+
+/* line 22, ../sass/back/vendor/_notifications.scss */
+.notification-title {
+  font-weight: 600;
+}
+
+/* line 26, ../sass/back/vendor/_notifications.scss */
+.vue-notification {
+  font-size: 12px;
+  padding: 10px;
+  margin: 0 5px 5px;
+  color: white;
+  background: #44A4FC;
+  border-left: 5px solid #187FE7;
+}
+
+/* line 36, ../sass/back/vendor/_notifications.scss */
+.vue-notification.warn {
+  background: #ffb648;
+  border-left-color: #f48a06;
+}
+
+/* line 41, ../sass/back/vendor/_notifications.scss */
+.vue-notification.error {
+  background: #E54D42;
+  border-left-color: #B82E24;
+}
+
+/* line 46, ../sass/back/vendor/_notifications.scss */
+.vue-notification.success {
+  background: #68CD86;
+  border-left-color: #42A85F;
+}
+
+/* line 51, ../sass/back/vendor/_notifications.scss */
+.vn-fade-enter-active, .vn-fade-leave-active, .vn-fade-move {
+  transition: all .5s;
+}
+
+/* line 55, ../sass/back/vendor/_notifications.scss */
+.vn-fade-enter, .vn-fade-leave-to {
+  opacity: 0;
+}
+
 /* line 3, ../sass/back/includes/_typography.scss */
 html {
   font-size: 62.5%;
@@ -627,63 +694,63 @@ form:after {
   background: #fcfcfc;
 }
 
-/* line 13, ../sass/back.scss */
+/* line 15, ../sass/back.scss */
 .add-button {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 18, ../sass/back.scss */
+/* line 20, ../sass/back.scss */
 .correct {
   float: right;
   cursor: pointer;
 }
 
-/* line 24, ../sass/back.scss */
+/* line 26, ../sass/back.scss */
 .correct.checked {
   color: orange;
 }
 
-/* line 28, ../sass/back.scss */
+/* line 30, ../sass/back.scss */
 .input {
   width: 97%;
 }
 
-/* line 32, ../sass/back.scss */
+/* line 34, ../sass/back.scss */
 .div-50 {
   width: 50%;
   float: left;
 }
 
-/* line 37, ../sass/back.scss */
+/* line 39, ../sass/back.scss */
 .div-50 .input {
   width: 80%;
 }
 
-/* line 41, ../sass/back.scss */
+/* line 43, ../sass/back.scss */
 .div-50 input[type="number"] {
   width: 50px;
 }
 
-/* line 45, ../sass/back.scss */
+/* line 47, ../sass/back.scss */
 .duplicate-button, .delete-button {
   float: right;
   margin-left: 0.5rem;
 }
 
-/* line 50, ../sass/back.scss */
+/* line 52, ../sass/back.scss */
 .move-button:hover {
   cursor: move;
 }
 
-/* line 54, ../sass/back.scss */
+/* line 56, ../sass/back.scss */
 .sortable-ghost > div {
   border: 1px solid #e7873c;
   box-shadow: none;
   background: none;
 }
 
-/* line 60, ../sass/back.scss */
+/* line 62, ../sass/back.scss */
 .updating_title, .updating_subtitle {
   padding: 0;
   margin: 0;
@@ -696,25 +763,25 @@ form:after {
   outline: none;
   border-radius: 0;
 }
-/* line 72, ../sass/back.scss */
+/* line 74, ../sass/back.scss */
 .updating_title:focus, .updating_subtitle:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 79, ../sass/back.scss */
+/* line 81, ../sass/back.scss */
 .questions-number {
   margin-right: 2rem;
   float: right;
 }
-/* line 83, ../sass/back.scss */
+/* line 85, ../sass/back.scss */
 .questions-number .number {
   display: inline-block;
   visibility: middle;
 }
 
-/* line 89, ../sass/back.scss */
+/* line 91, ../sass/back.scss */
 .updating_time {
   border: none;
   box-shadow: none;
@@ -722,24 +789,24 @@ form:after {
   min-width: 0;
   width: 4rem;
 }
-/* line 96, ../sass/back.scss */
+/* line 98, ../sass/back.scss */
 .updating_time:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 103, ../sass/back.scss */
+/* line 105, ../sass/back.scss */
 .status-1 {
   background: whitesmoke;
 }
 
-/* line 107, ../sass/back.scss */
+/* line 109, ../sass/back.scss */
 .status-2 {
   background: rgba(255, 219, 87, 0.3);
 }
 
-/* line 111, ../sass/back.scss */
+/* line 113, ../sass/back.scss */
 .status-3 {
   background: rgba(36, 204, 92, 0.3);
 }

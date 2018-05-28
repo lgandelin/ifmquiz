@@ -1,18 +1,17 @@
 @extends('ifmquiz::back.master')
 
 @section('main-content')
-        <div id="quiz" class="quiz-template page-template">
-            <div class="top-bar">
-                <div class="container">
-                    <a class="is-pulled-right icon mailing" href="{{ route('quiz_mailing', ['uuid' => $quiz->id]) }}">Mailing</a>
-                    <a class="is-pulled-right icon settings" href="{{ route('quiz_parameters', ['uuid' => $quiz->id]) }}">Paramètres</a>
-                    <a class="is-pulled-right button" href="{{ route('quiz_list') }}">Retour</a>
-                </div>
+    <div id="quiz" class="quiz-template page-template">
+        <div class="top-bar">
+            <div class="container">
+                <a class="is-pulled-right icon mailing" href="{{ route('quiz_mailing', ['uuid' => $quiz->id]) }}">Mailing</a>
+                <a class="is-pulled-right icon settings" href="{{ route('quiz_parameters', ['uuid' => $quiz->id]) }}">Paramètres</a>
+                <a class="is-pulled-right button" href="{{ route('quiz_list') }}">Retour</a>
             </div>
-
-            <quiz></quiz>
-            <input type="hidden" id="quiz_id" value="{{ $quiz->id }}" />
         </div>
+        <quiz></quiz>
+        <input type="hidden" id="quiz_id" value="{{ $quiz->id }}" />
+    </div>
 
     <script type="text/x-template" id="quiz-template">
         <div class="quiz">
@@ -71,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            <notifications group="quiz" />
         </div>
     </script>
 
