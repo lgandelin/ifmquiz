@@ -70,7 +70,7 @@ class FrontController extends Controller
 
         $answers = [];
         foreach($request->all() as $key => $value) {
-            if (preg_match('/textanswer_/', $key)) {
+            if (preg_match('/oneanswer_/', $key)) {
                 $questionID = str_replace('oneanswer_', '', $key);
                 $answers[$questionID][]= ['id' => $value];
             } elseif (preg_match('/textanswer_/', $key)) {

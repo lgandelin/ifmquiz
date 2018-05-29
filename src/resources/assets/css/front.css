@@ -79,58 +79,57 @@ html, body {
   box-shadow: 0;
 }
 
-/* line 1, ../sass/front/pages/_quiz.scss */
-.header {
+/* line 2, ../sass/front/pages/_quiz.scss */
+.front-template .header {
   overflow: hidden;
   margin-bottom: 8.5rem;
 }
-/* line 5, ../sass/front/pages/_quiz.scss */
-.header .title, .header h1 {
+/* line 6, ../sass/front/pages/_quiz.scss */
+.front-template .header .title, .front-template .header h1 {
   margin-bottom: 2.5rem;
 }
-/* line 9, ../sass/front/pages/_quiz.scss */
-.header .subtitle {
+/* line 10, ../sass/front/pages/_quiz.scss */
+.front-template .header .subtitle {
   width: auto;
   color: #999999;
   font-size: 2.6rem;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-/* line 18, ../sass/front/pages/_quiz.scss */
-.header .time-limit, .header .questions-number {
+/* line 19, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit, .front-template .header .questions-number {
   margin-bottom: 1.5rem;
   clear: right;
   float: right;
   font-size: 2.6rem;
   color: #d0d0d0;
 }
-/* line 26, ../sass/front/pages/_quiz.scss */
-.header .time-limit img, .header .questions-number img {
+/* line 27, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit img, .front-template .header .questions-number img {
   margin-right: 1rem;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 34, ../sass/front/pages/_quiz.scss */
-.header .time-limit .remaining-time {
+/* line 35, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit .remaining-time {
   display: inline-block;
   vertical-align: middle;
   color: #d0d0d0;
   font-size: 1.4rem;
 }
-/* line 44, ../sass/front/pages/_quiz.scss */
-.header .questions-number img {
+/* line 45, ../sass/front/pages/_quiz.scss */
+.front-template .header .questions-number img {
   margin-right: 2rem;
 }
-
-/* line 50, ../sass/front/pages/_quiz.scss */
-.questions {
+/* line 51, ../sass/front/pages/_quiz.scss */
+.front-template .questions {
   padding: 0 0 4rem 8rem;
   margin-bottom: 10rem;
   border: 2px solid #d0d0d0;
   background: white;
 }
-/* line 57, ../sass/front/pages/_quiz.scss */
-.questions .question {
+/* line 58, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question {
   padding: 3.5rem 4.5rem 4.5rem 0;
   position: relative;
   color: #7a7a7a;
@@ -139,8 +138,8 @@ html, body {
   letter-spacing: 0;
   border-bottom: 2px solid #cecece;
 }
-/* line 68, ../sass/front/pages/_quiz.scss */
-.questions .question .status {
+/* line 69, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status {
   position: absolute;
   width: 2rem;
   left: -4rem;
@@ -149,8 +148,8 @@ html, body {
   z-index: 2;
   background: url("../img/generic/uncheck.png") no-repeat 0 4.5rem;
 }
-/* line 78, ../sass/front/pages/_quiz.scss */
-.questions .question .status:after {
+/* line 79, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status:after {
   content: "";
   display: block;
   width: 2px;
@@ -161,8 +160,8 @@ html, body {
   bottom: 0;
   background: #d0d0d0;
 }
-/* line 91, ../sass/front/pages/_quiz.scss */
-.questions .question .status:before {
+/* line 92, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status:before {
   content: "";
   display: block;
   width: 2px;
@@ -173,52 +172,52 @@ html, body {
   height: 5rem;
   background: #d0d0d0;
 }
-/* line 105, ../sass/front/pages/_quiz.scss */
-.questions .question .statement {
+/* line 106, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .statement {
   float: left;
   vertical-align: top;
   width: 38.5rem;
   margin-right: 7.5rem;
 }
-/* line 111, ../sass/front/pages/_quiz.scss */
-.questions .question .statement h3 {
+/* line 112, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .statement h3 {
   margin-bottom: 1rem;
   color: #3b3b3b;
   font-size: 2.4rem;
   font-family: "Pathway Gothic One";
   text-transform: uppercase;
 }
-/* line 121, ../sass/front/pages/_quiz.scss */
-.questions .question .items {
+/* line 122, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items {
   margin-top: 1.5rem;
   width: auto;
   overflow: hidden;
   padding-left: 0.5rem;
 }
-/* line 127, ../sass/front/pages/_quiz.scss */
-.questions .question .items label {
+/* line 128, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items label {
   font-size: 1.6rem;
 }
-/* line 131, ../sass/front/pages/_quiz.scss */
-.questions .question .items .textarea {
+/* line 132, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .textarea {
   font-size: 1.6rem;
   letter-spacing: 0;
   border: 1px solid #3b3b3b;
   border-radius: 0;
 }
-/* line 139, ../sass/front/pages/_quiz.scss */
-.questions .question .items .radio, .questions .question .items .checkbox {
+/* line 140, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .radio, .front-template .questions .question .items .checkbox {
   display: inline-block;
   width: 32%;
   margin-top: 3rem;
 }
-/* line 146, ../sass/front/pages/_quiz.scss */
-.questions .question .items .left .control {
+/* line 147, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .left .control {
   display: block;
   margin-bottom: 0.7rem;
 }
-/* line 153, ../sass/front/pages/_quiz.scss */
-.questions .question .items .right input {
+/* line 154, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .right input {
   width: 2rem;
   height: 2rem;
   margin-right: 1.2rem;
@@ -228,33 +227,32 @@ html, body {
   text-align: center;
   border: 2px solid #3b3b3b;
 }
-/* line 170, ../sass/front/pages/_quiz.scss */
-.questions .question.first-question .status:before {
+/* line 171, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.first-question .status:before {
   display: none;
 }
-/* line 176, ../sass/front/pages/_quiz.scss */
-.questions .question.last-question {
+/* line 177, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.last-question {
   border-bottom: none;
 }
-/* line 180, ../sass/front/pages/_quiz.scss */
-.questions .question.last-question .status:after {
+/* line 181, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.last-question .status:after {
   display: none;
 }
-/* line 188, ../sass/front/pages/_quiz.scss */
-.questions .question.answered .status {
+/* line 189, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.answered .status {
   background-image: url("../img/generic/check.png");
 }
-/* line 191, ../sass/front/pages/_quiz.scss */
-.questions .question.answered .status:after, .questions .question.answered .status:before {
+/* line 192, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.answered .status:after, .front-template .questions .question.answered .status:before {
   background: #e7873c;
 }
-
-/* line 199, ../sass/front/pages/_quiz.scss */
-.submit {
+/* line 200, ../sass/front/pages/_quiz.scss */
+.front-template .submit {
   overflow: hidden;
 }
-/* line 202, ../sass/front/pages/_quiz.scss */
-.submit .button {
+/* line 203, ../sass/front/pages/_quiz.scss */
+.front-template .submit .button {
   margin-right: 4.5rem;
   float: right;
 }

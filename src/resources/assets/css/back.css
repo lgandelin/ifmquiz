@@ -748,63 +748,91 @@ form:after {
   background: #fcfcfc;
 }
 
-/* line 15, ../sass/back.scss */
+/* line 3, ../sass/back/pages/_user-answers.scss */
+.user-answers-template .user-answer-score {
+  margin-top: 2rem;
+}
+/* line 6, ../sass/back/pages/_user-answers.scss */
+.user-answers-template .user-answer-score .score {
+  margin-left: 1rem;
+  text-align: center;
+  border: 2px solid black;
+  width: 6rem;
+}
+/* line 13, ../sass/back/pages/_user-answers.scss */
+.user-answers-template .user-answer-score .button {
+  margin-left: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 2px;
+}
+/* line 21, ../sass/back/pages/_user-answers.scss */
+.user-answers-template .back {
+  float: right;
+  margin-bottom: 7.5rem;
+}
+/* line 26, ../sass/back/pages/_user-answers.scss */
+.user-answers-template .questions-number {
+  margin-right: 0;
+}
+
+/* line 16, ../sass/back.scss */
 .add-button {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 20, ../sass/back.scss */
+/* line 21, ../sass/back.scss */
 .correct {
   float: right;
   cursor: pointer;
 }
 
-/* line 26, ../sass/back.scss */
+/* line 27, ../sass/back.scss */
 .correct.checked {
   color: orange;
 }
 
-/* line 30, ../sass/back.scss */
+/* line 31, ../sass/back.scss */
 .input {
   width: 97%;
 }
 
-/* line 34, ../sass/back.scss */
+/* line 35, ../sass/back.scss */
 .div-50 {
   width: 50%;
   float: left;
 }
 
-/* line 39, ../sass/back.scss */
+/* line 40, ../sass/back.scss */
 .div-50 .input {
   width: 80%;
 }
 
-/* line 43, ../sass/back.scss */
+/* line 44, ../sass/back.scss */
 .div-50 input[type="number"] {
   width: 50px;
 }
 
-/* line 47, ../sass/back.scss */
+/* line 48, ../sass/back.scss */
 .duplicate-button, .delete-button {
   float: right;
   margin-left: 0.5rem;
 }
 
-/* line 52, ../sass/back.scss */
+/* line 53, ../sass/back.scss */
 .move-button:hover {
   cursor: move;
 }
 
-/* line 56, ../sass/back.scss */
+/* line 57, ../sass/back.scss */
 .sortable-ghost > div {
   border: 1px solid #e7873c;
   box-shadow: none;
   background: none;
 }
 
-/* line 62, ../sass/back.scss */
+/* line 63, ../sass/back.scss */
 .updating_title, .updating_subtitle {
   padding: 0;
   margin: 0;
@@ -817,25 +845,25 @@ form:after {
   outline: none;
   border-radius: 0;
 }
-/* line 74, ../sass/back.scss */
+/* line 75, ../sass/back.scss */
 .updating_title:focus, .updating_subtitle:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 81, ../sass/back.scss */
+/* line 82, ../sass/back.scss */
 .questions-number {
   margin-right: 2rem;
   float: right;
 }
-/* line 85, ../sass/back.scss */
+/* line 86, ../sass/back.scss */
 .questions-number .number {
   display: inline-block;
   visibility: middle;
 }
 
-/* line 91, ../sass/back.scss */
+/* line 92, ../sass/back.scss */
 .updating_time {
   border: none;
   box-shadow: none;
@@ -843,24 +871,24 @@ form:after {
   min-width: 0;
   width: 4rem;
 }
-/* line 98, ../sass/back.scss */
+/* line 99, ../sass/back.scss */
 .updating_time:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 105, ../sass/back.scss */
+/* line 106, ../sass/back.scss */
 .status-1 {
   background: whitesmoke;
 }
 
-/* line 109, ../sass/back.scss */
+/* line 110, ../sass/back.scss */
 .status-2 {
   background: rgba(255, 219, 87, 0.3);
 }
 
-/* line 113, ../sass/back.scss */
+/* line 114, ../sass/back.scss */
 .status-3 {
   background: rgba(36, 204, 92, 0.3);
 }

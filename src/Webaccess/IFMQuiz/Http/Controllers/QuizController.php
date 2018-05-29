@@ -33,6 +33,7 @@ class QuizController extends Controller
 
             //Calculate average
             $totalResults = 0;
+            $totalPoints = 0;
             $questions = Question::where('quiz_id', '=', $quiz->id)->orderBy('number', 'asc')->get();
             $marked_attempts = Attempt::where('quiz_id', '=', $quiz->id)->where('status', '=', Attempt::STATUS_MARKED)->get();
             foreach ($marked_attempts as $attempt) {
