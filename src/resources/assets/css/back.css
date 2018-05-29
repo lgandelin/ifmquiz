@@ -514,34 +514,84 @@ form:after {
   height: 100%;
 }
 /* line 39, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .title, .quiz-template .header h1 {
+  cursor: pointer;
+}
+/* line 42, ../sass/back/pages/_quiz.scss */
 .quiz-template .header .subtitle {
   margin-bottom: 0;
+  cursor: pointer;
 }
-/* line 43, ../sass/back/pages/_quiz.scss */
+/* line 48, ../sass/back/pages/_quiz.scss */
 .quiz-template .header .submit {
   margin-top: 0;
 }
-/* line 48, ../sass/back/pages/_quiz.scss */
+/* line 53, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .time .number {
+  cursor: pointer;
+}
+/* line 57, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .time .updating_time {
+  width: 3.1rem;
+  padding: 0;
+  font-family: "Pathway Gothic One";
+  border: none;
+}
+/* line 67, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .updating_subtitle, .quiz-template .header .updating_title {
+  padding: 0;
+  font-family: "Pathway Gothic One";
+  letter-spacing: 2px;
+  border: none;
+}
+/* line 76, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .updating_title {
+  width: 45rem;
+  font-size: 4rem;
+}
+/* line 82, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .updating_subtitle {
+  display: block;
+  margin-bottom: 0;
+  line-height: 1.25;
+}
+/* line 89, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .training_date {
+  margin-top: 1rem;
+  float: left;
+}
+/* line 93, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .training_date .vdp-datepicker {
+  display: inline-block;
+}
+/* line 96, ../sass/back/pages/_quiz.scss */
+.quiz-template .header .training_date .vdp-datepicker input {
+  cursor: pointer;
+  font-family: "Pathway Gothic One";
+  font-size: 1.8rem;
+  border: none;
+}
+/* line 108, ../sass/back/pages/_quiz.scss */
 .quiz-template .question {
   position: relative;
   margin-bottom: 2rem;
 }
-/* line 52, ../sass/back/pages/_quiz.scss */
+/* line 112, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .block-header {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-/* line 56, ../sass/back/pages/_quiz.scss */
+/* line 116, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .block-header .menu-icon {
   top: 7.8rem;
   right: 2.5rem;
 }
-/* line 61, ../sass/back/pages/_quiz.scss */
+/* line 121, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .block-header .menu {
   top: 4.8rem;
   right: 5rem;
 }
-/* line 67, ../sass/back/pages/_quiz.scss */
+/* line 127, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .move-button {
   display: block;
   margin: auto;
@@ -550,11 +600,11 @@ form:after {
   background: url(../img/back/move-icon.png) no-repeat center center;
   border: none;
 }
-/* line 76, ../sass/back/pages/_quiz.scss */
+/* line 136, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .move-button:focus {
   outline: 0;
 }
-/* line 81, ../sass/back/pages/_quiz.scss */
+/* line 141, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .toggle-button {
   display: block;
   margin: auto;
@@ -563,23 +613,23 @@ form:after {
   border: none;
   outline: 0;
 }
-/* line 90, ../sass/back/pages/_quiz.scss */
+/* line 150, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .toggle-button.up {
   background: url(../img/back/up-arrow-icon.png) no-repeat center center;
 }
-/* line 94, ../sass/back/pages/_quiz.scss */
+/* line 154, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .toggle-button.down {
   background: url(../img/back/down-arrow-icon.png) no-repeat center center;
 }
-/* line 98, ../sass/back/pages/_quiz.scss */
+/* line 158, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .toggle-button:focus, .quiz-template .question .toggle-button:active {
   outline: 0 !important;
 }
-/* line 103, ../sass/back/pages/_quiz.scss */
+/* line 163, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .inline-field {
   display: inline-block;
 }
-/* line 107, ../sass/back/pages/_quiz.scss */
+/* line 167, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .question-title {
   margin-right: 3.5rem;
   width: 250px;
@@ -587,50 +637,50 @@ form:after {
   display: inline-block;
   height: 50px;
 }
-/* line 115, ../sass/back/pages/_quiz.scss */
+/* line 175, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .question-description {
   display: inline-block;
   min-width: auto;
   width: 680px;
   height: 50px;
 }
-/* line 122, ../sass/back/pages/_quiz.scss */
+/* line 182, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .block-content {
   padding: 3.2rem 0rem 3.2rem 3.2rem;
 }
-/* line 126, ../sass/back/pages/_quiz.scss */
+/* line 186, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .metadata {
   display: inline-block;
   width: 250px;
   margin-right: 3.5rem;
   vertical-align: top;
 }
-/* line 132, ../sass/back/pages/_quiz.scss */
+/* line 192, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .metadata .type, .quiz-template .question .metadata .factor {
   margin-bottom: 2rem;
 }
-/* line 137, ../sass/back/pages/_quiz.scss */
+/* line 197, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items {
   display: inline-block;
   width: 715px;
 }
-/* line 141, ../sass/back/pages/_quiz.scss */
+/* line 201, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field {
   margin-bottom: 1.5rem;
 }
-/* line 144, ../sass/back/pages/_quiz.scss */
+/* line 204, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field input {
   width: 680px;
 }
-/* line 148, ../sass/back/pages/_quiz.scss */
+/* line 208, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field input[type="text"].highlighted {
   border: 1px solid #e7873c;
 }
-/* line 152, ../sass/back/pages/_quiz.scss */
+/* line 212, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field label {
   margin-right: 3.5rem;
 }
-/* line 156, ../sass/back/pages/_quiz.scss */
+/* line 216, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field .correct {
   margin-top: 0.5rem;
   width: 10px;
@@ -638,11 +688,11 @@ form:after {
   display: inline-block;
   background: url(../img/back/gray-check-icon.png) no-repeat center center;
 }
-/* line 164, ../sass/back/pages/_quiz.scss */
+/* line 224, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field .correct.checked {
   background: url(../img/back/orange-check-icon.png) no-repeat center center;
 }
-/* line 169, ../sass/back/pages/_quiz.scss */
+/* line 229, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field .delete {
   width: 10px;
   height: 10px;
@@ -650,37 +700,37 @@ form:after {
   margin: 1.3rem 0 0 1rem;
   background: url(../img/back/delete-icon.png) no-repeat center center;
 }
-/* line 177, ../sass/back/pages/_quiz.scss */
+/* line 237, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .field .delete:before, .quiz-template .question .items .field .delete:after {
   display: none;
 }
-/* line 184, ../sass/back/pages/_quiz.scss */
+/* line 244, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-left input, .quiz-template .question .items .items-right input {
   width: 100%;
 }
-/* line 189, ../sass/back/pages/_quiz.scss */
+/* line 249, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-left {
   width: 325px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 194, ../sass/back/pages/_quiz.scss */
+/* line 254, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-left input {
   width: 280px;
   display: inline-block;
 }
-/* line 200, ../sass/back/pages/_quiz.scss */
+/* line 260, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-right {
   width: 350px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 205, ../sass/back/pages/_quiz.scss */
+/* line 265, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-right input {
   width: 280px;
   display: inline-block;
 }
-/* line 210, ../sass/back/pages/_quiz.scss */
+/* line 270, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .items .items-right .associated-item {
   width: 30px;
   display: inline-block;
@@ -688,11 +738,11 @@ form:after {
   padding-right: 0;
   text-align: center;
 }
-/* line 222, ../sass/back/pages/_quiz.scss */
+/* line 282, ../sass/back/pages/_quiz.scss */
 .quiz-template .question .add-answer input {
   border: 1px dashed #cccccc;
 }
-/* line 228, ../sass/back/pages/_quiz.scss */
+/* line 288, ../sass/back/pages/_quiz.scss */
 .quiz-template .add-question {
   border: 2px dashed #eeeeee;
   background: #fcfcfc;
