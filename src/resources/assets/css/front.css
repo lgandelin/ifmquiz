@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+/* line 3, ../sass/front/includes/_typography.scss */
+html {
+  font-size: 62.5%;
+}
+
+/* line 7, ../sass/front/includes/_typography.scss */
+body {
+  font-family: "Pathway Gothic One";
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #3b3b3b;
+}
+
+/* line 15, ../sass/front/includes/_typography.scss */
+.title, h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+/* line 21, ../sass/front/includes/_typography.scss */
+.subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* line 32, ../sass/front/includes/_typography.scss */
+a:not(.button), a:visited:not(.button) {
+  color: #e7873c;
+}
+/* line 35, ../sass/front/includes/_typography.scss */
+a:not(.button):hover, a:visited:not(.button):hover {
+  text-decoration: underline;
+}
+
+/* line 1, ../sass/front/includes/_structure.scss */
+html, body {
+  background: #f7f7f7;
+}
+
+/* line 5, ../sass/front/includes/_structure.scss */
+.header {
+  padding-top: 6.5rem;
+  padding-bottom: 5.5rem;
+  background: white;
+}
+/* line 10, ../sass/front/includes/_structure.scss */
+.header .back-button {
+  float: right;
+}
+/* line 14, ../sass/front/includes/_structure.scss */
+.header .subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+}
+
+/* line 21, ../sass/front/includes/_structure.scss */
+.container {
+  max-width: 1140px;
+}
+
+/* line 1, ../sass/front/includes/_buttons.scss */
+.button {
+  padding-top: 0.7rem;
+  padding-bottom: 1rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  color: white;
+  font-size: 2rem;
+  font-family: "Pathway Gothic One";
+  text-align: center;
+  background: #e7873c;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0;
+}
+
+/* line 1, ../sass/front/pages/_quiz.scss */
+.header {
+  overflow: hidden;
+  margin-bottom: 8.5rem;
+}
+/* line 5, ../sass/front/pages/_quiz.scss */
+.header .title, .header h1 {
+  margin-bottom: 2.5rem;
+}
+/* line 9, ../sass/front/pages/_quiz.scss */
+.header .subtitle {
+  width: auto;
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+/* line 18, ../sass/front/pages/_quiz.scss */
+.header .time-limit, .header .questions-number {
+  margin-bottom: 1.5rem;
+  clear: right;
+  float: right;
+  font-size: 2.6rem;
+  color: #d0d0d0;
+}
+/* line 26, ../sass/front/pages/_quiz.scss */
+.header .time-limit img, .header .questions-number img {
+  margin-right: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 34, ../sass/front/pages/_quiz.scss */
+.header .time-limit .remaining-time {
+  display: inline-block;
+  vertical-align: middle;
+  color: #d0d0d0;
+  font-size: 1.4rem;
+}
+/* line 44, ../sass/front/pages/_quiz.scss */
+.header .questions-number img {
+  margin-right: 2rem;
+}
+
+/* line 50, ../sass/front/pages/_quiz.scss */
+.questions {
+  padding: 0 0 4rem 8rem;
+  margin-bottom: 10rem;
+  border: 2px solid #d0d0d0;
+  background: white;
+}
+/* line 57, ../sass/front/pages/_quiz.scss */
+.questions .question {
+  padding: 3.5rem 4.5rem 4.5rem 0;
+  position: relative;
+  color: #7a7a7a;
+  font-family: "Helvetica";
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  border-bottom: 2px solid #cecece;
+}
+/* line 68, ../sass/front/pages/_quiz.scss */
+.questions .question .status {
+  position: absolute;
+  width: 2rem;
+  left: -4rem;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  background: url("../img/generic/uncheck.png") no-repeat 0 4.5rem;
+}
+/* line 78, ../sass/front/pages/_quiz.scss */
+.questions .question .status:after {
+  content: "";
+  display: block;
+  width: 2px;
+  position: absolute;
+  left: 0.9rem;
+  z-index: 1;
+  top: 6.4rem;
+  bottom: 0;
+  background: #d0d0d0;
+}
+/* line 91, ../sass/front/pages/_quiz.scss */
+.questions .question .status:before {
+  content: "";
+  display: block;
+  width: 2px;
+  position: absolute;
+  left: 0.9rem;
+  z-index: 1;
+  top: -2px;
+  height: 5rem;
+  background: #d0d0d0;
+}
+/* line 105, ../sass/front/pages/_quiz.scss */
+.questions .question .statement {
+  float: left;
+  vertical-align: top;
+  width: 38.5rem;
+  margin-right: 7.5rem;
+}
+/* line 111, ../sass/front/pages/_quiz.scss */
+.questions .question .statement h3 {
+  margin-bottom: 1rem;
+  color: #3b3b3b;
+  font-size: 2.4rem;
+  font-family: "Pathway Gothic One";
+  text-transform: uppercase;
+}
+/* line 121, ../sass/front/pages/_quiz.scss */
+.questions .question .items {
+  margin-top: 1.5rem;
+  width: auto;
+  overflow: hidden;
+  padding-left: 0.5rem;
+}
+/* line 127, ../sass/front/pages/_quiz.scss */
+.questions .question .items label {
+  font-size: 1.6rem;
+}
+/* line 131, ../sass/front/pages/_quiz.scss */
+.questions .question .items .textarea {
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  border: 1px solid #3b3b3b;
+  border-radius: 0;
+}
+/* line 139, ../sass/front/pages/_quiz.scss */
+.questions .question .items .radio, .questions .question .items .checkbox {
+  display: inline-block;
+  width: 32%;
+  margin-top: 3rem;
+}
+/* line 146, ../sass/front/pages/_quiz.scss */
+.questions .question .items .left .control {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+/* line 153, ../sass/front/pages/_quiz.scss */
+.questions .question .items .right input {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #7a7a7a;
+  text-align: center;
+  border: 2px solid #3b3b3b;
+}
+/* line 170, ../sass/front/pages/_quiz.scss */
+.questions .question.first-question .status:before {
+  display: none;
+}
+/* line 176, ../sass/front/pages/_quiz.scss */
+.questions .question.last-question {
+  border-bottom: none;
+}
+/* line 180, ../sass/front/pages/_quiz.scss */
+.questions .question.last-question .status:after {
+  display: none;
+}
+/* line 188, ../sass/front/pages/_quiz.scss */
+.questions .question.answered .status {
+  background-image: url("../img/generic/check.png");
+}
+/* line 191, ../sass/front/pages/_quiz.scss */
+.questions .question.answered .status:after, .questions .question.answered .status:before {
+  background: #e7873c;
+}
+
+/* line 199, ../sass/front/pages/_quiz.scss */
+.submit {
+  overflow: hidden;
+}
+/* line 202, ../sass/front/pages/_quiz.scss */
+.submit .button {
+  margin-right: 4.5rem;
+  float: right;
+}
