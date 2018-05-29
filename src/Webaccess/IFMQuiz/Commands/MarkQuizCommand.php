@@ -29,7 +29,7 @@ class MarkQuizCommand extends Command
                 $answer_items = json_decode($answer->items);
                 $answer_items_right = json_decode($answer->items_right);
 
-                $answerIsCorrect = false;
+                $score = 0.0;
 
                 if ($answer) {
                     switch($question->type) {
@@ -42,7 +42,7 @@ class MarkQuizCommand extends Command
                             }
 
                             if (sizeof($answer_items) == 1 && $answer_items[0]->id == $correctItemID) {
-                                $answerIsCorrect = true;
+                                $score = 1.0;
                             }
 
                             break;
@@ -58,20 +58,40 @@ class MarkQuizCommand extends Command
                             array_multisort($correctItemIDs);
                             array_multisort($answerItemIDs);
 
-                            if (serialize($answerItemIDs) == serialize($correctItemIDs)) {
-                                $answerIsCorrect = true;
-                            }
-
-                            break;
-                        case 3:
-                            $errorFound = false;
-                            foreach($answer_items_right as $i => $answer_item) {
-                                if ((int) $answer_item->associated_item != $question->items_right[$i]->associated_item) {
-                                    $errorFound = true;
+                            $correctItems = 0;
+                            $incorrectItems = 0;
+                            foreach ($answerItemIDs as $item) {
+                                if (in_array($item, $correctItemIDs)) {
+                                    $correctItems++;
+                                } else {
+                                    $incorrectItems++;
                                 }
                             }
 
-                            if (!$errorFound) $answerIsCorrect = true;
+                            $factor = 1 / (sizeof($answerItemIDs));
+                            $multiplier = ($correctItems - $incorrectItems/2);
+                            if ($multiplier < 0) $multiplier = 0;
+
+                            $score =  $multiplier * $factor;
+
+                            break;
+                        case 3:
+                            $correctItems = 0;
+                            $incorrectItems = 0;
+                            foreach($answer_items_right as $i => $answer_item) {
+                                if ((int) $answer_item->associated_item != $question->items_right[$i]->associated_item) {
+                                    $incorrectItems++;
+                                } else {
+                                    $correctItems++;
+                                }
+                            }
+
+                            $factor = 1 / (sizeof($answer_items_right));
+                            $multiplier = ($correctItems - $incorrectItems/2);
+                            if ($multiplier < 0) $multiplier = 0;
+
+                            $score =  $multiplier * $factor;
+
                             break;
                         case 4:
                             //@TODO
@@ -79,7 +99,7 @@ class MarkQuizCommand extends Command
                     }
                 }
 
-                $answer->correct = $answerIsCorrect;
+                $answer->score = $score;
                 $answer->save();
             }
 

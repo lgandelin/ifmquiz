@@ -10,7 +10,7 @@
 
         <div class="questions">
             @foreach($questions as $i => $question)
-                <div class="box" @if($question->answer && $question->answer->correct === 1) style="background: rgba(36, 204, 92, 0.3);"@endif @if($question->answer && $question->answer->correct === 0) style="background: rgba(204, 15, 25, 0.3);"@endif>
+                <div class="box" @if($question->answer && $question->answer->score === 1) style="background: rgba(36, 204, 92, 0.3);"@endif @if($question->answer && $question->answer->score === 0) style="background: rgba(204, 15, 25, 0.3);"@endif>
                     <h3>{{ $question->title }}</h3>
                     <p class="description">{{ $question->description }}</p>
 
@@ -43,7 +43,7 @@
                                     @foreach ($question->items_right as $j => $item)
                                         <div class="control">
                                             <label>
-                                                <input disabled style="font-weight:bold; width: 2rem;" type="text" name="answer_{{ $question->id }}_{{ $item->id }}" @if ($question->answer)value="{{ $question->answer->items_right[$j]->associated_item }}"@endif /> {{ $item->title }}
+                                                <input disabled style="font-weight:bold; width: 2rem; padding: 0.5rem ;" type="text" name="answer_{{ $question->id }}_{{ $item->id }}" @if ($question->answer)value="{{ $question->answer->items_right[$j]->associated_item }}"@endif /> {{ $item->title }}
                                             </label>
                                         </div>
                                     @endforeach
@@ -56,9 +56,8 @@
                                 </div>
 
                                 <label class="radio">
-                                    <strong>Réponse valide ?</strong>
-                                    <input type="radio" value="1" name="is_correct" @if ($question->answer && ($question->answer->correct == null || $question->answer->correct == 1))checked="checked"@endif /> Oui
-                                    <input type="radio" value="0" name="is_correct" @if ($question->answer && $question->answer->correct === 0)checked="checked"@endif /> Non
+                                    <strong>Note (en %)</strong>
+                                    <input type="text" value="@if (isset($question->answer->score)){{ 100*$question->answer->score }}@endif" name="score" />
                                 </label>
 
                                 <input type="submit" class="button is-primary" value="Enregistrer" />

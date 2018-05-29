@@ -49,7 +49,7 @@
                     @foreach ($average_by_questions as $i => $question)
                         <td>{{ round($question, 1) }}</td>
                     @endforeach
-                    <td>{{ round($average_result, 1) }}/{{ sizeof($questions) }}</td>
+                    <td>{{ round($average_result, 1) }}/{{ $total_points }}</td>
                     <td></td>
                 </tr>
             </tfoot>
