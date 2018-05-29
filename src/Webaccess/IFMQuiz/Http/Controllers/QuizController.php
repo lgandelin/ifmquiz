@@ -253,7 +253,7 @@ class QuizController extends Controller
         ]);
     }
 
-    public function mailing_handler(Request $request, $quizID) {
+    /*public function mailing_handler(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
         $url = route('quiz_front_intro', ['uuid' => $quizID]);
 
@@ -285,6 +285,42 @@ class QuizController extends Controller
         }
 
         return redirect()->route('quiz_mailing', ['uuid' => $quizID]);
+    }*/
+
+    public function mailing_handler(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+        $url = route('quiz_front_intro', ['uuid' => $quizID]);
+        $links = [];
+        $emails = explode(PHP_EOL, $request->mailing_list);
+
+        foreach($emails as $i => $email) {
+            $email = trim(preg_replace('/\r/', '', $email));
+
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                //Create user if not existing
+                if (!$user = User::where('email', $email)->first()) {
+                    $user = new User();
+                    $user->id = Uuid::uuid4()->toString();
+                    $user->email = $email;
+                    $user->save();
+                }
+
+                //Create attempt
+                $attempt = new Attempt();
+                $attempt->id = Uuid::uuid4()->toString();
+                $attempt->user_id = $user->id;
+                $attempt->quiz_id = $quizID;
+                $attempt->save();
+
+                $links[]= (object)array('url' => $url . '?attempt_id=' . $attempt->id, 'email' => $email);
+            }
+        }
+
+        return view('ifmquiz::back.quiz.mailing', [
+            'quiz' => $quiz,
+            'links' => $links,
+        ]);
     }
 
     public function quiz(Request $request, $quizID) {
