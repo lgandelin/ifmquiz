@@ -18,6 +18,6 @@ class Answer extends Model
         'items',
         'items_left',
         'items_right',
-        'correct',
+        'score',
     ];
 }

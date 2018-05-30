@@ -22,6 +22,8 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Mail</th>
+                    <th>Société</th>
+                    <th>Date</th>
                     @foreach ($questions as $i => $question)
                         <th>Q{{ $i+1 }}</th>
                     @endforeach
@@ -35,6 +37,8 @@
                         <td>{{ $attempt->user->last_name }}</td>
                         <td>{{ $attempt->user->first_name }}</td>
                         <td>{{ $attempt->user->email }}</td>
+                        <td>@if ($attempt->user->company){{ $attempt->user->company }}@else{{ 'N/A' }}@endif</td>
+                        <td class="center">@if ($attempt->started_at){{ DateTime::createFromFormat('Y-m-d H:i:s', $attempt->started_at)->format('d/m/y') }}@else{{ 'N/A' }}@endif</td>
                         @foreach ($attempt->answers as $answer)
                             <td class="center no-border"><span @if ($answer > 0)style="border:1px solid orange"@endif>{{ $answer }}</span></td>
                         @endforeach
@@ -45,11 +49,11 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="right">Moyenne</td>
+                    <td colspan="5" class="right">Moyenne</td>
                     @foreach ($average_by_questions as $i => $question)
-                        <td>{{ round($question, 1) }}</td>
+                        <td>{{ round($question, 2) }}</td>
                     @endforeach
-                    <td>{{ round($average_result, 1) }}/{{ sizeof($questions) }}</td>
+                    <td>{{ round($average_result, 2) }}/{{ $total_points }}</td>
                     <td></td>
                 </tr>
             </tfoot>
@@ -66,7 +70,7 @@
         });
 
         function apply_filters() {
-            $('#user-results  tbody tr').each(function() {
+            $('#user-results tbody tr').each(function() {
                 var show = false;
 
                 //Search bar

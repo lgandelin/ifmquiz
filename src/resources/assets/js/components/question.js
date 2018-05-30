@@ -16,6 +16,10 @@ Vue.component('question', {
             default: 1,
             type: Number
         },
+        factor: {
+            default: 1,
+            type: Number
+        },
         items: Array,
         items_left: Array,
         items_right: Array,
@@ -55,6 +59,12 @@ Vue.component('question', {
         update_question_type: function(e, question_number) {
             this.$store.commit('update_question_type', {
                 type: parseInt(e.target.value),
+                question_number: question_number,
+            });
+        },
+        update_question_factor: function(e, question_number) {
+            this.$store.commit('update_question_factor', {
+                factor: parseInt(e.target.value),
                 question_number: question_number,
             });
         },

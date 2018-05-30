@@ -22,6 +22,7 @@ const store = new Vuex.Store({
             question.items_left = [];
             question.items_right = [];
             question.type = 1;
+            question.factor = 1;
             state.quiz.questions.push(question);
         },
         update_question_title(state, params) {
@@ -35,6 +36,12 @@ const store = new Vuex.Store({
             var description = params.description;
 
             state.quiz.questions[number].description = description;
+        },
+        update_question_factor(state, params) {
+            var number = params.question_number;
+            var factor = params.factor;
+
+            state.quiz.questions[number].factor = factor;
         },
         update_question_type(state, params) {
             var number = params.question_number;

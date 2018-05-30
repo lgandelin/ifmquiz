@@ -36,13 +36,73 @@
 	}
 
 	.header {
+		.title {
+			cursor: pointer;
+		}
 		.subtitle {
 			margin-bottom: 0;
+
+			cursor: pointer;
 		}
 		
 		.submit {
 			margin-top: 0;
 		}
+		
+		.time {
+			.number {
+				cursor: pointer;
+			}
+
+			.updating_time {
+				width: 3.1rem;
+				padding: 0;
+
+				font-family: $main-font;
+
+				border: none;
+			}
+		}
+
+		.updating_subtitle, .updating_title {
+			padding: 0;
+
+			font-family: $main-font;
+			letter-spacing: 2px;
+
+			border: none;
+		}
+
+		.updating_title {
+			width: 45rem;
+
+			font-size: 4rem;
+		}
+
+		.updating_subtitle {
+			display: block;
+			margin-bottom: 0;
+
+			line-height: 1.25;
+		}
+
+		.training_date {
+			margin-top: 1rem;
+			float: left;
+
+			.vdp-datepicker {
+				display: inline-block;
+
+				input {
+					cursor: pointer;
+					font-family: $main-font;
+					font-size: 1.8rem;
+
+					border: none;
+				}
+			}
+		}
+
 	}
 
 	.question {
@@ -122,12 +182,16 @@
 		.block-content {
 			padding: 3.2rem 0rem 3.2rem 3.2rem;
 		}
+		
+		.metadata {
+			display: inline-block;
+			width: 250px;
+			margin-right: 3.5rem;
+			vertical-align: top;
 
-		.type {
-		    vertical-align: top;
-		    display: inline-block;
-		    width: 250px;
-		    margin-right: 3.5rem;
+			.type, .factor {
+				margin-bottom: 2rem;
+			}
 		}
 
 		.items {

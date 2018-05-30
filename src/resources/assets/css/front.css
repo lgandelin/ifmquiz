@@ -1,0 +1,383 @@
+@import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+/* line 3, ../sass/front/includes/_typography.scss */
+html {
+  font-size: 62.5%;
+}
+
+/* line 7, ../sass/front/includes/_typography.scss */
+body {
+  font-family: "Pathway Gothic One";
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #3b3b3b;
+}
+
+/* line 15, ../sass/front/includes/_typography.scss */
+.title, h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+/* line 21, ../sass/front/includes/_typography.scss */
+.subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* line 32, ../sass/front/includes/_typography.scss */
+a:not(.button), a:visited:not(.button) {
+  color: #e7873c;
+}
+/* line 35, ../sass/front/includes/_typography.scss */
+a:not(.button):hover, a:visited:not(.button):hover {
+  text-decoration: underline;
+}
+
+/* line 1, ../sass/front/includes/_structure.scss */
+html, body {
+  background: #f7f7f7;
+}
+
+/* line 5, ../sass/front/includes/_structure.scss */
+.header {
+  padding-top: 6.5rem;
+  padding-bottom: 5.5rem;
+  background: white;
+}
+/* line 10, ../sass/front/includes/_structure.scss */
+.header .back-button {
+  float: right;
+}
+/* line 14, ../sass/front/includes/_structure.scss */
+.header .subtitle {
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+}
+
+/* line 21, ../sass/front/includes/_structure.scss */
+.container {
+  max-width: 1140px;
+}
+
+/* line 1, ../sass/front/includes/_buttons.scss */
+.button {
+  padding-top: 0.7rem;
+  padding-bottom: 1rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  color: white;
+  font-size: 2rem;
+  font-family: "Pathway Gothic One";
+  text-align: center;
+  background: #e7873c;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0;
+}
+
+/* line 1, ../sass/front/includes/_form.scss */
+input[type="text"], input[type="number"], textarea {
+  padding: 1.5rem;
+  width: 100%;
+  color: #3b3b3b;
+  font-size: 1.4rem;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+  box-shadow: none;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+}
+
+/* line 15, ../sass/front/includes/_form.scss */
+textarea {
+  min-height: 8.5rem;
+}
+
+/* line 19, ../sass/front/includes/_form.scss */
+.submit {
+  float: right;
+  margin-top: 3rem;
+}
+
+/* line 25, ../sass/front/includes/_form.scss */
+form:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* line 32, ../sass/front/includes/_form.scss */
+.ck-editor__editable {
+  font-size: 1.4rem;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+}
+
+/* line 38, ../sass/front/includes/_form.scss */
+.label {
+  color: #c5c5c5;
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-family: "Helvetica";
+  letter-spacing: 0;
+}
+
+/* line 46, ../sass/front/includes/_form.scss */
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #3b3b3b;
+}
+
+/* line 50, ../sass/front/includes/_form.scss */
+.select {
+  width: 100%;
+}
+/* line 53, ../sass/front/includes/_form.scss */
+.select select {
+  padding-left: 1.5rem;
+  width: 100%;
+  height: 4rem;
+  font-family: "Helvetica";
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  border-radius: 0;
+}
+
+/* line 1, ../sass/front/vendor/_sticky.scss */
+.kui.sticky.element {
+  position: fixed !important;
+  margin-top: 0 !important;
+  top: 0 !important;
+}
+
+/* line 1, ../sass/front/vendor/_sticky.scss */
+.kui.sticky.scrolled::-webkit-scrollbar {
+  width: 0;
+  background: 0 0;
+}
+
+/* line 1, ../sass/front/vendor/_sticky.scss */
+.kui.sticky {
+  overflow: -moz-scrollbars-none;
+}
+
+/* line 1, ../sass/front/vendor/_sticky.scss */
+.kui.sticky.scrolled {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+/* line 2, ../sass/front/pages/_quiz.scss */
+.front-template .header {
+  overflow: hidden;
+  margin-bottom: 8.5rem;
+  position: relative;
+  z-index: 999;
+}
+/* line 8, ../sass/front/pages/_quiz.scss */
+.front-template .header .title, .front-template .header h1 {
+  margin-bottom: 2.5rem;
+}
+/* line 12, ../sass/front/pages/_quiz.scss */
+.front-template .header .subtitle {
+  width: auto;
+  color: #999999;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+/* line 21, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit, .front-template .header .questions-number {
+  margin-bottom: 1.5rem;
+  clear: right;
+  float: right;
+  font-size: 2.6rem;
+  color: #d0d0d0;
+}
+/* line 29, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit img, .front-template .header .questions-number img {
+  margin-right: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 37, ../sass/front/pages/_quiz.scss */
+.front-template .header .time-limit .remaining-time {
+  display: inline-block;
+  vertical-align: middle;
+  color: #d0d0d0;
+  font-size: 1.4rem;
+}
+/* line 47, ../sass/front/pages/_quiz.scss */
+.front-template .header .questions-number img {
+  margin-right: 2rem;
+}
+/* line 53, ../sass/front/pages/_quiz.scss */
+.front-template .questions {
+  padding: 0 0 4rem 8rem;
+  margin-bottom: 10rem;
+  border: 2px solid #d0d0d0;
+  background: white;
+}
+/* line 60, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question {
+  padding: 3.5rem 4.5rem 4.5rem 0;
+  position: relative;
+  color: #7a7a7a;
+  font-family: "Helvetica";
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  border-bottom: 2px solid #cecece;
+}
+/* line 71, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status {
+  position: absolute;
+  width: 2rem;
+  left: -4rem;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  background: url("../img/generic/uncheck.png") no-repeat 0 4.5rem;
+}
+/* line 81, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status:after {
+  content: "";
+  display: block;
+  width: 2px;
+  position: absolute;
+  left: 0.9rem;
+  z-index: 1;
+  top: 6.4rem;
+  bottom: 0;
+  background: #d0d0d0;
+}
+/* line 94, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .status:before {
+  content: "";
+  display: block;
+  width: 2px;
+  position: absolute;
+  left: 0.9rem;
+  z-index: 1;
+  top: -2px;
+  height: 5rem;
+  background: #d0d0d0;
+}
+/* line 108, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .statement {
+  float: left;
+  vertical-align: top;
+  width: 38.5rem;
+  margin-right: 7.5rem;
+}
+/* line 114, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .statement h3 {
+  margin-bottom: 1rem;
+  color: #3b3b3b;
+  font-size: 2.4rem;
+  font-family: "Pathway Gothic One";
+  text-transform: uppercase;
+}
+/* line 124, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items {
+  margin-top: 1.5rem;
+  width: auto;
+  overflow: hidden;
+  padding-left: 0.5rem;
+}
+/* line 130, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items label {
+  font-size: 1.6rem;
+}
+/* line 134, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .textarea {
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  border: 1px solid #3b3b3b;
+  border-radius: 0;
+}
+/* line 142, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .radio, .front-template .questions .question .items .checkbox {
+  display: inline-block;
+  width: 32%;
+  margin-top: 3rem;
+}
+/* line 149, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .left .control {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+/* line 156, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .items .right input {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #7a7a7a;
+  text-align: center;
+  border: 2px solid #3b3b3b;
+}
+/* line 173, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.first-question .status:before {
+  display: none;
+}
+/* line 179, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.last-question {
+  border-bottom: none;
+}
+/* line 183, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.last-question .status:after {
+  display: none;
+}
+/* line 191, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.answered .status {
+  background-image: url("../img/generic/check.png");
+}
+/* line 194, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question.answered .status:after, .front-template .questions .question.answered .status:before {
+  background: #e7873c;
+}
+/* line 202, ../sass/front/pages/_quiz.scss */
+.front-template .submit {
+  overflow: hidden;
+}
+/* line 205, ../sass/front/pages/_quiz.scss */
+.front-template .submit .button {
+  margin-right: 4.5rem;
+  float: right;
+}
+/* line 211, ../sass/front/pages/_quiz.scss */
+.front-template .notification {
+  border-radius: 0;
+}
+/* line 214, ../sass/front/pages/_quiz.scss */
+.front-template .notification.is-danger {
+  background: #ffbc45;
+}
+/* line 219, ../sass/front/pages/_quiz.scss */
+.front-template .intro_text {
+  margin-bottom: 4rem;
+}
+
+/* line 2, ../sass/front/pages/_intro.scss */
+.intro-template .notification {
+  margin-bottom: 4rem;
+}
+/* line 7, ../sass/front/pages/_intro.scss */
+.intro-template form .field {
+  margin-bottom: 1.5rem;
+}
+/* line 10, ../sass/front/pages/_intro.scss */
+.intro-template form label {
+  font-family: "Pathway Gothic One";
+  color: #3b3b3b;
+  font-size: 2rem;
+}
+/* line 17, ../sass/front/pages/_intro.scss */
+.intro-template form .submit .button {
+  margin-right: 0;
+}

@@ -33,22 +33,25 @@ class QuizController extends Controller
 
             //Calculate average
             $totalResults = 0;
+            $totalPoints = 0;
             $questions = Question::where('quiz_id', '=', $quiz->id)->orderBy('number', 'asc')->get();
             $marked_attempts = Attempt::where('quiz_id', '=', $quiz->id)->where('status', '=', Attempt::STATUS_MARKED)->get();
             foreach ($marked_attempts as $attempt) {
                 $result = 0;
 
+                $totalPoints = 0;
                 foreach ($questions as $question) {
                     $answer = Answer::where('question_id', '=', $question->id)->where('attempt_id', '=', $attempt->id)->first();
-                    if (isset($answer->correct) && $answer->correct) {
-                        $result++;
+                    if (isset($answer->score) && $answer->score) {
+                        $result += $answer->score * $question->factor;
                     }
+                    $totalPoints += $question->factor;
                 }
                 $totalResults += $result;
             }
 
             $average_score = (sizeof($marked_attempts) > 0) ? ($totalResults / sizeof($marked_attempts)) : 0;
-            $quiz->average = (sizeof($questions) > 0) ? ($average_score / sizeof($questions)) : 0;
+            $quiz->average = ($totalPoints > 0) ? ($average_score / $totalPoints) : 0;
 
             $quiz->training_date = ($quiz->training_date != null) ? DateTime::createFromFormat('Y-m-d', $quiz->training_date)->format('d/m/Y') : 'N/A';
         }
@@ -97,18 +100,21 @@ class QuizController extends Controller
             $result = 0;
             $answers = [];
 
+            $totalPoints = 0;
             foreach ($questions as $question) {
                 $answer = Answer::where('question_id', '=', $question->id)->where('attempt_id', '=', $attempt->id)->first();
                 if (!$answer) {
                     $result = 'N/A';
                 }
 
-                if (isset($answer->correct)) {
-                    $answers[] = $answer->correct;
+                $totalPoints += $question->factor;
 
-                    if ($answer->correct) {
-                        $result++;
-                        $totalByQuestions[$question->id]++;
+                if (isset($answer->score)) {
+                    $answers[] = $answer->score * $question->factor;
+
+                    if ($answer->score) {
+                        $result += $answer->score * $question->factor;
+                        $totalByQuestions[$question->id]+= $answer->score * $question->factor;
                     }
                 } else {
                     $answers[] = 'N/A';
@@ -119,7 +125,7 @@ class QuizController extends Controller
             $attempt->answers = $answers;
             if ($attempt->status == Attempt::STATUS_MARKED) {
                 $totalResults += $result;
-                $attempt->result = round($result, 1) . '/' . sizeof($questions);
+                $attempt->result = round($result, 1) . '/' . $totalPoints;
                 $completedQuizs++;
             } else {
                 $attempt->result = 'N/A';
@@ -140,6 +146,7 @@ class QuizController extends Controller
             'attempts' => $attempts,
             'average_result' => $averageResult,
             'average_by_questions' => $averageByQuestions,
+            'total_points' => $totalPoints,
         ]);
     }
 
@@ -177,7 +184,7 @@ class QuizController extends Controller
 
     public function user_answers_valid_answer(Request $request, $quizID, $attemptID) {
         if ($answer = Answer::where('attempt_id', '=', $attemptID)->where('question_id', '=', $request->question_id)->first()) {
-            $answer->correct = (int) $request->is_correct;
+            $answer->score = $request->score / 100;
             $answer->save();
         }
 
@@ -253,7 +260,7 @@ class QuizController extends Controller
         ]);
     }
 
-    public function mailing_handler(Request $request, $quizID) {
+    /*public function mailing_handler(Request $request, $quizID) {
         $quiz = Quiz::find($quizID);
         $url = route('quiz_front_intro', ['uuid' => $quizID]);
 
@@ -285,6 +292,42 @@ class QuizController extends Controller
         }
 
         return redirect()->route('quiz_mailing', ['uuid' => $quizID]);
+    }*/
+
+    public function mailing_handler(Request $request, $quizID) {
+        $quiz = Quiz::find($quizID);
+        $url = route('quiz_front_intro', ['uuid' => $quizID]);
+        $links = [];
+        $emails = explode(PHP_EOL, $request->mailing_list);
+
+        foreach($emails as $i => $email) {
+            $email = trim(preg_replace('/\r/', '', $email));
+
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                //Create user if not existing
+                if (!$user = User::where('email', $email)->first()) {
+                    $user = new User();
+                    $user->id = Uuid::uuid4()->toString();
+                    $user->email = $email;
+                    $user->save();
+                }
+
+                //Create attempt
+                $attempt = new Attempt();
+                $attempt->id = Uuid::uuid4()->toString();
+                $attempt->user_id = $user->id;
+                $attempt->quiz_id = $quizID;
+                $attempt->save();
+
+                $links[]= (object)array('url' => $url . '?attempt_id=' . $attempt->id, 'email' => $email);
+            }
+        }
+
+        return view('ifmquiz::back.quiz.mailing', [
+            'quiz' => $quiz,
+            'links' => $links,
+        ]);
     }
 
     public function quiz(Request $request, $quizID) {
@@ -318,6 +361,7 @@ class QuizController extends Controller
             $q->id = $question['id'];
             $q->description = $question['description'];
             $q->type = $question['type'];
+            $q->factor = $question['factor'];
             $q->title = $question['title'];
             $q->number = $question_number+1;
             $q->items = json_encode($question['items']);

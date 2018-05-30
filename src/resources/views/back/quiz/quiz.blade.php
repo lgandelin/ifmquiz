@@ -27,7 +27,7 @@
                     <input type="text" class="title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                     <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
                     <input type="text" class="subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
-                    <span style="margin-top: 1rem; float: left" class="training_date">Date de formation : <datepicker style="margin-left: 1rem; display:inline-block" v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
+                    <span class="training_date">Date de formation : <datepicker v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
 
                     <button class="button submit" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
                     <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
@@ -46,6 +46,7 @@
                                 v-bind:items_left="question.items_left"
                                 v-bind:items_right="question.items_right"
                                 v-bind:type="question.type"
+                                v-bind:factor="question.factor"
                                 v-bind:key="question.id"
                         ></question>
                     </div>
@@ -99,15 +100,30 @@
             </div>
             <div class="block-content" v-show="is_opened">
                 <div class="content">
-                    <div class="type">
-                        <label class="label">Type</label>
-                        <div class="select">
-                            <select v-bind:value="type" @input="update_question_type($event, question_number)">
-                                <option value="1">Boutons radios</option>
-                                <option value="2">Choix multiples</option>
-                                <option value="3">Association d'items</option>
-                                <option value="4">Réponse simple</option>
-                            </select>
+                    <div class="metadata">
+                        <div class="type">
+                            <label class="label">Type</label>
+                            <div class="select">
+                                <select v-bind:value="type" @input="update_question_type($event, question_number)">
+                                    <option value="1">Boutons radios</option>
+                                    <option value="2">Choix multiples</option>
+                                    <option value="3">Association d'items</option>
+                                    <option value="4">Réponse simple</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="factor">
+                            <label class="label">Coefficient</label>
+                            <div class="select">
+                                <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

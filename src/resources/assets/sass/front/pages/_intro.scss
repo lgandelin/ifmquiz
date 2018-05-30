@@ -1,0 +1,22 @@
+.intro-template {
+    .notification {
+        margin-bottom: 4rem;
+    }
+
+    form {
+        .field {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            font-family: $main-font;
+            color: $black;
+            font-size: 2rem;
+        }
+
+        .submit {
+            .button {
+                margin-right: 0;
+            }
+        }
+    }
+}

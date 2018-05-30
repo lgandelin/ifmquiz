@@ -33,6 +33,7 @@ Vue.component('quiz', {
             this.$store.commit('add_question', {
                 title: this.new_question_title,
                 description: this.new_question_description,
+                factor: 1,
             });
 
             this.new_question_title = '';

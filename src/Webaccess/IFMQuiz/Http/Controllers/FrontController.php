@@ -70,7 +70,10 @@ class FrontController extends Controller
 
         $answers = [];
         foreach($request->all() as $key => $value) {
-            if (preg_match('/textanswer_/', $key)) {
+            if (preg_match('/oneanswer_/', $key)) {
+                $questionID = str_replace('oneanswer_', '', $key);
+                $answers[$questionID][]= ['id' => $value];
+            } elseif (preg_match('/textanswer_/', $key)) {
                 $questionID = str_replace('textanswer_', '', $key);
                 $answers[$questionID][]= $value;
             } elseif (preg_match('/answer_/', $key)) {
@@ -118,6 +121,7 @@ class FrontController extends Controller
     public function quiz_intro(Request $request, $quizID)
     {
         $quiz = Quiz::find($quizID);
+        $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
         $attemptID = $request->attempt_id;
         $error = null;
 
@@ -137,6 +141,7 @@ class FrontController extends Controller
             'quiz' => $quiz,
             'user' => $user,
             'attempt_id' => $attemptID,
+            'questions_number' => sizeof($questions),
             'error' => $error,
         ]);
     }
@@ -156,10 +161,11 @@ class FrontController extends Controller
             return;
         }
 
-        //Update user with lastname / firstname
+        //Update user with lastname / firstname / company
         $user = User::find($attempt->user_id);
         $user->last_name = $request->last_name;
         $user->first_name = $request->first_name;
+        $user->company = $request->company;
         $user->save();
 
         //Update attempt start date

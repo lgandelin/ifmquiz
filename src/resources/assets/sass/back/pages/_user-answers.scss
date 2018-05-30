@@ -1,0 +1,29 @@
+.user-answers-template {
+
+    .user-answer-score {
+        margin-top: 2rem;
+
+        .score {
+            margin-left: 1rem;
+            text-align: center;
+            border:2px solid black;
+            width: 6rem;
+        }
+
+        .button {
+            margin-left: 2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            margin-top: 2px;
+        }
+    }
+
+    .back {
+        float:right;
+        margin-bottom: 7.5rem;
+    }
+
+    .questions-number {
+        margin-right: 0;
+    }
+}
