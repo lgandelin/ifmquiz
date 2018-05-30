@@ -37,6 +37,13 @@
                         </div>
                     </div>
 
+                    <div class="field">
+                        <label class="label">Société</label>
+                        <div class="control">
+                            <input type="text" class="input" value="{{ $user->company }}" name="company" placeholder="Société" />
+                        </div>
+                    </div>
+
                     {{ csrf_field() }}
                     <input type="hidden" value="{{ $attempt_id }}" name="attempt_id" />
                     <input type="submit" class="button is-primary" value="Démarrer l'examen" />

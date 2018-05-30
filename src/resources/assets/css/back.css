@@ -462,17 +462,21 @@ form:after {
   margin-bottom: 1rem;
 }
 
-/* line 2, ../sass/back/pages/_results.scss */
+/* line 1, ../sass/back/pages/_results.scss */
+.results-template {
+  overflow-x: auto;
+}
+/* line 4, ../sass/back/pages/_results.scss */
 .results-template .search {
   padding: 3rem 0;
 }
-/* line 5, ../sass/back/pages/_results.scss */
+/* line 7, ../sass/back/pages/_results.scss */
 .results-template .search .search-label {
   display: inline-block;
   font-family: "Helvetica";
   font-size: 1.6rem;
 }
-/* line 12, ../sass/back/pages/_results.scss */
+/* line 14, ../sass/back/pages/_results.scss */
 .results-template .search .search-input {
   width: 20%;
   display: inline-block;

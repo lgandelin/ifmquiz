@@ -159,10 +159,11 @@ class FrontController extends Controller
             return;
         }
 
-        //Update user with lastname / firstname
+        //Update user with lastname / firstname / company
         $user = User::find($attempt->user_id);
         $user->last_name = $request->last_name;
         $user->first_name = $request->first_name;
+        $user->company = $request->company;
         $user->save();
 
         //Update attempt start date
