@@ -121,6 +121,7 @@ class FrontController extends Controller
     public function quiz_intro(Request $request, $quizID)
     {
         $quiz = Quiz::find($quizID);
+        $questions = Question::where('quiz_id', '=', $quizID)->orderBy('number', 'asc')->get();
         $attemptID = $request->attempt_id;
         $error = null;
 
@@ -140,6 +141,7 @@ class FrontController extends Controller
             'quiz' => $quiz,
             'user' => $user,
             'attempt_id' => $attemptID,
+            'questions_number' => sizeof($questions),
             'error' => $error,
         ]);
     }

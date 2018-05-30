@@ -2,6 +2,8 @@
     .header {
         overflow: hidden;
         margin-bottom: 8.5rem;
+        position: relative;
+        z-index: 999;
 
         .title {
             margin-bottom: 2.5rem;
@@ -204,5 +206,17 @@
             margin-right: 4.5rem;
             float: right;
         }
+    }
+
+    .notification {
+        border-radius: 0;
+
+        &.is-danger {
+            background: #ffbc45;
+        }
+    }
+    
+    .intro_text {
+        margin-bottom: 4rem;
     }
 }

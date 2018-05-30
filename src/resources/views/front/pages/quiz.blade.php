@@ -2,16 +2,15 @@
 
 @section('main-content')
     <div class="front-template">
-        <div class="header">
+        <div class="header" data-kui-sticky>
             <div class="container">
                 @if ($quiz->time)
                     <span class="time-limit">
-                        <img src="{{ asset('img/generic/time.png') }}" width="33" height="33" /> {{  $quiz->time }} min
-
                         @if ($quiz->time > 0)
-                            <div id="countdown" class="remaining-time">
+                            <div id="countdown">
+                                <img src="{{ asset('img/generic/time.png') }}" width="33" height="33" />
                                 <countdown :time="{{ $seconds_remaining * 1000 }}" @countdownend="countdownend">
-                                <template slot-scope="props">(@{{ props.hours }}h @{{ props.minutes }}min)</template>
+                                <template slot-scope="props"><span v-show="props.hours > 0">@{{ props.hours }}h</span> @{{ props.minutes }}min</template>
                                 </countdown>
                             </div>
                         @endif
@@ -64,7 +63,7 @@
                                             @foreach ($question->items_right as $j => $item)
                                                 <div class="control">
                                                     <label>
-                                                        <input type="text" name="answer_{{ $question->id }}_{{ $item->id }}" /> {{ $item->title }}
+                                                        <input style="padding:0" type="text" name="answer_{{ $question->id }}_{{ $item->id }}" /> {{ $item->title }}
                                                     </label>
                                                 </div>
                                             @endforeach
@@ -91,6 +90,7 @@
     </div>
 
     <script src="{{ asset('js/dist/front.js') }}"></script>
+    <script src="{{ asset('js/vendor/sticky.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
