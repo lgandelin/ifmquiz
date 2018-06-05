@@ -1,4 +1,4 @@
-input[type="text"], input[type="number"], textarea {
+input[type="text"], input[type="number"], textarea, input[type="password"] {
 	padding: 1.5rem;
 	width: 100%;
 
@@ -60,4 +60,9 @@ form {
 
 		border-radius: 0;
 	}
+}
+
+.error {
+	color: #ae1203;
+	letter-spacing: 0;
 }

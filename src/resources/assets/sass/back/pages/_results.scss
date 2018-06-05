@@ -1,5 +1,11 @@
 .results-template {
-	overflow-x: auto;
+
+	.table {
+		overflow-x: auto;
+		display: block;
+		margin-bottom: 10rem;
+		border: none;
+	}
 
 	.search {
 		padding: 3rem 0;

@@ -30,7 +30,7 @@
                     <th>Résultats</th>
                     <th>Réponses</th>
                 </tr>
-            <thead>
+            </thead>
             <tbody>
                 @foreach ($attempts as $attempt)
                     <tr>

@@ -1,9 +1,11 @@
 @extends('ifmquiz::back.master')
 
 @section('main-content')
-    
+
     <div class="header">
         <div class="container">
+            <a style="float:right; margin-top: 1rem" href="{{ route('logout') }}">Se déconnecter</a>
+
             <h1 class="title">Dashboard</h1>
             <h2 class="subtitle">Questionnaires</h2>
         </div>

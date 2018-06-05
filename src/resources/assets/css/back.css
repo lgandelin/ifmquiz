@@ -195,7 +195,7 @@ html, body {
 }
 
 /* line 1, ../sass/back/includes/_form.scss */
-input[type="text"], input[type="number"], textarea {
+input[type="text"], input[type="number"], textarea, input[type="password"] {
   padding: 1.5rem;
   width: 100%;
   color: #3b3b3b;
@@ -258,6 +258,12 @@ form:after {
   font-size: 1.4rem;
   letter-spacing: 0;
   border-radius: 0;
+}
+
+/* line 65, ../sass/back/includes/_form.scss */
+.error {
+  color: #ae1203;
+  letter-spacing: 0;
 }
 
 /* line 2, ../sass/back/includes/_page.scss */
@@ -462,21 +468,24 @@ form:after {
   margin-bottom: 1rem;
 }
 
-/* line 1, ../sass/back/pages/_results.scss */
-.results-template {
+/* line 3, ../sass/back/pages/_results.scss */
+.results-template .table {
   overflow-x: auto;
+  display: block;
+  margin-bottom: 10rem;
+  border: none;
 }
-/* line 4, ../sass/back/pages/_results.scss */
+/* line 10, ../sass/back/pages/_results.scss */
 .results-template .search {
   padding: 3rem 0;
 }
-/* line 7, ../sass/back/pages/_results.scss */
+/* line 13, ../sass/back/pages/_results.scss */
 .results-template .search .search-label {
   display: inline-block;
   font-family: "Helvetica";
   font-size: 1.6rem;
 }
-/* line 14, ../sass/back/pages/_results.scss */
+/* line 20, ../sass/back/pages/_results.scss */
 .results-template .search .search-input {
   width: 20%;
   display: inline-block;
@@ -780,63 +789,77 @@ form:after {
   margin-right: 0;
 }
 
-/* line 16, ../sass/back.scss */
+/* line 1, ../sass/back/pages/_login.scss */
+.login-wrapper {
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30%;
+  padding: 3.5rem;
+  background: white;
+}
+/* line 11, ../sass/back/pages/_login.scss */
+.login-wrapper h1 {
+  margin-bottom: 3rem;
+}
+
+/* line 17, ../sass/back.scss */
 .add-button {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 21, ../sass/back.scss */
+/* line 22, ../sass/back.scss */
 .correct {
   float: right;
   cursor: pointer;
 }
 
-/* line 27, ../sass/back.scss */
+/* line 28, ../sass/back.scss */
 .correct.checked {
   color: orange;
 }
 
-/* line 31, ../sass/back.scss */
+/* line 32, ../sass/back.scss */
 .input {
   width: 97%;
 }
 
-/* line 35, ../sass/back.scss */
+/* line 36, ../sass/back.scss */
 .div-50 {
   width: 50%;
   float: left;
 }
 
-/* line 40, ../sass/back.scss */
+/* line 41, ../sass/back.scss */
 .div-50 .input {
   width: 80%;
 }
 
-/* line 44, ../sass/back.scss */
+/* line 45, ../sass/back.scss */
 .div-50 input[type="number"] {
   width: 50px;
 }
 
-/* line 48, ../sass/back.scss */
+/* line 49, ../sass/back.scss */
 .duplicate-button, .delete-button {
   float: right;
   margin-left: 0.5rem;
 }
 
-/* line 53, ../sass/back.scss */
+/* line 54, ../sass/back.scss */
 .move-button:hover {
   cursor: move;
 }
 
-/* line 57, ../sass/back.scss */
+/* line 58, ../sass/back.scss */
 .sortable-ghost > div {
   border: 1px solid #e7873c;
   box-shadow: none;
   background: none;
 }
 
-/* line 63, ../sass/back.scss */
+/* line 64, ../sass/back.scss */
 .updating_title, .updating_subtitle {
   padding: 0;
   margin: 0;
@@ -849,25 +872,25 @@ form:after {
   outline: none;
   border-radius: 0;
 }
-/* line 75, ../sass/back.scss */
+/* line 76, ../sass/back.scss */
 .updating_title:focus, .updating_subtitle:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 82, ../sass/back.scss */
+/* line 83, ../sass/back.scss */
 .questions-number {
   margin-right: 2rem;
   float: right;
 }
-/* line 86, ../sass/back.scss */
+/* line 87, ../sass/back.scss */
 .questions-number .number {
   display: inline-block;
   visibility: middle;
 }
 
-/* line 92, ../sass/back.scss */
+/* line 93, ../sass/back.scss */
 .updating_time {
   border: none;
   box-shadow: none;
@@ -875,24 +898,24 @@ form:after {
   min-width: 0;
   width: 4rem;
 }
-/* line 99, ../sass/back.scss */
+/* line 100, ../sass/back.scss */
 .updating_time:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 106, ../sass/back.scss */
+/* line 107, ../sass/back.scss */
 .status-1 {
   background: whitesmoke;
 }
 
-/* line 110, ../sass/back.scss */
+/* line 111, ../sass/back.scss */
 .status-2 {
   background: rgba(255, 219, 87, 0.3);
 }
 
-/* line 114, ../sass/back.scss */
+/* line 115, ../sass/back.scss */
 .status-3 {
   background: rgba(36, 204, 92, 0.3);
 }

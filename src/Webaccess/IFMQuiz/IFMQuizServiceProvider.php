@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Webaccess\IFMQuiz\Commands\MarkQuizCommand;
+use Webaccess\IFMQuiz\Http\Middlewares\AdminMiddleware;
 
 class IFMQuizServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class IFMQuizServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom($basePath.'resources/views/', 'ifmquiz');
         $this->loadTranslationsFrom($basePath.'resources/lang/', 'ifmquiz');
+
+        $router->aliasMiddleware('admin', AdminMiddleware::class);
 
         //Assets publications
         $this->publishes([

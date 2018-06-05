@@ -12,24 +12,26 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
     Route::get('/remerciements/{uuid}', array('as' => 'quiz_front_outro', 'uses' => 'FrontController@quiz_outro'));
 
     //ADMIN
-    Route::get('/admin', array('as' => 'quiz_list', 'uses' => 'QuizController@index'));
-    Route::get('/admin/questionnaires/creer', array('as' => 'quiz_create', 'uses' => 'QuizController@create'));
-    Route::get('/admin/questionnaires/modifier/{uuid}', array('as' => 'quiz_update', 'uses' => 'QuizController@update'));
-    Route::get('/admin/questionnaires/resultats/{uuid}', array('as' => 'quiz_results', 'uses' => 'QuizController@results'));
-    Route::get('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers', 'uses' => 'QuizController@user_answers'));
-    Route::post('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers_valid_answer', 'uses' => 'QuizController@user_answers_valid_answer'));
-    Route::get('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters', 'uses' => 'QuizController@parameters'));
-    Route::post('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters_handler', 'uses' => 'QuizController@parameters_handler'));
-    Route::get('/admin/questionnaires/envoyer/{uuid}', array('as' => 'quiz_mailing', 'uses' => 'QuizController@mailing'));
-    Route::post('/admin/questionnaires/envoyer/{uuid}', array('as' => 'quiz_mailing_handler', 'uses' => 'QuizController@mailing_handler'));
-    Route::get('/admin/questionnaires/dupliquer/{uuid}', array('as' => 'quiz_duplicate', 'uses' => 'QuizController@duplicate'));
-    Route::get('/admin/questionnaires/supprimer/{uuid}', array('as' => 'quiz_delete', 'uses' => 'QuizController@delete'));
+    Route::get('/admin/login', array('as' => 'login', 'uses' => 'LoginController@index'));
+    Route::get('/admin/logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
+    Route::post('/admin/login_handler', array('as' => 'login_handler', 'uses' => 'LoginController@login'));
+
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('/admin', array('as' => 'quiz_list', 'uses' => 'QuizController@index'));
+        Route::get('/admin/questionnaires/creer', array('as' => 'quiz_create', 'uses' => 'QuizController@create'));
+        Route::get('/admin/questionnaires/modifier/{uuid}', array('as' => 'quiz_update', 'uses' => 'QuizController@update'));
+        Route::get('/admin/questionnaires/resultats/{uuid}', array('as' => 'quiz_results', 'uses' => 'QuizController@results'));
+        Route::get('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers', 'uses' => 'QuizController@user_answers'));
+        Route::post('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers_valid_answer', 'uses' => 'QuizController@user_answers_valid_answer'));
+        Route::get('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters', 'uses' => 'QuizController@parameters'));
+        Route::post('/admin/questionnaires/parametres/{uuid}', array('as' => 'quiz_parameters_handler', 'uses' => 'QuizController@parameters_handler'));
+        Route::get('/admin/questionnaires/envoyer/{uuid}', array('as' => 'quiz_mailing', 'uses' => 'QuizController@mailing'));
+        Route::post('/admin/questionnaires/envoyer/{uuid}', array('as' => 'quiz_mailing_handler', 'uses' => 'QuizController@mailing_handler'));
+        Route::get('/admin/questionnaires/dupliquer/{uuid}', array('as' => 'quiz_duplicate', 'uses' => 'QuizController@duplicate'));
+        Route::get('/admin/questionnaires/supprimer/{uuid}', array('as' => 'quiz_delete', 'uses' => 'QuizController@delete'));
 
         //API
         Route::get('/admin/quiz/{uuid}', array('as' => 'quiz', 'uses' => 'QuizController@quiz'));
         Route::post('/admin/quiz/{uuid}', array('as' => 'quiz_handler', 'uses' => 'QuizController@quiz_handler'));
-
-    Route::group(['middleware' => 'admin'], function () {
-
     });
 });
