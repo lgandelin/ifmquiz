@@ -28,7 +28,7 @@ exemple3@mail.com" name="mailing_list"></textarea>
                     @else
                         @foreach ($links as $link)
                             <div class="box">
-                                <strong>{{ $link->email }}</strong><br/>
+                                {{ $link->email }}<br/>
                                 <small><a href="{{ $link->url }}">{{ $link->url }}</a></small>
                             </div>
                         @endforeach

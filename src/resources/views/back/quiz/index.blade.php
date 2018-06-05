@@ -4,7 +4,8 @@
 
     <div class="header">
         <div class="container">
-            <a style="float:right; margin-top: 1rem" href="{{ route('logout') }}">Se déconnecter</a>
+            <a class="logout" style="color:#9a9a9a" href="{{ route('logout') }}">Se déconnecter</a>
+            <a style="float:right; margin-top: 1rem; margin-right: 3rem" href="{{ route('user_list') }}">Gestion des utilisateurs</a>
 
             <h1 class="title">Dashboard</h1>
             <h2 class="subtitle">Questionnaires</h2>

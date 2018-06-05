@@ -124,8 +124,13 @@ html, body {
   font-size: 2.6rem;
   text-transform: uppercase;
 }
+/* line 20, ../sass/back/includes/_structure.scss */
+.header .logout {
+  float: right;
+  margin-top: 1rem;
+}
 
-/* line 21, ../sass/back/includes/_structure.scss */
+/* line 26, ../sass/back/includes/_structure.scss */
 .container {
   max-width: 1140px;
 }
@@ -144,6 +149,13 @@ html, body {
   border-radius: 0;
   border: none;
   box-shadow: 0;
+}
+
+/* line 19, ../sass/back/includes/_buttons.scss */
+.table .button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.6rem;
 }
 
 /* line 1, ../sass/back/includes/_tables.scss */
@@ -263,6 +275,13 @@ form:after {
 /* line 65, ../sass/back/includes/_form.scss */
 .error {
   color: #ae1203;
+  letter-spacing: 0;
+}
+
+/* line 70, ../sass/back/includes/_form.scss */
+.success {
+  margin-top: 1rem;
+  color: #57ae4e;
   letter-spacing: 0;
 }
 
