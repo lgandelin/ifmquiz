@@ -5,6 +5,7 @@ namespace Webaccess\IFMQuiz\Http\Controllers;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 use Webaccess\IFMQuiz\Models\Answer;
 use Webaccess\IFMQuiz\Models\Attempt;
@@ -62,6 +63,14 @@ class FrontController extends Controller
                 return;
             }
         }
+
+        Log::info('QUIZ_ATTEMPT_COMPLETED', [
+            'attempt_id' => $attemptID,
+            'user_id' => $attempt->user_id,
+            'quiz_id' => $attempt->quiz_id,
+            'attempt_completed_at' => (new DateTime())->format('Y-m-d H:i:s'),
+            'request' => json_encode($request->all()),
+        ]);
 
         //Update status / date of the attempt
         $attempt->completed_at = new DateTime();
@@ -166,6 +175,7 @@ class FrontController extends Controller
         $user->last_name = $request->last_name;
         $user->first_name = $request->first_name;
         $user->company = $request->company;
+
         $user->save();
 
         //Update attempt start date
@@ -178,6 +188,16 @@ class FrontController extends Controller
             $attempt->ends_at = $endTime;
         }
         $attempt->save();
+
+        Log::info('QUIZ_ATTEMPT_STARTED', [
+            'attempt_id' => $attempt->id,
+            'user_id' => $user->id,
+            'last_name' => $user->last_name,
+            'first_name' => $user->first_name,
+            'company' => $user->company,
+            'attempt_started_at' => $attempt->started_at->format('Y-m-d H:i:s'),
+            'attempt_ends_at' => $endTime->format('Y-m-d H:i:s'),
+        ]);
 
         return redirect()->route('quiz_front', ['uuid' => $quizID, 'attempt_id' => $attemptID]);
     }
