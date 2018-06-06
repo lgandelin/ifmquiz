@@ -109,6 +109,7 @@ class QuizController extends Controller
 
                 $totalPoints += $question->factor;
 
+
                 if (isset($answer->score)) {
                     $answers[] = $answer->score * $question->factor;
 
@@ -124,7 +125,7 @@ class QuizController extends Controller
             $user = User::find($attempt->user_id);
             $attempt->answers = $answers;
             if ($attempt->status == Attempt::STATUS_MARKED) {
-                $totalResults += $result;
+                if (is_numeric($result)) $totalResults += $result;
                 $attempt->result = round($result, 1) . '/' . $totalPoints;
                 $completedQuizs++;
             } else {
@@ -367,6 +368,10 @@ class QuizController extends Controller
             $q->items = json_encode($question['items']);
             $q->items_left = json_encode($question['items_left']);
             $q->items_right = json_encode($question['items_right']);
+            $q->linear_scale_start_number = $question['linear_scale_start_number'];
+            $q->linear_scale_end_number = $question['linear_scale_end_number'];
+            $q->linear_scale_start_label = $question['linear_scale_start_label'];
+            $q->linear_scale_end_label = $question['linear_scale_end_label'];
             $q->quiz_id = $quizID;
             $q->save();
         }

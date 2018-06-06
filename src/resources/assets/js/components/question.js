@@ -23,6 +23,22 @@ Vue.component('question', {
         items: Array,
         items_left: Array,
         items_right: Array,
+        linear_scale_start_number: {
+            default: 1,
+            type: Number
+        },
+        linear_scale_end_number: {
+            default: 10,
+            type: Number
+        },
+        linear_scale_start_label: {
+            default: 'Très mauvais',
+            type: String
+        },
+        linear_scale_end_label: {
+            default: 'Excellent',
+            type: String
+        }
     },
     data: function() {
         return {
@@ -71,7 +87,7 @@ Vue.component('question', {
         add_item_left: function(question_number) {
             this.$store.commit('add_item_left', {
                 title: this.new_item_left_title,
-                question_number: question_number
+                question_number: question_number,
             });
 
             this.new_item_left_title = '';
@@ -85,6 +101,30 @@ Vue.component('question', {
 
             this.new_item_right_title = '';
             this.new_item_right_associated_item = 0;
+        },
+        update_question_linear_scale_start_number: function(e, question_number) {
+            this.$store.commit('update_question_linear_scale_start_number', {
+                linear_scale_start_number: parseInt(e.target.value),
+                question_number: question_number,
+            });
+        },
+        update_question_linear_scale_end_number: function(e, question_number) {
+            this.$store.commit('update_question_linear_scale_end_number', {
+                linear_scale_end_number: parseInt(e.target.value),
+                question_number: question_number,
+            });
+        },
+        update_question_linear_scale_start_label: function(e, question_number) {
+            this.$store.commit('update_question_linear_scale_start_label', {
+                linear_scale_start_label: e.target.value,
+                question_number: question_number,
+            });
+        },
+        update_question_linear_scale_end_label: function(e, question_number) {
+            this.$store.commit('update_question_linear_scale_end_label', {
+                linear_scale_end_label: e.target.value,
+                question_number: question_number,
+            });
         },
     }
 });

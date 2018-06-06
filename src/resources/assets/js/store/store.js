@@ -23,6 +23,10 @@ const store = new Vuex.Store({
             question.items_right = [];
             question.type = 1;
             question.factor = 1;
+            question.linear_scale_start_number = 1;
+            question.linear_scale_end_number = 10;
+            question.linear_scale_start_label = 'Très mauvais';
+            question.linear_scale_end_label = 'Excellent';
             state.quiz.questions.push(question);
         },
         update_question_title(state, params) {
@@ -165,6 +169,30 @@ const store = new Vuex.Store({
             var item_number = params.item_number;
 
             state.quiz.questions[question_number].items_right.splice(item_number, 1);
+        },
+        update_question_linear_scale_start_number(state, params) {
+            var number = params.question_number;
+            var linear_scale_start_number = params.linear_scale_start_number;
+        
+            state.quiz.questions[number].linear_scale_start_number = linear_scale_start_number;
+        },
+        update_question_linear_scale_end_number(state, params) {
+            var number = params.question_number;
+            var linear_scale_end_number = params.linear_scale_end_number;
+        
+            state.quiz.questions[number].linear_scale_end_number = linear_scale_end_number;
+        },
+        update_question_linear_scale_start_label(state, params) {
+            var number = params.question_number;
+            var linear_scale_start_label = params.linear_scale_start_label;
+
+            state.quiz.questions[number].linear_scale_start_label = linear_scale_start_label;
+        },
+        update_question_linear_scale_end_label(state, params) {
+            var number = params.question_number;
+            var linear_scale_end_label = params.linear_scale_end_label;
+
+            state.quiz.questions[number].linear_scale_end_label = linear_scale_end_label;
         },
     }
 });

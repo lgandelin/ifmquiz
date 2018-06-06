@@ -47,6 +47,10 @@
                                 v-bind:items_right="question.items_right"
                                 v-bind:type="question.type"
                                 v-bind:factor="question.factor"
+                                v-bind:linear_scale_start_number="question.linear_scale_start_number"
+                                v-bind:linear_scale_end_number="question.linear_scale_end_number"
+                                v-bind:linear_scale_start_label="question.linear_scale_start_label"
+                                v-bind:linear_scale_end_label="question.linear_scale_end_label"
                                 v-bind:key="question.id"
                         ></question>
                     </div>
@@ -109,6 +113,7 @@
                                     <option value="2">Choix multiples</option>
                                     <option value="3">Association d'items</option>
                                     <option value="4">Réponse simple</option>
+                                    <option value="5">Echelle linéaire</option>
                                 </select>
                             </div>
                         </div>
@@ -178,6 +183,42 @@
 
                     <div class="items" v-if="type == 4">
 
+                    </div>
+
+                    <div class="items" v-if="type == 5">
+                        <div class="field" style="display: inline-block; width: 12.5rem; margin-right: 2.5rem">
+                            <label class="label">De</label>
+
+                            <div class="select">
+                                <select v-bind:value="linear_scale_start_number" @input="update_question_linear_scale_start_number($event, question_number)">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field" style="display: inline-block; width: 12.5rem">
+                            <label class="label">A</label>
+
+                            <div class="select">
+                                <select v-bind:value="linear_scale_end_number" @input="update_question_linear_scale_end_number($event, question_number)">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Libellé gauche (facultatif)</label>
+                            <input type="text" placeholder="Très mauvais" v-bind:value="linear_scale_start_label" @input="update_question_linear_scale_start_label($event, question_number)" />
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Libellé droite (facultatif)</label>
+                            <input type="text" placeholder="Excellent" v-bind:value="linear_scale_end_label" @input="update_question_linear_scale_end_label($event, question_number)" />
+                        </div>
                     </div>
                 </div>
             </div>

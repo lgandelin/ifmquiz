@@ -20,6 +20,10 @@ class Question extends Model
         'items',
         'items_left',
         'items_right',
+        'linear_scale_start_number',
+        'linear_scale_end_number',
+        'linear_scale_start_label',
+        'linear_scale_end_label',
         'quiz_id',
     ];
 }

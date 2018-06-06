@@ -60,6 +60,7 @@ class FrontController extends Controller
         //Check that the time is not elapsed
         if ($attempt->ends_at) {
             if (new DateTime() > new DateTime($attempt->ends_at)) {
+                //@TODO : redirect the user with an error message
                 return;
             }
         }
@@ -68,7 +69,7 @@ class FrontController extends Controller
             'attempt_id' => $attemptID,
             'user_id' => $attempt->user_id,
             'quiz_id' => $attempt->quiz_id,
-            'attempt_completed_at' => (new DateTime())->format('Y-m-d H:i:s'),
+            'attempt_completed_at' => (new DateTime()),
             'request' => json_encode($request->all()),
         ]);
 
@@ -84,7 +85,10 @@ class FrontController extends Controller
                 $answers[$questionID][]= ['id' => $value];
             } elseif (preg_match('/textanswer_/', $key)) {
                 $questionID = str_replace('textanswer_', '', $key);
-                $answers[$questionID][]= $value;
+                $answers[$questionID][] = $value;
+            } elseif (preg_match('/scaleanswer_/', $key)) {
+                $questionID = str_replace('scaleanswer_', '', $key);
+                $answers[$questionID][] = $value;
             } elseif (preg_match('/answer_/', $key)) {
                 $key = str_replace('answer_', '', $key);
                 list($questionID, $itemID) = explode('_', $key);
@@ -118,6 +122,9 @@ class FrontController extends Controller
                     $answer->items_right = json_encode($answers[$questionID]);
                     break;
                 case 4:
+                    $answer->items = $question_answers[0];
+                    break;
+                case 5:
                     $answer->items = $question_answers[0];
                     break;
             }
