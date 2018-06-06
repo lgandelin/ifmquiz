@@ -10,11 +10,11 @@
             <div class="login" style="overflow: hidden;">
                 <form role="form" method="POST" action="{{ route('login_handler') }}">
                     <div class="field">
-                        <input type="text" class="form-control" name="email" />
+                        <input type="text" class="form-control" name="email" placeholder="Adresse e-mail" />
                     </div>
 
                     <div class="field">
-                        <input type="password" class="form-control" name="password" autocomplete="off" />
+                        <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Mot de passe" />
                     </div>
 
                     <div class="field">
