@@ -68,6 +68,12 @@
 
             border-bottom: 2px solid #cecece;
 
+            &:after {
+                clear:both;
+                display: block;
+                content:"";
+            }
+
             .status {
                 position: absolute;
                 width: 2rem;
@@ -141,6 +147,7 @@
 
                 .radio, .checkbox {
                     display: inline-block;
+                    vertical-align: top;
                     width: 32%;
                     margin-top: 3rem;
                 }
