@@ -63,11 +63,12 @@ class QuizController extends Controller
         ]);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request, $type) {
         $quiz = new Quiz();
         $quiz->id = Uuid::uuid4()->toString();
         $quiz->title = "Nouveau questionnaire";
         $quiz->subtitle = "Sous-titre";
+        $quiz->type = (in_array($type, [Quiz::EXAMEN_TYPE, Quiz::SONDAGE_TYPE]) ? $type : Quiz::EXAMEN_TYPE);
         $quiz->time = 0;
         $quiz->save();
 
@@ -96,6 +97,7 @@ class QuizController extends Controller
 
         $attempts = Attempt::where('quiz_id', '=', $quizID)->get();
 
+        $totalPoints = 0;
         foreach ($attempts as $attempt) {
             $result = 0;
             $answers = [];

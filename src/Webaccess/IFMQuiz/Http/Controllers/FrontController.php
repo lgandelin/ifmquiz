@@ -203,7 +203,7 @@ class FrontController extends Controller
             'first_name' => $user->first_name,
             'company' => $user->company,
             'attempt_started_at' => $attempt->started_at->format('Y-m-d H:i:s'),
-            'attempt_ends_at' => $endTime->format('Y-m-d H:i:s'),
+            'attempt_ends_at' => isset($endTime) ? $endTime->format('Y-m-d H:i:s') : null,
         ]);
 
         return redirect()->route('quiz_front', ['uuid' => $quizID, 'attempt_id' => $attemptID]);

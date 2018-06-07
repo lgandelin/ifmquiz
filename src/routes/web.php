@@ -18,7 +18,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
 
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/admin', array('as' => 'quiz_list', 'uses' => 'QuizController@index'));
-        Route::get('/admin/questionnaires/creer', array('as' => 'quiz_create', 'uses' => 'QuizController@create'));
+        Route::get('/admin/questionnaires/creer/{type}', array('as' => 'quiz_create', 'uses' => 'QuizController@create'));
         Route::get('/admin/questionnaires/modifier/{uuid}', array('as' => 'quiz_update', 'uses' => 'QuizController@update'));
         Route::get('/admin/questionnaires/resultats/{uuid}', array('as' => 'quiz_results', 'uses' => 'QuizController@results'));
         Route::get('/admin/questionnaires/resultats/{uuid}/reponses/{attempt_uuid}', array('as' => 'quiz_user_answers', 'uses' => 'QuizController@user_answers'));

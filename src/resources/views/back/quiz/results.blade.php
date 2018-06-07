@@ -27,7 +27,9 @@
                     @foreach ($questions as $i => $question)
                         <th>Q{{ $i+1 }}</th>
                     @endforeach
-                    <th>Résultats</th>
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <th>Résultats</th>
+                    @endif
                     <th>Réponses</th>
                 </tr>
             </thead>
@@ -42,7 +44,9 @@
                         @foreach ($attempt->answers as $answer)
                             <td class="center no-border"><span @if ($answer > 0)style="border:1px solid orange"@endif>{{ $answer }}</span></td>
                         @endforeach
-                        <td>{{ $attempt->result }}</td>
+                        @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                            <td>{{ $attempt->result }}</td>
+                        @endif
                         <td class="center"><a href="{{ route('quiz_user_answers', ['quiz_id' => $quiz->id, 'attempt_id' => $attempt->id]) }}">Voir</a></td>
                     </tr>
                 @endforeach
@@ -53,7 +57,9 @@
                     @foreach ($average_by_questions as $i => $question)
                         <td>{{ round($question, 2) }}</td>
                     @endforeach
-                    <td>{{ round($average_result, 2) }}/{{ $total_points }}</td>
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <td>{{ round($average_result, 2) }}/{{ $total_points }}</td>
+                    @endif
                     <td></td>
                 </tr>
             </tfoot>

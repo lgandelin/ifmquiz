@@ -17,17 +17,24 @@
         <div class="quiz">
             <div class="header">
                 <div class="container is-clearfix">
-                    <span class="time" style="float:right">
-                        <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
-                        <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
-                    min</span>
 
-                    <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <span class="time" style="float:right">
+                            <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
+                            <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
+                        min</span>
+
+                        <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
+                    @endif
+
                     <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
                     <input type="text" class="title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                     <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
                     <input type="text" class="subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
-                    <span class="training_date">Date de formation : <datepicker v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
+
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <span class="training_date">Date de formation : <datepicker v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
+                    @endif
 
                     <button class="button submit" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
                     <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
@@ -118,18 +125,20 @@
                             </div>
                         </div>
 
-                        <div class="factor">
-                            <label class="label">Coefficient</label>
-                            <div class="select">
-                                <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                        @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                            <div class="factor">
+                                <label class="label">Coefficient</label>
+                                <div class="select">
+                                    <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <div class="items" v-if="type == 1 || type == 2">
