@@ -203,6 +203,68 @@
                     }
                 }
             }
+
+            .linear-scale {
+                margin-top: 0.5rem;
+                height: 5.2rem;
+                border: none;
+                position: relative;
+                left: -2rem;
+                margin-left: 2.5rem;
+
+                &:before {
+                    content: "";
+                    display: block;
+                    height: 1.3rem;
+                    position: absolute;
+                    top: 0.3rem;
+                    left: 0;
+                    right: 0;
+                    cursor: pointer;
+
+                    border: 2px solid #e7e7e7;
+                    border-radius: 1rem;
+                }
+
+                label {
+                    position: absolute;
+                    width: 20px;
+                    margin-left: -4px;
+                    margin-top: 3.2rem;
+
+                    color: #7a7a7a;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+
+                .ui-state-default {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    background: #3b3b3b;
+                    border-radius: 50%;
+                    cursor: pointer;
+
+                    outline: 0 !important;
+                }
+
+                .ui-slider-range-min {
+                    height: 1.2rem;
+                    background: #e7e7e7;
+                    top: 0.3rem;
+                    border-radius: 1rem;
+                }
+            }
+
+            .linear_scale_start_label,
+            .linear_scale_end_label {
+                font-size: 1.5rem;
+                display: inline-block;
+                margin-top: 2rem;
+            }
+
+            .linear_scale_end_label {
+                float: right;
+            }
         }
     }
 

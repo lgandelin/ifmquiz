@@ -348,24 +348,83 @@ form:after {
 .front-template .questions .question.answered .status:after, .front-template .questions .question.answered .status:before {
   background: #e7873c;
 }
-/* line 209, ../sass/front/pages/_quiz.scss */
+/* line 207, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear-scale {
+  margin-top: 0.5rem;
+  height: 5.2rem;
+  border: none;
+  position: relative;
+  left: -2rem;
+  margin-left: 2.5rem;
+}
+/* line 215, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear-scale:before {
+  content: "";
+  display: block;
+  height: 1.3rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  border: 2px solid #e7e7e7;
+  border-radius: 1rem;
+}
+/* line 229, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear-scale label {
+  position: absolute;
+  width: 20px;
+  margin-left: -4px;
+  margin-top: 3.2rem;
+  color: #7a7a7a;
+  font-size: 1.5rem;
+  text-align: center;
+}
+/* line 240, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear-scale .ui-state-default {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #3b3b3b;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: 0 !important;
+}
+/* line 250, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear-scale .ui-slider-range-min {
+  height: 1.2rem;
+  background: #e7e7e7;
+  top: 0.3rem;
+  border-radius: 1rem;
+}
+/* line 258, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear_scale_start_label,
+.front-template .questions .question .linear_scale_end_label {
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-top: 2rem;
+}
+/* line 265, ../sass/front/pages/_quiz.scss */
+.front-template .questions .question .linear_scale_end_label {
+  float: right;
+}
+/* line 271, ../sass/front/pages/_quiz.scss */
 .front-template .submit {
   overflow: hidden;
 }
-/* line 212, ../sass/front/pages/_quiz.scss */
+/* line 274, ../sass/front/pages/_quiz.scss */
 .front-template .submit .button {
   margin-right: 4.5rem;
   float: right;
 }
-/* line 218, ../sass/front/pages/_quiz.scss */
+/* line 280, ../sass/front/pages/_quiz.scss */
 .front-template .notification {
   border-radius: 0;
 }
-/* line 221, ../sass/front/pages/_quiz.scss */
+/* line 283, ../sass/front/pages/_quiz.scss */
 .front-template .notification.is-danger {
   background: #ffbc45;
 }
-/* line 226, ../sass/front/pages/_quiz.scss */
+/* line 288, ../sass/front/pages/_quiz.scss */
 .front-template .intro_text {
   margin-bottom: 4rem;
 }

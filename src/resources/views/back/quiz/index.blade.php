@@ -24,8 +24,8 @@
                     <a href="" class="back">Retour</a>
                     <span class="select-type">Sélectionnez le type<br/> de questionnaire</span>
                     
-                    <a class="button" href="{{ route('quiz_create') }}">Examen</a>
-                    <a class="button" href="{{ route('quiz_create') }}">Sondage</a>
+                    <a class="button" href="{{ route('quiz_create', ['type' => Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE]) }}">Examen</a>
+                    <a class="button" href="{{ route('quiz_create', ['type' => Webaccess\IFMQuiz\Models\Quiz::SONDAGE_TYPE]) }}">Sondage</a>
                 </div>
             </div>
 
@@ -33,15 +33,31 @@
                 <div class="item">
                     <span class="menu-icon"></span>
                     <h3 class="title">{{ $quiz->title }}</h3>
-                    <span class="type">Type : Examen</span>
-                    <span class="training_date">Date de formation : {{ $quiz->training_date }}</span>
+                    <span class="type">
+                        Type : @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE) Examen
+                                @elseif ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::SONDAGE_TYPE) Sondage
+                                @endif
+                    </span>
+                    <span class="training_date">Date de formation :
+                        @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                            {{ $quiz->training_date }}
+                        @else
+                            N/A
+                        @endif
+                    </span>
                     <div class="progress-bar">Taux de complétion <span class="is-pulled-right">{{ round(100*$quiz->completion) }}%</span><br/>
                         <progress class="progress" value="{{ $quiz->completion }}" max="1"></progress>
                     </div>
 
-                    <div class="progress-bar">Note moyenne <span class="is-pulled-right">{{ round(100*$quiz->average) }}%</span><br/>
-                        <progress class="progress" value="{{ $quiz->average }}" max="1"></progress>
-                    </div>
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <div class="progress-bar">Note moyenne <span class="is-pulled-right">{{ round(100*$quiz->average) }}%</span><br/>
+                            <progress class="progress" value="{{ $quiz->average }}" max="1"></progress>
+                        </div>
+                    @else
+                        <div class="progress-bar">Note moyenne <span class="is-pulled-right">N/A</span><br/>
+                            <progress class="progress" value="0" max="0"></progress>
+                        </div>
+                    @endif
                     <br/>
 
                     <a class="button" href="{{ route('quiz_update', ['uuid' => $quiz->id]) }}">Editer</a>

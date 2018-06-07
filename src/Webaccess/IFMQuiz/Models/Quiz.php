@@ -12,6 +12,9 @@ class Quiz extends Model
         'id' => 'string'
     ];
 
+    const EXAMEN_TYPE = 1;
+    const SONDAGE_TYPE = 2;
+
     protected $fillable = [
         'title',
         'subtitle',

@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Webaccess\IFMQuiz\Models\Answer;
 use Webaccess\IFMQuiz\Models\Attempt;
 use Webaccess\IFMQuiz\Models\Question;
+use Webaccess\IFMQuiz\Models\Quiz;
 
 class MarkQuizCommand extends Command
 {
@@ -19,84 +20,93 @@ class MarkQuizCommand extends Command
         $attempts = Attempt::where('status', '=', Attempt::STATUS_COMPLETED)->get();
         foreach ($attempts as $attempt) {
             $questions = Question::where('quiz_id', '=', $attempt->quiz_id)->get();
+
+            $quiz = Quiz::find($attempt->quiz_id);
+
             foreach ($questions as $question) {
-                $question->items = json_decode($question->items);
-                $question->items_left = json_decode($question->items_left);
-                $question->items_right = json_decode($question->items_right);
-
-                $answer = Answer::where('attempt_id', '=', $attempt->id)->where('question_id', '=', $question->id)->first();
-
-                $answer_items = json_decode($answer->items);
-                $answer_items_right = json_decode($answer->items_right);
 
                 $score = 0.0;
+                $answer = Answer::where('attempt_id', '=', $attempt->id)->where('question_id', '=', $question->id)->first();
 
-                if ($answer) {
-                    switch($question->type) {
-                        case 1:
-                            $correctItemID = null;
-                            foreach ($question->items as $item) {
-                                if ($item->correct === true) {
-                                    $correctItemID = $item->id;
+                //Examens
+                if ($quiz->type == Quiz::EXAMEN_TYPE) {
+                    $question->items = json_decode($question->items);
+                    $question->items_left = json_decode($question->items_left);
+                    $question->items_right = json_decode($question->items_right);
+
+                    $answer_items = json_decode($answer->items);
+                    $answer_items_right = json_decode($answer->items_right);
+                    if ($answer) {
+                        switch ($question->type) {
+                            case 1:
+                                $correctItemID = null;
+                                foreach ($question->items as $item) {
+                                    if ($item->correct === true) {
+                                        $correctItemID = $item->id;
+                                    }
                                 }
-                            }
 
-                            if (sizeof($answer_items) == 1 && $answer_items[0]->id == $correctItemID) {
-                                $score = 1.0;
-                            }
-
-                            break;
-                        case 2:
-                            $correctItemIDs = [];
-                            foreach ($question->items as $item) {
-                                if ($item->correct === true) {
-                                    $correctItemIDs[]= $item->id;
+                                if (sizeof($answer_items) == 1 && $answer_items[0]->id == $correctItemID) {
+                                    $score = 1.0;
                                 }
-                            }
 
-                            $answerItemIDs = array_column($answer_items, 'id');
-                            array_multisort($correctItemIDs);
-                            array_multisort($answerItemIDs);
-
-                            $correctItems = 0;
-                            $incorrectItems = 0;
-                            foreach ($answerItemIDs as $item) {
-                                if (in_array($item, $correctItemIDs)) {
-                                    $correctItems++;
-                                } else {
-                                    $incorrectItems++;
+                                break;
+                            case 2:
+                                $correctItemIDs = [];
+                                foreach ($question->items as $item) {
+                                    if ($item->correct === true) {
+                                        $correctItemIDs[] = $item->id;
+                                    }
                                 }
-                            }
 
-                            $factor = 1 / (sizeof($answerItemIDs));
-                            $multiplier = ($correctItems - $incorrectItems/2);
-                            if ($multiplier < 0) $multiplier = 0;
+                                $answerItemIDs = array_column($answer_items, 'id');
+                                array_multisort($correctItemIDs);
+                                array_multisort($answerItemIDs);
 
-                            $score =  $multiplier * $factor;
-
-                            break;
-                        case 3:
-                            $correctItems = 0;
-                            $incorrectItems = 0;
-                            foreach($answer_items_right as $i => $answer_item) {
-                                if ((int) $answer_item->associated_item != $question->items_right[$i]->associated_item) {
-                                    $incorrectItems++;
-                                } else {
-                                    $correctItems++;
+                                $correctItems = 0;
+                                $incorrectItems = 0;
+                                foreach ($answerItemIDs as $item) {
+                                    if (in_array($item, $correctItemIDs)) {
+                                        $correctItems++;
+                                    } else {
+                                        $incorrectItems++;
+                                    }
                                 }
-                            }
 
-                            $factor = 1 / (sizeof($answer_items_right));
-                            $multiplier = ($correctItems - $incorrectItems/2);
-                            if ($multiplier < 0) $multiplier = 0;
+                                $factor = 1 / (sizeof($answerItemIDs));
+                                $multiplier = ($correctItems - $incorrectItems / 2);
+                                if ($multiplier < 0) $multiplier = 0;
 
-                            $score =  $multiplier * $factor;
+                                $score = $multiplier * $factor;
 
-                            break;
-                        case 4:
-                            //@TODO
-                            break;
+                                break;
+                            case 3:
+                                $correctItems = 0;
+                                $incorrectItems = 0;
+                                foreach ($answer_items_right as $i => $answer_item) {
+                                    if ((int)$answer_item->associated_item != $question->items_right[$i]->associated_item) {
+                                        $incorrectItems++;
+                                    } else {
+                                        $correctItems++;
+                                    }
+                                }
+
+                                $factor = 1 / (sizeof($answer_items_right));
+                                $multiplier = ($correctItems - $incorrectItems / 2);
+                                if ($multiplier < 0) $multiplier = 0;
+
+                                $score = $multiplier * $factor;
+
+                                break;
+                            case 4:
+                                //@TODO
+                                break;
+                        }
                     }
+
+                //Sondages
+                } elseif ($quiz->type == Quiz::SONDAGE_TYPE) {
+                    $score = (int) $answer->items;
                 }
 
                 $answer->score = $score;

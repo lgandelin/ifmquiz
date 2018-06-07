@@ -78,6 +78,10 @@
                                 <div class="field">
                                     <textarea disabled class="textarea" placeholder="Répondre içi" name="textanswer_{{ $question->id }}">@if ($question->answer){!! $question->answer->text !!}@endif</textarea>
                                 </div>
+                            @elseif ($question->type == 5)
+                                <div id="linear-scale-{{ $question->id }}" class="linear-scale" data-min="{{ $question->linear_scale_start_number }}" data-max="{{ $question->linear_scale_end_number }}" data-value="{{ $question->answer->items }}"></div>
+                                @if ($question->linear_scale_start_label)<span class="linear_scale_start_label">{{ $question->linear_scale_start_label }}</span>@endif
+                                @if ($question->linear_scale_end_label)<span class="linear_scale_end_label">{{ $question->linear_scale_end_label }}</span>@endif
                             @endif
                         </div>
                     </div>
@@ -91,6 +95,34 @@
     </div>
 
     <link rel="stylesheet" href="{{ asset('css/front.css') }}">
-    <script src="{{ asset('js/dist/front.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".linear-scale").each(function() {
+                $(this).slider({
+                    value: $(this).data('value'),
+                    min: $(this).data('min'),
+                    max: $(this).data('max'),
+                    step: 1,
+                    range: "min",
+                    disabled: true
+                }).each(function() {
+                    // Get the options for this slider
+                    var opt = $(this).data().uiSlider.options;
+
+                    // Get the number of possible values
+                    var vals = opt.max - opt.min;
+
+                    // Space out values
+                    for (var i = 0; i <= vals; i++) {
+                        var el = $('<label>'+(i+opt.min)+'</label>').css('left', (i/vals*100)+'%');
+                        $(this).append(el);
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

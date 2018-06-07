@@ -17,17 +17,24 @@
         <div class="quiz">
             <div class="header">
                 <div class="container is-clearfix">
-                    <span class="time" style="float:right">
-                        <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
-                        <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
-                    min</span>
 
-                    <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <span class="time" style="float:right">
+                            <span class="number" v-text="$store.state.quiz.time" v-on:click="updating_quiz_time = true" v-show="!updating_quiz_time"></span>
+                            <input type="text" class="number updating_time" v-show="updating_quiz_time" v-model="$store.state.quiz.time" v-on:blur="updating_quiz_time = false" />
+                        min</span>
+
+                        <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
+                    @endif
+
                     <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
                     <input type="text" class="title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                     <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
                     <input type="text" class="subtitle updating_subtitle" v-show="updating_quiz_subtitle" v-model="$store.state.quiz.subtitle" v-on:blur="updating_quiz_subtitle = false">
-                    <span class="training_date">Date de formation : <datepicker v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
+
+                    @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                        <span class="training_date">Date de formation : <datepicker v-model="$store.state.quiz.training_date" :language="lang"></datepicker></span>
+                    @endif
 
                     <button class="button submit" v-on:click="save_questions" v-show="!saving">Sauvegarder</button>
                     <button class="button" v-on:click="save_questions" v-show="saving" :disabled="saving">Sauvegarde...</button>
@@ -47,6 +54,10 @@
                                 v-bind:items_right="question.items_right"
                                 v-bind:type="question.type"
                                 v-bind:factor="question.factor"
+                                v-bind:linear_scale_start_number="question.linear_scale_start_number"
+                                v-bind:linear_scale_end_number="question.linear_scale_end_number"
+                                v-bind:linear_scale_start_label="question.linear_scale_start_label"
+                                v-bind:linear_scale_end_label="question.linear_scale_end_label"
                                 v-bind:key="question.id"
                         ></question>
                     </div>
@@ -109,22 +120,25 @@
                                     <option value="2">Choix multiples</option>
                                     <option value="3">Association d'items</option>
                                     <option value="4">Réponse simple</option>
+                                    <option value="5">Echelle linéaire</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="factor">
-                            <label class="label">Coefficient</label>
-                            <div class="select">
-                                <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                        @if ($quiz->type == Webaccess\IFMQuiz\Models\Quiz::EXAMEN_TYPE)
+                            <div class="factor">
+                                <label class="label">Coefficient</label>
+                                <div class="select">
+                                    <select v-bind:value="factor" @input="update_question_factor($event, question_number)">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <div class="items" v-if="type == 1 || type == 2">
@@ -178,6 +192,42 @@
 
                     <div class="items" v-if="type == 4">
 
+                    </div>
+
+                    <div class="items" v-if="type == 5">
+                        <div class="field" style="display: inline-block; width: 12.5rem; margin-right: 2.5rem">
+                            <label class="label">De</label>
+
+                            <div class="select">
+                                <select v-bind:value="linear_scale_start_number" @input="update_question_linear_scale_start_number($event, question_number)">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field" style="display: inline-block; width: 12.5rem">
+                            <label class="label">A</label>
+
+                            <div class="select">
+                                <select v-bind:value="linear_scale_end_number" @input="update_question_linear_scale_end_number($event, question_number)">
+                                    @for($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Libellé gauche (facultatif)</label>
+                            <input type="text" placeholder="Très mauvais" v-bind:value="linear_scale_start_label" @input="update_question_linear_scale_start_label($event, question_number)" />
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Libellé droite (facultatif)</label>
+                            <input type="text" placeholder="Excellent" v-bind:value="linear_scale_end_label" @input="update_question_linear_scale_end_label($event, question_number)" />
+                        </div>
                     </div>
                 </div>
             </div>

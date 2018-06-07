@@ -71,6 +71,11 @@
                                     </div>
                                 @elseif ($question->type == 4)
                                     <textarea class="textarea" placeholder="Répondre içi" name="textanswer_{{ $question->id }}"></textarea>
+                                @elseif ($question->type == 5)
+                                    <div id="linear-scale-{{ $question->id }}" class="linear-scale" data-min="{{ $question->linear_scale_start_number }}" data-max="{{ $question->linear_scale_end_number }}"></div>
+                                    @if ($question->linear_scale_start_label)<span class="linear_scale_start_label">{{ $question->linear_scale_start_label }}</span>@endif
+                                    @if ($question->linear_scale_end_label)<span class="linear_scale_end_label">{{ $question->linear_scale_end_label }}</span>@endif
+                                    <input type="hidden" name="scaleanswer_{{ $question->id }}" id="linear-scale-{{ $question->id }}-value" />
                                 @endif
                             </div>
                         </div>
@@ -92,10 +97,40 @@
     <script src="{{ asset('js/dist/front.js') }}"></script>
     <script src="{{ asset('js/vendor/sticky.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.question .items input, .question .items textarea').change(function(e) {
                $(this).closest('.question').addClass('answered');
+            });
+
+            $(".linear-scale").each(function() {
+                $(this).slider({
+                    value: Math.ceil($(this).data('max') / 2),
+                    min: $(this).data('min'),
+                    max: $(this).data('max'),
+                    step: 1,
+                    range: "min",
+                    change: function() {
+                        $(this).closest('.question').addClass('answered');
+                        var input_id = $(this).attr('id') + '-value';
+                        console.log(input_id);
+                        $('#' + input_id).val($(this).slider('value'));
+                    }
+                }).each(function() {
+                    // Get the options for this slider
+                    var opt = $(this).data().uiSlider.options;
+
+                    // Get the number of possible values
+                    var vals = opt.max - opt.min;
+
+                    // Space out values
+                    for (var i = 0; i <= vals; i++) {
+                        var el = $('<label>'+(i+opt.min)+'</label>').css('left', (i/vals*100)+'%');
+                        $(this).append(el);
+                    }
+                });
             });
         });
     </script>

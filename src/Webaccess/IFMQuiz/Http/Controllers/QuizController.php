@@ -63,11 +63,12 @@ class QuizController extends Controller
         ]);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request, $type) {
         $quiz = new Quiz();
         $quiz->id = Uuid::uuid4()->toString();
         $quiz->title = "Nouveau questionnaire";
         $quiz->subtitle = "Sous-titre";
+        $quiz->type = (in_array($type, [Quiz::EXAMEN_TYPE, Quiz::SONDAGE_TYPE]) ? $type : Quiz::EXAMEN_TYPE);
         $quiz->time = 0;
         $quiz->save();
 
@@ -96,6 +97,7 @@ class QuizController extends Controller
 
         $attempts = Attempt::where('quiz_id', '=', $quizID)->get();
 
+        $totalPoints = 0;
         foreach ($attempts as $attempt) {
             $result = 0;
             $answers = [];
@@ -108,6 +110,7 @@ class QuizController extends Controller
                 }
 
                 $totalPoints += $question->factor;
+
 
                 if (isset($answer->score)) {
                     $answers[] = $answer->score * $question->factor;
@@ -124,7 +127,7 @@ class QuizController extends Controller
             $user = User::find($attempt->user_id);
             $attempt->answers = $answers;
             if ($attempt->status == Attempt::STATUS_MARKED) {
-                $totalResults += $result;
+                if (is_numeric($result)) $totalResults += $result;
                 $attempt->result = round($result, 1) . '/' . $totalPoints;
                 $completedQuizs++;
             } else {
@@ -367,6 +370,10 @@ class QuizController extends Controller
             $q->items = json_encode($question['items']);
             $q->items_left = json_encode($question['items_left']);
             $q->items_right = json_encode($question['items_right']);
+            $q->linear_scale_start_number = $question['linear_scale_start_number'];
+            $q->linear_scale_end_number = $question['linear_scale_end_number'];
+            $q->linear_scale_start_label = $question['linear_scale_start_label'];
+            $q->linear_scale_end_label = $question['linear_scale_end_label'];
             $q->quiz_id = $quizID;
             $q->save();
         }
