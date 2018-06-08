@@ -13,6 +13,9 @@ const store = new Vuex.Store({
             subtitle: '',
             training_date: '',
             questions: [],
+            header_logo: '',
+            footer_text: '',
+            footer_image: '',
         }
     },
     mutations: {

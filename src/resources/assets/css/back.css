@@ -285,6 +285,11 @@ form:after {
   letter-spacing: 0;
 }
 
+/* line 77, ../sass/back/includes/_form.scss */
+.ck-editor__editable {
+  min-height: 20rem;
+}
+
 /* line 2, ../sass/back/includes/_page.scss */
 .page-template .page-content {
   margin-top: 8rem;
@@ -778,6 +783,16 @@ form:after {
 .quiz-template .add-question {
   border: 2px dashed #eeeeee;
   background: #fcfcfc;
+}
+/* line 293, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer {
+  background-color: #fff;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+/* line 298, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .ck-editor {
+  max-width: 40%;
 }
 
 /* line 3, ../sass/back/pages/_user-answers.scss */

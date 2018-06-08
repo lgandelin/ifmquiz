@@ -82,6 +82,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="quiz-footer">
+                <div class="container">
+                    <textarea id="footer_text" v-text="$store.state.quiz.footer_text" placeholder="Votre texte içi"></textarea>
+                </div>
+            </div>
             <notifications group="quiz" />
         </div>
     </script>
@@ -262,5 +268,15 @@
     </script>
 
     <script src="{{ asset('js/dist/back.js') }}"></script>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+                .create(document.querySelector('#footer_text'))
+        .then(editor => {
+        })
+        .catch(error => {
+        });
+    </script>
 
 @endsection

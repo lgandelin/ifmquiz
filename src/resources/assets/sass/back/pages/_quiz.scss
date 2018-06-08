@@ -289,4 +289,14 @@
 		border: 2px dashed #eeeeee;
 		background: #fcfcfc;
 	}
+
+	.quiz-footer {
+		background-color: #fff;
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+
+		.ck-editor {
+			max-width: 40%;
+		}
+	}
 }

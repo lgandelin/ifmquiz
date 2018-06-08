@@ -354,6 +354,7 @@ class QuizController extends Controller
         $quiz->title = $request->quiz['title'];
         $quiz->subtitle = $request->quiz['subtitle'];
         $quiz->time = $request->quiz['time'];
+        $quiz->footer_text = $request->quiz['footer_text'];
         $quiz->training_date = (new DateTime($request->quiz['training_date']))->format('Y-m-d');
         $quiz->save();
 

@@ -21,6 +21,9 @@ class Quiz extends Model
         'time',
         'intro_text',
         'outro_text',
+        'header_logo',
+        'footer_text',
+        'footer_image',
         'training_date',
     ];
 }
