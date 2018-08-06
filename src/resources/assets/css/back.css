@@ -37,31 +37,35 @@
   background: #44A4FC;
   border-left: 5px solid #187FE7;
 }
+/* line 35, ../sass/back/vendor/_notifications.scss */
+.vue-notification * {
+  color: white;
+}
 
-/* line 36, ../sass/back/vendor/_notifications.scss */
+/* line 40, ../sass/back/vendor/_notifications.scss */
 .vue-notification.warn {
   background: #ffb648;
   border-left-color: #f48a06;
 }
 
-/* line 41, ../sass/back/vendor/_notifications.scss */
+/* line 45, ../sass/back/vendor/_notifications.scss */
 .vue-notification.error {
   background: #E54D42;
   border-left-color: #B82E24;
 }
 
-/* line 46, ../sass/back/vendor/_notifications.scss */
+/* line 50, ../sass/back/vendor/_notifications.scss */
 .vue-notification.success {
   background: #68CD86;
   border-left-color: #42A85F;
 }
 
-/* line 51, ../sass/back/vendor/_notifications.scss */
+/* line 55, ../sass/back/vendor/_notifications.scss */
 .vn-fade-enter-active, .vn-fade-leave-active, .vn-fade-move {
   transition: all .5s;
 }
 
-/* line 55, ../sass/back/vendor/_notifications.scss */
+/* line 59, ../sass/back/vendor/_notifications.scss */
 .vn-fade-enter, .vn-fade-leave-to {
   opacity: 0;
 }
