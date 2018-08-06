@@ -289,4 +289,84 @@
 		border: 2px dashed #eeeeee;
 		background: #fcfcfc;
 	}
+
+	.quiz-footer {
+		background-color: #fff;
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+		overflow: hidden;
+
+		.ck-editor {
+		}
+		
+		.footer_image_upload {
+			max-width: 50%;
+			float: right;
+
+			.image_upload_wrapper {
+				text-align: right;
+			}
+
+			.footer_image {
+				display: block;
+				width: 100%;
+
+				cursor: pointer;
+			}
+		}
+
+		.footer_text {
+			max-width: 50%;
+			float: left;
+		}
+	}
+
+	.header_logo_upload {
+		float: left;
+		margin-right: 4rem;
+
+		.header_logo {
+			display: block;
+			max-width: 15rem;
+			height: auto;
+
+			cursor: pointer;
+		}
+		
+		.image_upload_wrapper {
+			input {
+				left: 0;
+				right: auto;
+			}
+		}
+	}
+
+	.image_upload_wrapper {
+		position: relative;
+
+		img {
+			position: relative;
+			z-index: 1;
+		}
+
+		input {
+			cursor: pointer;
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: auto;
+			right: 0;
+			bottom: 0;
+			opacity: 0;
+		}
+	}
+	
+	.remove-image {
+		display: block;
+		margin-top: 2rem;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
 }

@@ -4,6 +4,8 @@
     <div class="front-template">
         <div class="header" data-kui-sticky>
             <div class="container">
+                @if ($quiz->header_logo)<img class="header_logo" src="{{ asset($quiz->header_logo) }}" />@endif
+
                 @if ($quiz->time)
                     <span class="time-limit">
                         @if ($quiz->time > 0)
@@ -90,6 +92,18 @@
 
                 </form>
 
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                @if ($quiz->footer_image)<img id="footer_image" class="footer_image" src="{{ asset($quiz->footer_image) }}" width="50%" alt="" />@endif
+
+                @if ($quiz->footer_text)
+                    <div class="footer_text">
+                        {!! $quiz->footer_text !!}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

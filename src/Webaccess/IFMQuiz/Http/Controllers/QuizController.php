@@ -354,6 +354,9 @@ class QuizController extends Controller
         $quiz->title = $request->quiz['title'];
         $quiz->subtitle = $request->quiz['subtitle'];
         $quiz->time = $request->quiz['time'];
+        $quiz->header_logo = $request->quiz['header_logo'];
+        $quiz->footer_image = $request->quiz['footer_image'];
+        $quiz->footer_text = $request->quiz['footer_text'];
         $quiz->training_date = (new DateTime($request->quiz['training_date']))->format('Y-m-d');
         $quiz->save();
 
@@ -377,5 +380,37 @@ class QuizController extends Controller
             $q->quiz_id = $quizID;
             $q->save();
         }
+    }
+
+    public function quiz_upload_image(Request $request, $quizID, $imageType) {
+        $quiz = Quiz::find($quizID);
+
+        $imageFolder = public_path('uploads/' . $quizID);
+        @mkdir($imageFolder);
+
+        $image = $request->get($imageType);
+
+        if ($imageName = self::uploadImage($request->$imageType, $imageFolder, $request->file($imageType)->extension())) {
+            $quiz->$imageType = 'uploads/' . $quizID . '/' . $imageName;
+            $quiz->save();
+
+            return response()->json([
+                'image' => asset($quiz->$imageType)
+            ]);
+        }
+    }
+
+    public static function uploadImage($imageFile, $folder, $extension) {
+        $imageName = $imageFile->getClientOriginalName() . '.' . $extension;
+
+        if (!is_dir($folder)) {
+            @mkdir($folder);
+        }
+
+        if ($imageFile->move($folder, $imageName)) {
+            return $imageName . '?t=' . time();
+        }
+
+        return false;
     }
 }

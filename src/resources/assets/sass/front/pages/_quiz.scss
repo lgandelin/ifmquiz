@@ -2,6 +2,7 @@
     .header {
         overflow: hidden;
         margin-bottom: 8.5rem;
+        padding-bottom: 3.5rem;
         position: relative;
         z-index: 999;
 
@@ -47,6 +48,16 @@
             img {
                 margin-right: 2rem;
             }
+        }
+
+        .header_logo {
+            display: block;
+            max-width: 15rem;
+            height: auto;
+            margin-right: 4rem;
+            float: left;
+            position: relative;
+            top: -2rem;
         }
     }
 
@@ -287,5 +298,27 @@
     
     .intro_text {
         margin-bottom: 4rem;
+    }
+    
+    .footer {
+        padding-top: 7rem;
+        overflow: hidden;
+
+        background: white;
+
+        .footer_text {
+            max-width: 45%;
+            margin-right: 10%;
+            float: left;
+
+            color: #7a7a7a;
+            font-family: $secondary-font;
+        }
+
+        .footer_image {
+            max-width: 45%;
+            height: auto;
+            float: right;
+        }
     }
 }

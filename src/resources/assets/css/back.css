@@ -37,31 +37,35 @@
   background: #44A4FC;
   border-left: 5px solid #187FE7;
 }
+/* line 35, ../sass/back/vendor/_notifications.scss */
+.vue-notification * {
+  color: white;
+}
 
-/* line 36, ../sass/back/vendor/_notifications.scss */
+/* line 40, ../sass/back/vendor/_notifications.scss */
 .vue-notification.warn {
   background: #ffb648;
   border-left-color: #f48a06;
 }
 
-/* line 41, ../sass/back/vendor/_notifications.scss */
+/* line 45, ../sass/back/vendor/_notifications.scss */
 .vue-notification.error {
   background: #E54D42;
   border-left-color: #B82E24;
 }
 
-/* line 46, ../sass/back/vendor/_notifications.scss */
+/* line 50, ../sass/back/vendor/_notifications.scss */
 .vue-notification.success {
   background: #68CD86;
   border-left-color: #42A85F;
 }
 
-/* line 51, ../sass/back/vendor/_notifications.scss */
+/* line 55, ../sass/back/vendor/_notifications.scss */
 .vn-fade-enter-active, .vn-fade-leave-active, .vn-fade-move {
   transition: all .5s;
 }
 
-/* line 55, ../sass/back/vendor/_notifications.scss */
+/* line 59, ../sass/back/vendor/_notifications.scss */
 .vn-fade-enter, .vn-fade-leave-to {
   opacity: 0;
 }
@@ -283,6 +287,11 @@ form:after {
   margin-top: 1rem;
   color: #57ae4e;
   letter-spacing: 0;
+}
+
+/* line 77, ../sass/back/includes/_form.scss */
+.ck-editor__editable {
+  min-height: 20rem;
 }
 
 /* line 2, ../sass/back/includes/_page.scss */
@@ -778,6 +787,79 @@ form:after {
 .quiz-template .add-question {
   border: 2px dashed #eeeeee;
   background: #fcfcfc;
+}
+/* line 293, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer {
+  background-color: #fff;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+/* line 302, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload {
+  max-width: 50%;
+  float: right;
+}
+/* line 306, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload .image_upload_wrapper {
+  text-align: right;
+}
+/* line 310, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload .footer_image {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+/* line 318, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_text {
+  max-width: 50%;
+  float: left;
+}
+/* line 324, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload {
+  float: left;
+  margin-right: 4rem;
+}
+/* line 328, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload .header_logo {
+  display: block;
+  max-width: 15rem;
+  height: auto;
+  cursor: pointer;
+}
+/* line 337, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload .image_upload_wrapper input {
+  left: 0;
+  right: auto;
+}
+/* line 344, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper {
+  position: relative;
+}
+/* line 347, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper img {
+  position: relative;
+  z-index: 1;
+}
+/* line 352, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper input {
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+/* line 364, ../sass/back/pages/_quiz.scss */
+.quiz-template .remove-image {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* line 3, ../sass/back/pages/_user-answers.scss */
