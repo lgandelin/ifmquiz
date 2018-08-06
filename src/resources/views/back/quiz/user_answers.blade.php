@@ -93,17 +93,19 @@
 
         </div>
 
-        <div class="footer">
-            <div class="container">
-                @if ($quiz->footer_image)<img id="footer_image" class="footer_image" src="{{ asset($quiz->footer_image) }}" width="50%" alt="" />@endif
+        @if ($quiz->footer_image || $quiz->footer_text)
+            <div class="footer">
+                <div class="container">
+                    @if ($quiz->footer_image)<img id="footer_image" class="footer_image" src="{{ asset($quiz->footer_image) }}" width="50%" alt="" />@endif
 
-                @if ($quiz->footer_text)
-                    <div class="footer_text">
-                        {!! $quiz->footer_text !!}
-                    </div>
-                @endif
+                    @if ($quiz->footer_text)
+                        <div class="footer_text">
+                            {!! $quiz->footer_text !!}
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
 
         <a class="button back" href="{{ route('quiz_results', ['uuid' => $quiz->id]) }}">Retour</a>
 
