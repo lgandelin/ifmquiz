@@ -7,6 +7,7 @@ Vue.component('quiz', {
     template: '#quiz-template',
     data: function() {
         return {
+            footer_image: '',
             saving: false,
             new_question_title: '',
             new_question_description: '',
@@ -17,7 +18,7 @@ Vue.component('quiz', {
         }
     },
     components: {
-        datepicker: Datepicker,
+        datepicker: Datepicker
     },
     mounted: function() {
         var store = this.$store;
@@ -44,6 +45,13 @@ Vue.component('quiz', {
             var quiz = this;
             quiz.saving = true;
 
+            //Putting footer text in store manually because CKeditor doesn't work properly with VueJS
+            this.$store.state.quiz.footer_text = document.getElementById('footer_text').value;
+            this.$store.state.quiz.header_logo = document.getElementById('header_logo').src;
+            this.$store.state.quiz.footer_image = document.getElementById('footer_image').src;
+
+            console.log(this.$store.state.quiz);
+
             axios.post(
             "/admin/quiz/" + quiz_id, {
                 quiz: this.$store.state.quiz
@@ -63,5 +71,35 @@ Vue.component('quiz', {
             const moved_question = this.$store.state.quiz.questions.splice(event.oldIndex, 1)[0];
             this.$store.state.quiz.questions.splice(event.newIndex, 0, moved_question);
         },
+        upload_header_logo: function(event) {
+            var quiz_id = document.getElementById('quiz_id').value;
+            this.header_logo = event.target.files[0];
+
+            const form_data = new FormData();
+            form_data.append('header_logo', this.header_logo, 'header_logo');
+
+            axios.post(
+                "/admin/quiz/" + quiz_id + "/upload_image/header_logo",
+                form_data
+            ).then(function (response) {
+                document.getElementById('header_logo').src = response.data.image;
+                document.getElementById('header_logo_upload_wrapper').style.display = 'none';
+            });
+        },
+        upload_footer_image: function(event) {
+            var quiz_id = document.getElementById('quiz_id').value;
+            this.footer_image = event.target.files[0];
+
+            const form_data = new FormData();
+            form_data.append('footer_image', this.footer_image, 'footer_image');
+
+            axios.post(
+                "/admin/quiz/" + quiz_id + "/upload_image/footer_image",
+                form_data
+            ).then(function (response) {
+                document.getElementById('footer_image').src = response.data.image;
+                document.getElementById('footer_image_upload_wrapper').style.display = 'none';
+            });
+        }
     },
 });

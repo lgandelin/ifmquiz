@@ -15,7 +15,7 @@ const store = new Vuex.Store({
             questions: [],
             header_logo: '',
             footer_text: '',
-            footer_image: '',
+            footer_image: ''
         }
     },
     mutations: {

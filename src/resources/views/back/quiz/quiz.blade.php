@@ -27,6 +27,17 @@
                         <span class="questions-number"><span class="number" v-text="$store.state.quiz.questions.length"></span> questions</span>
                     @endif
 
+                    <div class="header_logo_upload">
+
+                        <img id="header_logo" class="header_logo" src="@if ($quiz->header_logo){{ asset($quiz->header_logo) }}@endif" />
+
+                        <div class="image_upload_wrapper">
+                            <img src="{{ asset('img/generic/upload_image.png') }}" width="151" height="151" @if ($quiz->header_logo)style="display: none"@endif id="header_logo_upload_wrapper" />
+                            <input type="file" @change="upload_header_logo" value="Ajouter une image" />
+                        </div>
+                        {{--<input type="button" class="button remove-image" value="Supprimer" />--}}
+                    </div>
+
                     <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
                     <input type="text" class="title is-spaced updating_title" v-show="updating_quiz_title" v-model="$store.state.quiz.title" v-on:blur="updating_quiz_title = false" />
                     <h2 class="subtitle" v-text="$store.state.quiz.subtitle" v-on:click="updating_quiz_subtitle = true" v-show="!updating_quiz_subtitle"></h2>
@@ -85,7 +96,20 @@
 
             <div class="quiz-footer">
                 <div class="container">
-                    <textarea id="footer_text" v-text="$store.state.quiz.footer_text" placeholder="Votre texte içi"></textarea>
+                    <div class="footer_image_upload">
+
+                        <img id="footer_image" class="footer_image" src="@if ($quiz->footer_image){{ asset($quiz->footer_image) }}@endif" width="50%" alt="" />
+
+                        <div class="image_upload_wrapper">
+                            <img src="{{ asset('img/generic/upload_image.png') }}" width="151" height="151" @if ($quiz->footer_image)style="display: none"@endif id="footer_image_upload_wrapper" />
+                            <input type="file" @change="upload_footer_image" value="Ajouter une image" />
+                        </div>
+                        {{--<input type="button" class="button remove-image" value="Supprimer" />--}}
+                    </div>
+
+                    <div class="footer_text">
+                        <textarea placeholder="Commentaires..." id="footer_text">{{ $quiz->footer_text }}</textarea>
+                    </div>
                 </div>
             </div>
             <notifications group="quiz" />
@@ -270,13 +294,38 @@
     <script src="{{ asset('js/dist/back.js') }}"></script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <script>
+        let footer_editor;
         ClassicEditor
                 .create(document.querySelector('#footer_text'))
         .then(editor => {
+            footer_editor = editor;
         })
         .catch(error => {
         });
+
+        jQuery(document).on('blur', '.ck-editor__editable_inline', function(e) {
+            $('#footer_text').val(footer_editor.getData()).trigger('change')
+        })
+
+        jQuery('#header_logo').click(function() {
+           jQuery('.header_logo_upload input[type="file"]').trigger('click');
+        });
+
+        jQuery('#footer_image').click(function() {
+            jQuery('.footer_image_upload input[type="file"]').trigger('click');
+        });
+
+        jQuery('.remove-image').click(function() {
+            $(this).parent().find('img').first().attr('src', '');
+            $(this).parent().find('.image_upload_wrapper img').show();
+            $(this).hide();
+        })
+
     </script>
 
 @endsection

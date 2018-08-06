@@ -789,10 +789,73 @@ form:after {
   background-color: #fff;
   padding-top: 5rem;
   padding-bottom: 5rem;
+  overflow: hidden;
 }
-/* line 298, ../sass/back/pages/_quiz.scss */
-.quiz-template .quiz-footer .ck-editor {
-  max-width: 40%;
+/* line 302, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload {
+  max-width: 50%;
+  float: right;
+}
+/* line 306, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload .image_upload_wrapper {
+  text-align: right;
+}
+/* line 310, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_image_upload .footer_image {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+/* line 318, ../sass/back/pages/_quiz.scss */
+.quiz-template .quiz-footer .footer_text {
+  max-width: 50%;
+  float: left;
+}
+/* line 324, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload {
+  float: left;
+  margin-right: 4rem;
+}
+/* line 328, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload .header_logo {
+  display: block;
+  max-width: 15rem;
+  height: auto;
+  cursor: pointer;
+}
+/* line 337, ../sass/back/pages/_quiz.scss */
+.quiz-template .header_logo_upload .image_upload_wrapper input {
+  left: 0;
+  right: auto;
+}
+/* line 344, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper {
+  position: relative;
+}
+/* line 347, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper img {
+  position: relative;
+  z-index: 1;
+}
+/* line 352, ../sass/back/pages/_quiz.scss */
+.quiz-template .image_upload_wrapper input {
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+/* line 364, ../sass/back/pages/_quiz.scss */
+.quiz-template .remove-image {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* line 3, ../sass/back/pages/_user-answers.scss */
