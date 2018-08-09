@@ -84,6 +84,17 @@ Vue.component('quiz', {
             ).then(function (response) {
                 document.getElementById('header_logo').src = response.data.image;
                 document.getElementById('header_logo_upload_wrapper').style.display = 'none';
+                document.getElementById('header_logo_delete').style.display = 'block';
+            });
+        },
+        delete_header_logo: function(event) {
+            var quiz_id = document.getElementById('quiz_id').value;
+
+            axios.post("/admin/quiz/" + quiz_id + "/delete_image/header_logo")
+            .then(function (response) {
+                document.getElementById('header_logo').src = "";
+                document.getElementById('header_logo_upload_wrapper').style.display = 'block';
+                document.getElementById('header_logo_delete').style.display = 'none';
             });
         },
         upload_footer_image: function(event) {
@@ -99,6 +110,17 @@ Vue.component('quiz', {
             ).then(function (response) {
                 document.getElementById('footer_image').src = response.data.image;
                 document.getElementById('footer_image_upload_wrapper').style.display = 'none';
+                document.getElementById('footer_image_delete').style.display = 'block';
+            });
+        },
+        delete_footer_image: function(event) {
+            var quiz_id = document.getElementById('quiz_id').value;
+
+            axios.post("/admin/quiz/" + quiz_id + "/delete_image/footer_image")
+            .then(function (response) {
+                document.getElementById('footer_image').src = "";
+                document.getElementById('footer_image_upload_wrapper').style.display = 'block';
+                document.getElementById('footer_image_delete').style.display = 'none';
             });
         }
     },

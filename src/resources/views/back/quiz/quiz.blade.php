@@ -35,7 +35,7 @@
                             <img src="{{ asset('img/generic/upload_image.png') }}" width="151" height="151" @if ($quiz->header_logo)style="display: none"@endif id="header_logo_upload_wrapper" />
                             <input type="file" @change="upload_header_logo" value="Ajouter une image" />
                         </div>
-                        {{--<input type="button" class="button remove-image" value="Supprimer" />--}}
+                        <input type="button" class="button remove-image" value="Supprimer" @click="delete_header_logo" id="header_logo_delete" @if (!$quiz->header_logo)style="display: none"@endif />
                     </div>
 
                     <h1 class="title" v-text="$store.state.quiz.title" v-on:click="updating_quiz_title = true" v-show="!updating_quiz_title"></h1>
@@ -104,7 +104,7 @@
                             <img src="{{ asset('img/generic/upload_image.png') }}" width="151" height="151" @if ($quiz->footer_image)style="display: none"@endif id="footer_image_upload_wrapper" />
                             <input type="file" @change="upload_footer_image" value="Ajouter une image" />
                         </div>
-                        {{--<input type="button" class="button remove-image" value="Supprimer" />--}}
+                        <input type="button" class="button remove-image" value="Supprimer" @click="delete_footer_image" id="footer_image_delete" @if (!$quiz->footer_image)style="display: none"@endif />
                     </div>
 
                     <div class="footer_text">

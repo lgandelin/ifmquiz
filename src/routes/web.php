@@ -41,5 +41,6 @@ Route::group(['middleware' => 'web', 'namespace' => 'Webaccess\IFMQuiz\Http\Cont
         Route::get('/admin/quiz/{uuid}', array('as' => 'quiz', 'uses' => 'QuizController@quiz'));
         Route::post('/admin/quiz/{uuid}', array('as' => 'quiz_handler', 'uses' => 'QuizController@quiz_handler'));
         Route::post('/admin/quiz/{uuid}/upload_image/{image_type}', array('as' => 'quiz_upload_image', 'uses' => 'QuizController@quiz_upload_image'));
+        Route::post('/admin/quiz/{uuid}/delete_image/{image_type}', array('as' => 'quiz_delete_image', 'uses' => 'QuizController@quiz_delete_image'));
     });
 });

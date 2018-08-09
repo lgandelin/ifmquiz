@@ -400,6 +400,16 @@ class QuizController extends Controller
         }
     }
 
+    public function quiz_delete_image(Request $request, $quizID, $imageType) {
+        $quiz = Quiz::find($quizID);
+        $quiz->$imageType = null;
+        $quiz->save();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
     public static function uploadImage($imageFile, $folder, $extension) {
         $imageName = $imageFile->getClientOriginalName() . '.' . $extension;
 
